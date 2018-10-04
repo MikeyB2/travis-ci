@@ -46,7 +46,7 @@ function getShoppingList(callbackFn) {
 function displayShoppingList(data) {
     console.log(data);
     for (index in data.shoppingList) {
-        $('body').append(
+        $('.shopping-list').append(
             '<li>' + data.shoppingList[index].ingrediant + '</li>');
     }
     $('body').append('<hr>');
@@ -116,7 +116,7 @@ function getRecipes(callbackFn) {
 function displayRecipes(data) {
     console.log(data);
     for (index in data.recipes) {
-        $('body').append(
+        $('.recipes').append(
             '<ul>' + data.recipes[index].name + '</ul>');
     }
     $('body').append('<hr>');
