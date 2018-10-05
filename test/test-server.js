@@ -47,6 +47,17 @@ describe("recipes page", function () {
     });
 });
 
+describe("Meals page", function () {
+    it("should exist", function () {
+        return chai
+            .request(app)
+            .get("/meals.html")
+            .then(function (res) {
+                expect(res).to.have.status(200);
+            });
+    });
+});
+
 // describe('GET endpoint', function () {
 //     it('should return all existing recipes', function () {
 //         return chai.request(app)
