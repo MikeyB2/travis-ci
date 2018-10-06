@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const app = express();
 
+app.use(morgan('common'));
+
 const {
 	DATABASE_URL,
 	PORT
@@ -13,7 +15,9 @@ const {
 	Recipe
 } = require('./models');
 app.use(express.static('public'));
-app.use(morgan('common'));
+
+// app.use("/shopping-list", shoppingListRouter);
+// app.use("/recipes", recipesRouter);
 
 
 app.get('/recipes', (req, res) => {
@@ -30,6 +34,34 @@ app.get('/recipes', (req, res) => {
 				error: 'something went terribly wrong'
 			});
 		});
+});
+
+app.post('/recipes', (req, res) => {
+	const requiredFields = ['name', 'ingrediants', 'instructions'];
+	for (let i = 0; i < requiredFields.length; i++) {
+		const field = requiredFields[i];
+		console.log('Testing:' + req.body);
+		if (!(field in req.body)) {
+			const message = `Missing \`${field}\` in request body`;
+			console.error(message);
+			return res.status(400).send(message);
+		}
+	}
+
+	Recipe
+		.create({
+			name: req.body.name,
+			ingrediants: req.body.ingrediants,
+			instructions: req.body.instructions
+		})
+		.then(recipe => res.status(201).json(recipe.serialize()))
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({
+				error: 'Something went wrong'
+			});
+		});
+
 });
 
 function runServer(databaseUrl, port = PORT) {

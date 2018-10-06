@@ -79,7 +79,7 @@ const recipeSchema = mongoose.Schema({
     recipes: [{
         name: String,
         ingrediants: Array,
-        instructions: String
+        instructions: String //paragraph a steps
     }]
 });
 

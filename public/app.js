@@ -1,3 +1,29 @@
+let shoppingItemTemplate =
+    '<li class="js-shopping-item">' +
+    '<p><span class="shopping-item js-shopping-item-name"></span></p>' +
+    '<div class="shopping-item-controls">' +
+    '<button class="js-shopping-item-toggle">' +
+    '<span class="button-label">check</span>' +
+    "</button>" +
+    '<button class="js-shopping-item-delete">' +
+    '<span class="button-label">delete</span>' +
+    "</button>" +
+    "</div>" +
+    "</li>";
+
+let recipeTemplate =
+    '<div class="recipe js-recipe">' +
+    '<h3 class="js-recipe-name"><h3>' +
+    "<hr>" +
+    '<ul class="js-recipe-ingredients">' +
+    "</ul>" +
+    '<div class="recipe-controls">' +
+    '<button class="js-recipe-delete">' +
+    '<span class="button-label">delete</span>' +
+    "</button>" +
+    "</div>" +
+    "</div>";
+
 let MOCK_SHOPPING_LIST = {
     "shoppingList": [{
             "id": "1111111",
