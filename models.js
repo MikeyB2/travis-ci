@@ -8,25 +8,21 @@ let MOCK_SHOPPING_LIST = {
             "id": "1111111",
             "ingrediant": "Onion",
             "amount": "1",
-            "unit": "each"
         },
         {
             "id": "2222222",
             "ingrediant": "milk",
             "amount": "1",
-            "unit": "gal"
         },
         {
             "id": "333333",
             "ingrediant": "ketchup",
             "amount": "1",
-            "unit": "each"
         },
         {
             "id": "4444444",
             "ingrediant": "syrup",
             "amount": "1",
-            "unit": "tbs"
         }
     ]
 };
@@ -98,8 +94,29 @@ recipeSchema.methods.serialize = function () {
     };
 };
 
+const shoppingListSchema = mongoose.Schema({
+    ingrediant: {
+        type: String
+    },
+    amount: {
+        type: String
+    } //paragraph of steps
+
+});
+
+
+shoppingListSchema.methods.serialize = function () {
+    return {
+        id: this._id,
+        ingrediant: this.ingrediant,
+        amount: this.amount,
+    };
+};
+
 const Recipe = mongoose.model('Recipes', recipeSchema);
+const ShoppingList = mongoose.model('Shopping-List', shoppingListSchema);
 
 module.exports = {
-    Recipe
+    Recipe,
+    ShoppingList
 };

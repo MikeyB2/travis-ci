@@ -7,7 +7,6 @@ const expect = chai.expect;
 
 const {
     Recipe,
-    ShoppingList
 } = require('../models');
 const {
     closeServer,
