@@ -149,5 +149,36 @@ describe('recipe API resource', function () {
                 });
         });
     });
+    describe('PUT endpoint', function () {
+        //  need to get a recipe from the db
+        // update that recipe from the id
+        // check data
+        it('should update fields you send over', function () {
+            const updateData = {
+                recipeName: faker.name.title(),
+                ingrediants: faker.random.arrayElement(),
+                instructions: faker.lorem.paragraph()
+            };
+
+            return Recipe
+                .findOne()
+                .then(recipe => {
+                    updateData.id = recipe.id;
+
+                    return chai.request(app)
+                        .put(`/recipes/${recipe.id}`)
+                        .send(updateData);
+                })
+                .then(res => {
+                    expect(res).to.have.status(204);
+                    return Recipe.findById(updateData.id);
+                })
+                .then(recipe => {
+                    expect(recipe.recipeName).to.equal(updateData.recipeName);
+                    expect(recipe.ingrediants).to.equal(updateData.ingrediants);
+                    expect(recipe.instructions).to.equal(updateData.instructions);
+                });
+        });
+    });
 
 });
