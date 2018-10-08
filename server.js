@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const app = express();
 
+// const shoppingListRouter = require("./shoppingListRouter");
+const recipesRouter = require("./recipesRouter");
+
 app.use(morgan('common'));
 app.use(express.json());
 
