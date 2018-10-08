@@ -5,6 +5,7 @@ mongoose.Promise = global.Promise;
 const app = express();
 
 app.use(morgan('common'));
+app.use(express.json());
 
 const {
 	DATABASE_URL,
@@ -36,11 +37,22 @@ app.get('/recipes', (req, res) => {
 		});
 });
 
+app.get('/recipes/:id', (req, res) => {
+	Recipe
+		.findById(req.params.id)
+		.then(recipe => res.json(recipe.serialize()))
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({
+				error: 'something went horribly awry'
+			});
+		});
+});
+
 app.post('/recipes', (req, res) => {
-	const requiredFields = ['name', 'ingrediants', 'instructions'];
+	const requiredFields = ['recipeName', 'ingrediants', 'instructions'];
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
-		console.log('Testing:' + req.body);
 		if (!(field in req.body)) {
 			const message = `Missing \`${field}\` in request body`;
 			console.error(message);
@@ -50,7 +62,7 @@ app.post('/recipes', (req, res) => {
 
 	Recipe
 		.create({
-			name: req.body.name,
+			recipeName: req.body.recipeName,
 			ingrediants: req.body.ingrediants,
 			instructions: req.body.instructions
 		})
@@ -97,9 +109,7 @@ function closeServer() {
 }
 
 if (require.main === module) {
-	app.listen(process.env.PORT || 8080, function () {
-		console.info(`App listening on ${this.address().port}`);
-	});
+	runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
 module.exports = {

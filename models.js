@@ -34,7 +34,7 @@ let MOCK_SHOPPING_LIST = {
 let MOCK_RECIPES = {
     "recipes": [{
             "id": "1111111",
-            "name": "milk shake",
+            "recipeName": "milk shake",
             "ingrediants": [{
                     "amount": "2 tbs",
                     "item": "Chocolate Syrup"
@@ -52,7 +52,7 @@ let MOCK_RECIPES = {
         },
         {
             "id": "2222222",
-            "name": "smoothie",
+            "recipeName": "smoothie",
             "ingrediants": [{
                     "amount": "2 cups",
                     "item": "strawberries"
@@ -76,18 +76,23 @@ let MOCK_RECIPES = {
 };
 
 const recipeSchema = mongoose.Schema({
-    recipes: [{
-        name: String,
-        ingrediants: Array,
-        instructions: String //paragraph a steps
-    }]
+    recipeName: {
+        type: String
+    },
+    ingrediants: {
+        type: String
+    },
+    instructions: {
+        type: String
+    } //paragraph of steps
+
 });
 
 
 recipeSchema.methods.serialize = function () {
     return {
         id: this._id,
-        name: this.name,
+        recipeName: this.recipeName,
         ingrediants: this.ingrediants,
         instructions: this.instructions,
     };
