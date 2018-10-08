@@ -76,6 +76,15 @@ app.post('/recipes', (req, res) => {
 
 });
 
+app.delete('/recipes/:id', (req, res) => {
+	Recipe
+		.findByIdAndRemove(req.params.id)
+		.then(() => {
+			console.log(`Deleted Recipe with id \`${req.params.id}\``);
+			res.status(204).end();
+		});
+});
+
 function runServer(databaseUrl, port = PORT) {
 	return new Promise((resolve, reject) => {
 		mongoose.connect(databaseUrl, err => {

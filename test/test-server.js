@@ -127,5 +127,27 @@ describe('recipe API resource', function () {
                 });
         });
     });
+    describe('DELETE endpoint', function () {
+        //  get a recipe to retreive the id
+        // delete that id
+        it('should delete a recipe by id', function () {
+
+            let recipe;
+
+            return Recipe
+                .findOne()
+                .then(_recipe => {
+                    recipe = _recipe;
+                    return chai.request(app).delete(`/recipes/${recipe.id}`);
+                })
+                .then(res => {
+                    expect(res).to.have.status(204);
+                    return Recipe.findById(recipe.id);
+                })
+                .then(_post => {
+                    expect(_post).to.be.null;
+                });
+        });
+    });
 
 });
