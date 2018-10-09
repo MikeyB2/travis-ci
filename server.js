@@ -1,17 +1,22 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const passport = require('passport');
 mongoose.Promise = global.Promise;
 const app = express();
 
-// const shoppingListRouter = require("./shoppingListRouter");
-// const recipesRouter = require("./recipesRouter");
-
-// app.use("/shopping-list", shoppingListRouter);
-// app.use("/recipes", recipesRouter);
-
 app.use(morgan('common'));
 app.use(express.json());
+
+const {
+	router: usersRouter
+} = require('./users');
+const {
+	router: authRouter,
+	localStrategy,
+	jwtStrategy
+} = require('./auth');
 
 const {
 	DATABASE_URL,
@@ -24,12 +29,40 @@ const {
 } = require('./models');
 app.use(express.static('public'));
 
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', {
+	session: false
+});
+
+// CORS
+app.use(function (req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+	if (req.method === 'OPTIONS') {
+		return res.send(204);
+	}
+	next();
+});
+
 app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/public/login.html");
 });
 
+//GET Authentication
+app.get('/api/protected', jwtAuth, (req, res) => {
+	return res.json({
+		data: 'rosebud'
+	});
+});
 
 
+// GET ,Recipes
 app.get('/recipes', (req, res) => {
 	Recipe
 		.find()
@@ -46,6 +79,8 @@ app.get('/recipes', (req, res) => {
 		});
 });
 
+
+// GET Recipes by ID
 app.get('/recipes/:id', (req, res) => {
 	Recipe
 		.findById(req.params.id)
@@ -58,6 +93,8 @@ app.get('/recipes/:id', (req, res) => {
 		});
 });
 
+
+// POST Recipes
 app.post('/recipes', (req, res) => {
 	const requiredFields = ['recipeName', 'ingrediants', 'instructions'];
 	for (let i = 0; i < requiredFields.length; i++) {
@@ -85,6 +122,8 @@ app.post('/recipes', (req, res) => {
 
 });
 
+
+// DELETE Recipe
 app.delete('/recipes/:id', (req, res) => {
 	Recipe
 		.findByIdAndRemove(req.params.id)
@@ -94,6 +133,8 @@ app.delete('/recipes/:id', (req, res) => {
 		});
 });
 
+
+// PUT update recipe
 app.put('/recipes/:id', (req, res) => {
 	if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		res.status(400).json({
@@ -122,7 +163,7 @@ app.put('/recipes/:id', (req, res) => {
 });
 
 
-
+// GET Shopping-list
 app.get('/Shopping-List', (req, res) => {
 	ShoppingList
 		.find()
@@ -139,6 +180,8 @@ app.get('/Shopping-List', (req, res) => {
 		});
 });
 
+
+//GET shopping-list item
 app.get('/Shopping-List/:id', (req, res) => {
 	ShoppingList
 		.findById(req.params.id)
@@ -151,6 +194,8 @@ app.get('/Shopping-List/:id', (req, res) => {
 		});
 });
 
+
+// POST New Shopping-list item
 app.post('/Shopping-List', (req, res) => {
 	const requiredFields = ['ingrediant', 'amount'];
 	for (let i = 0; i < requiredFields.length; i++) {
@@ -177,6 +222,8 @@ app.post('/Shopping-List', (req, res) => {
 
 });
 
+
+//DELETE Shopping-list item
 app.delete('/Shopping-List/:id', (req, res) => {
 	Recipe
 		.findByIdAndRemove(req.params.id)
@@ -186,6 +233,8 @@ app.delete('/Shopping-List/:id', (req, res) => {
 		});
 });
 
+
+//PUT update shopping-list item
 app.put('/Shopping-List/:id', (req, res) => {
 	if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		res.status(400).json({
@@ -213,7 +262,7 @@ app.put('/Shopping-List/:id', (req, res) => {
 		}));
 });
 
-
+// Server Instructions
 function runServer(databaseUrl, port = PORT) {
 	return new Promise((resolve, reject) => {
 		mongoose.connect(databaseUrl, err => {
