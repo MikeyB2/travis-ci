@@ -5,7 +5,10 @@ mongoose.Promise = global.Promise;
 const app = express();
 
 // const shoppingListRouter = require("./shoppingListRouter");
-const recipesRouter = require("./recipesRouter");
+// const recipesRouter = require("./recipesRouter");
+
+// app.use("/shopping-list", shoppingListRouter);
+// app.use("/recipes", recipesRouter);
 
 app.use(morgan('common'));
 app.use(express.json());
@@ -16,12 +19,11 @@ const {
 } = require('./config');
 
 const {
-	Recipe
+	Recipe,
+	ShoppingList
 } = require('./models');
 app.use(express.static('public'));
 
-// app.use("/shopping-list", shoppingListRouter);
-// app.use("/recipes", recipesRouter);
 
 
 app.get('/recipes', (req, res) => {
@@ -113,6 +115,24 @@ app.put('/recipes/:id', (req, res) => {
 		.catch(err => res.status(500).json({
 			message: 'WHAT DID YOU DO?!'
 		}));
+});
+
+
+
+app.get('/Shopping-List', (req, res) => {
+	ShoppingList
+		.find()
+		.then(listItems => {
+			res.json({
+				listItems: listItems.map(listItem => listItem.serialize())
+			});
+		})
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({
+				error: 'WHAT DID YOU DO?!'
+			});
+		});
 });
 
 function runServer(databaseUrl, port = PORT) {
