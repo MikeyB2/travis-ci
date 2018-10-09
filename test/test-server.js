@@ -140,10 +140,12 @@ describe('recipe API resource', function () {
                     return chai.request(app).delete(`/recipes/${recipe.id}`);
                 })
                 .then(res => {
+                    console.log("Res: " + recipe.id)
                     expect(res).to.have.status(204);
                     return Recipe.findById(recipe.id);
                 })
                 .then(_post => {
+                    console.log('TESTING RECIPE: ' + _post);
                     expect(_post).to.be.null;
                 });
         });

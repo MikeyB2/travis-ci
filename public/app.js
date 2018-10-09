@@ -24,33 +24,7 @@ let recipeTemplate =
     "</div>" +
     "</div>";
 
-let MOCK_SHOPPING_LIST = {
-    "shoppingList": [{
-            "id": "1111111",
-            "ingrediant": "Onion",
-            "amount": "1",
-            "unit": "each"
-        },
-        {
-            "id": "2222222",
-            "ingrediant": "milk",
-            "amount": "1",
-            "unit": "gal"
-        },
-        {
-            "id": "333333",
-            "ingrediant": "ketchup",
-            "amount": "1",
-            "unit": "each"
-        },
-        {
-            "id": "4444444",
-            "ingrediant": "syrup",
-            "amount": "1",
-            "unit": "tbs"
-        }
-    ]
-};
+
 
 // this function's name and argument can stay the
 // same after we have a live API, but its internal
@@ -84,49 +58,6 @@ function getAndDisplayShoppingList() {
     getShoppingList(displayShoppingList);
 }
 
-let MOCK_RECIPES = {
-    "recipes": [{
-            "id": "1111111",
-            "name": "milk shake",
-            "ingrediants": [{
-                    "amount": "2 tbs",
-                    "item": "Chocolate Syrup"
-                },
-                {
-                    "amount": "3 cups",
-                    "item": "milk"
-                },
-                {
-                    "amount": "1",
-                    "item": "Glass"
-                },
-            ],
-            "instructions": "list of steps"
-        },
-        {
-            "id": "2222222",
-            "name": "smoothie",
-            "ingrediants": [{
-                    "amount": "2 cups",
-                    "item": "strawberries"
-                },
-                {
-                    "amount": "3 cups",
-                    "item": "milk"
-                },
-                {
-                    "amount": "1",
-                    "item": "banana"
-                },
-                {
-                    "amount": "1",
-                    "item": "Glass"
-                },
-            ],
-            "instructions": "list of steps"
-        }
-    ]
-};
 
 function getRecipes(callbackFn) {
     // we use a `setTimeout` to make this asynchronous
