@@ -41,7 +41,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const requiredFields = ['recipeName', 'ingrediants', 'instructions'];
+    const requiredFields = ['recipeName', 'ingredients', 'instructions'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
     Recipe
         .create({
             recipeName: req.body.recipeName,
-            ingrediants: req.body.ingrediants,
+            ingredients: req.body.ingredients,
             instructions: req.body.instructions
         })
         .then(recipe => res.status(201).json(recipe.serialize()))
@@ -84,7 +84,7 @@ router.put('/:id', (req, res) => {
     }
 
     const updated = {};
-    const updateableFields = ['recipeName', 'ingrediants', 'instructions'];
+    const updateableFields = ['recipeName', 'ingredients', 'instructions'];
     updateableFields.forEach(field => {
         if (field in req.body) {
             updated[field] = req.body[field];
