@@ -24,7 +24,9 @@ let recipeTemplate =
     "</div>" +
     "</div>";
 
-
+let serverBase = "//localhost:8080/";
+let RECIPES_URL = serverBase + "recipes";
+let SHOPPING_LIST_URL = serverBase + "shopping-list";
 
 // this function's name and argument can stay the
 // same after we have a live API, but its internal
@@ -46,45 +48,152 @@ function getShoppingList(callbackFn) {
 function displayShoppingList(data) {
     console.log(data);
     for (index in data.shoppingList) {
-        $('.shopping-list').append(
+        $('.js-shopping-list').append(
             '<li>' + data.shoppingList[index].ingrediant + '</li>');
     }
     $('body').append('<hr>');
 }
 
+
+
 // this function can stay the same even when we
-// are connecting to real API
-function getAndDisplayShoppingList() {
-    getShoppingList(displayShoppingList);
-}
+// // are connecting to real API
+// function getAndDisplayShoppingList() {
+//     getShoppingList(displayShoppingList);
+// }
 
 
-function getRecipes(callbackFn) {
-    // we use a `setTimeout` to make this asynchronous
-    // as it would be with a real AJAX call.
-    setTimeout(function () {
-        callbackFn(MOCK_RECIPES)
-    }, 1);
-}
+// function getRecipes(callbackFn) {
+// we use a `setTimeout` to make this asynchronous
+// as it would be with a real AJAX call.
+//     setTimeout(function () {
+//         callbackFn(MOCK_RECIPES)
+//     }, 1);
+// }
 
 
 // this function stays the same when we connect
 // to real API later
-function displayRecipes(data) {
-    console.log(data);
-    for (index in data.recipes) {
-        $('.recipes').append(
-            '<ul>' + data.recipes[index].name + '</ul>');
-    }
-    $('body').append('<hr>');
-}
+// function displayRecipes(data) {
+//     console.log(data);
+//     for (index in data.recipes) {
+//         $('.recipes').append(
+//             '<ul>' + data.recipes[index].name + '</ul>');
+//     }
+//     $('body').append('<hr>');
+// }
 
 // this function can stay the same even when we
 // are connecting to real API
-function getAndDisplayRecipes() {
-    getRecipes(displayRecipes);
+// function getAndDisplayRecipes() {
+//     getRecipes(displayRecipes);
+// }
+
+function getAndDisplayShoppingList() {
+    console.log("Retrieving shopping list");
+    $.getJSON(SHOPPING_LIST_URL, function (items) {
+        console.log("Rendering shopping list" + items.listItems);
+        let itemElements = items.map(function (item) {
+            let element = $(shoppingItemTemplate);
+            element.attr("id", item.id);
+            let itemName = element.find(".js-shopping-item-name");
+            itemName.text(item.name);
+            element.attr("data-checked", item.checked);
+            if (item.checked) {
+                itemName.addClass("shopping-item__checked");
+            }
+            return element;
+        });
+        $(".js-shopping-list").html(itemElements);
+    });
 }
 
+function addShoppingItem(item) {
+    console.log("Adding shopping item: " + item);
+    $.ajax({
+        method: "POST",
+        url: SHOPPING_LIST_URL,
+        data: JSON.stringify(item),
+        success: function (data) {
+            getAndDisplayShoppingList();
+        },
+        dataType: "json",
+        contentType: "application/json"
+    });
+}
+
+function handleShoppingListAdd() {
+    $("#js-shopping-list-form").submit(function (e) {
+        e.preventDefault();
+        addShoppingItem({
+
+            ingrediant: $(e.currentTarget)
+                .find("#js-new-item")
+                .val(),
+            amount: $(e.currentTarget)
+                .find("#js-new-amount")
+                .val(),
+            checked: false
+        });
+    });
+}
+
+// function handleShoppingListDelete() {
+//     $(".js-shopping-list").on("click", ".js-shopping-item-delete", function (e) {
+//         e.preventDefault();
+//         deleteShoppingItem(
+//             $(e.currentTarget)
+//             .closest(".js-shopping-item")
+//             .attr("id")
+//         );
+//     });
+// }
+
+
+// function handleShoppingCheckedToggle() {
+//     $(".js-shopping-list").on("click", ".js-shopping-item-toggle", function (e) {
+//         e.preventDefault();
+//         var element = $(e.currentTarget).closest(".js-shopping-item");
+//         var item = {
+//             id: element.attr("id"),
+//             checked: !JSON.parse(element.attr("data-checked")),
+//             name: element.find(".js-shopping-item-name").text()
+//         };
+//         updateShoppingListitem(item);
+//     });
+// }
+
+
+
+// function handleRecipeAdd() {
+//     $("#js-recipe-form").submit(function (e) {
+//         e.preventDefault();
+//         var ingredients = $(e.currentTarget)
+//             .find("#ingredients-list")
+//             .val()
+//             .split(",")
+//             .map(function (ingredient) {
+//                 return ingredient.trim();
+//             });
+//         addRecipe({
+//             name: $(e.currentTarget)
+//                 .find("#recipe-name")
+//                 .val(),
+//             ingredients: ingredients
+//         });
+//     });
+// }
+
+// function handleRecipeDelete() {
+//     $(".js-recipes").on("click", ".js-recipe-delete", function (e) {
+//         e.preventDefault();
+//         deleteRecipe(
+//             $(e.currentTarget)
+//             .closest(".js-recipe")
+//             .attr("id")
+//         );
+//     });
+// }
 
 
 
@@ -93,6 +202,13 @@ function getAndDisplayRecipes() {
 
 // //  on page load do this
 $(function () {
-    getAndDisplayShoppingList();
-    getAndDisplayRecipes();
+    // getAndDisplayShoppingList();
+    // getAndDisplayRecipes();
+
+    handleShoppingListAdd();
+    // handleShoppingListDelete();
+    // handleShoppingCheckedToggle();
+
+    // handleRecipeAdd();
+    // handleRecipeDelete();
 })

@@ -167,16 +167,18 @@ describe('shopping list API resource', function () {
                 .findOne()
                 .then(_item => {
                     item = _item;
+                    console.log('Testing: ' + item);
                     return chai.request(app).delete(`/Shopping-List/${item.id}`);
+
                 })
                 .then(res => {
                     console.log("Res: " + item.id)
                     expect(res).to.have.status(204);
                     return ShoppingList.findById(item.id);
                 })
-                .then(_post => {
-                    console.log('TEST: ' + _post);
-                    expect(_post).to.be.null;
+                .then(_item => {
+                    console.log('TEST: ' + _item);
+                    expect(_item).to.be.null;
                 });
         });
     });
