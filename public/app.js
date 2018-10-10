@@ -1,6 +1,6 @@
 let shoppingItemTemplate =
     '<li class="js-shopping-item">' +
-    '<p><span class="shopping-item js-shopping-item-name"></span></p>' +
+    '<p><span class="shopping-item js-shopping-item-name"></span><span class="shopping-item js-shopping-item-amount"></span></p>' +
     '<div class="shopping-item-controls">' +
     '<button class="js-shopping-item-toggle">' +
     '<span class="button-label">check</span>' +
@@ -93,18 +93,21 @@ function getAndDisplayShoppingList() {
     console.log("Retrieving shopping list");
     $.getJSON(SHOPPING_LIST_URL, function (items) {
         console.log("Rendering shopping list" + items.listItems);
-        let itemElements = items.map(function (item) {
-            let element = $(shoppingItemTemplate);
-            element.attr("id", item.id);
-            let itemName = element.find(".js-shopping-item-name");
-            itemName.text(item.name);
-            element.attr("data-checked", item.checked);
-            if (item.checked) {
-                itemName.addClass("shopping-item__checked");
-            }
-            return element;
-        });
-        $(".js-shopping-list").html(itemElements);
+        // let itemElements = items.map(function (item) {
+        //     let element = $(shoppingItemTemplate);
+        //     element.attr("id", item.id);
+        //     let itemName = element.find(".js-shopping-item-name");
+        //     let itemAmount = element.find(".js-shopping-item-amount");
+        //     itemName.text(item.ingrediant);
+        //     itemAmount.text(item.amount);
+        //     element.attr("data-checked", item.checked);
+        //     if (item.checked) {
+        //         itemName.addClass("shopping-item__checked");
+        //         itemAmount.addClass("shopping-item__checked");
+        //     }
+        //     return element;
+        // });
+        // $(".js-shopping-list").html(itemElements);
     });
 }
 
@@ -163,26 +166,26 @@ function handleShoppingListAdd() {
 //     });
 // }
 
+function getAndDisplayRecipes() {
+    console.log("Retrieving recipes");
+    $.getJSON(RECIPES_URL, function (recipes) {
+        console.log("Rendering recipes" + recipes);
+        // var recipesElement = recipes.map(function (recipe) {
+        //     var element = $(recipeTemplate);
+        //     element.attr("id", recipe.id);
+        //     element.find(".js-recipe-name").text(recipe.name);
+        //     recipe.ingredients.forEach(function (ingredient) {
+        //         element
+        //             .find(".js-recipe-ingredients")
+        //             .append("<li>" + ingredient + "</li>");
+        //     });
+        //     return element;
+        // });
+        // $(".js-recipes").html(recipesElement);
+    });
+}
 
 
-// function handleRecipeAdd() {
-//     $("#js-recipe-form").submit(function (e) {
-//         e.preventDefault();
-//         var ingredients = $(e.currentTarget)
-//             .find("#ingredients-list")
-//             .val()
-//             .split(",")
-//             .map(function (ingredient) {
-//                 return ingredient.trim();
-//             });
-//         addRecipe({
-//             name: $(e.currentTarget)
-//                 .find("#recipe-name")
-//                 .val(),
-//             ingredients: ingredients
-//         });
-//     });
-// }
 
 // function handleRecipeDelete() {
 //     $(".js-recipes").on("click", ".js-recipe-delete", function (e) {
@@ -195,7 +198,27 @@ function handleShoppingListAdd() {
 //     });
 // }
 
-
+function handleRecipeAdd() {
+    $("#js-recipe-form").submit(function (e) {
+        e.preventDefault();
+        let ingredients = $(e.currentTarget)
+            .find("#ingredients-list")
+            .val()
+            .split(",")
+            .map(function (ingredient) {
+                return ingredient.trim();
+            });
+        addRecipe({
+            recipeName: $(e.currentTarget)
+                .find("#recipe-name")
+                .val(),
+            ingredients: ingredients,
+            instructions: $(e.currentTarget)
+                .find("#instructions")
+                .val(),
+        });
+    });
+}
 
 
 
@@ -209,6 +232,6 @@ $(function () {
     // handleShoppingListDelete();
     // handleShoppingCheckedToggle();
 
-    // handleRecipeAdd();
+    handleRecipeAdd();
     // handleRecipeDelete();
 })
