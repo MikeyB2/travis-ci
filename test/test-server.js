@@ -33,7 +33,7 @@ function generateRecipe() {
     return {
         // id: faker.random.alphaNumeric(),
         recipeName: faker.name.title(),
-        ingrediants: faker.random.arrayElement(),
+        ingredients: faker.random.arrayElement(),
         instructions: faker.lorem.paragraph()
     };
 }
@@ -84,7 +84,7 @@ describe('recipe API resource', function () {
 
                     res.body.recipes.forEach(function (recipe) {
                         expect(recipe).to.be.a('object');
-                        expect(recipe).to.include.keys('recipeName', 'ingrediants', 'instructions');
+                        expect(recipe).to.include.keys('recipeName', 'ingredients', 'instructions');
                     });
                     // check to make sure response data matches db data
                     resRecipe = res.body.recipes[0];
@@ -92,7 +92,7 @@ describe('recipe API resource', function () {
                 })
                 .then(recipe => {
                     expect(resRecipe.recipeName).to.equal(recipe.recipeName);
-                    expect(resRecipe.ingrediants).to.equal(recipe.ingrediants);
+                    expect(resRecipe.ingredients).to.equal(recipe.ingredients);
                     expect(resRecipe.instructions).to.equal(recipe.instructions);
                 });
         });
@@ -112,16 +112,16 @@ describe('recipe API resource', function () {
                     expect(res).to.be.json;
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys(
-                        'recipeName', 'ingrediants', 'instructions');
+                        'recipeName', 'ingredients', 'instructions');
                     expect(res.body.recipeName).to.equal(newRecipe.recipeName);
                     expect(res.body.id).to.not.be.null;
-                    expect(res.body.ingrediants).to.equal(newRecipe.ingrediants);
+                    expect(res.body.ingredients).to.equal(newRecipe.ingredients);
                     expect(res.body.instructions).to.equal(newRecipe.instructions);
                     return Recipe.findById(res.body.id);
                 })
                 .then(function (recipe) {
                     expect(recipe.recipeName).to.equal(newRecipe.recipeName);
-                    expect(recipe.ingrediants).to.equal(newRecipe.ingrediants);
+                    expect(recipe.ingredients).to.equal(newRecipe.ingredients);
                     expect(recipe.instructions).to.equal(newRecipe.instructions);
                 });
         });
@@ -157,7 +157,7 @@ describe('recipe API resource', function () {
         it('should update fields you send over', function () {
             const updateData = {
                 recipeName: faker.name.title(),
-                ingrediants: faker.random.arrayElement(),
+                ingredients: faker.random.arrayElement(),
                 instructions: faker.lorem.paragraph()
             };
 
@@ -176,7 +176,7 @@ describe('recipe API resource', function () {
                 })
                 .then(recipe => {
                     expect(recipe.recipeName).to.equal(updateData.recipeName);
-                    expect(recipe.ingrediants).to.equal(updateData.ingrediants);
+                    expect(recipe.ingredients).to.equal(updateData.ingredients);
                     expect(recipe.instructions).to.equal(updateData.instructions);
                 });
         });

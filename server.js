@@ -96,7 +96,7 @@ app.get('/recipes/:id', (req, res) => {
 
 // POST Recipes
 app.post('/recipes', (req, res) => {
-	const requiredFields = ['recipeName', 'ingrediants', 'instructions'];
+	const requiredFields = ['recipeName', 'ingredients', 'instructions'];
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -109,7 +109,7 @@ app.post('/recipes', (req, res) => {
 	Recipe
 		.create({
 			recipeName: req.body.recipeName,
-			ingrediants: req.body.ingrediants,
+			ingredients: req.body.ingredients,
 			instructions: req.body.instructions
 		})
 		.then(recipe => res.status(201).json(recipe.serialize()))
@@ -143,7 +143,7 @@ app.put('/recipes/:id', (req, res) => {
 	}
 
 	const updated = {};
-	const updateableFields = ['recipeName', 'ingrediants', 'instructions'];
+	const updateableFields = ['recipeName', 'ingredients', 'instructions'];
 	updateableFields.forEach(field => {
 		if (field in req.body) {
 			updated[field] = req.body[field];
@@ -197,7 +197,7 @@ app.get('/Shopping-List/:id', (req, res) => {
 
 // POST New Shopping-list item
 app.post('/Shopping-List', (req, res) => {
-	const requiredFields = ['ingrediant', 'amount'];
+	const requiredFields = ['ingredient', 'amount'];
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -209,7 +209,7 @@ app.post('/Shopping-List', (req, res) => {
 
 	ShoppingList
 		.create({
-			ingrediant: req.body.ingrediant,
+			ingredient: req.body.ingredient,
 			amount: req.body.amount
 		})
 		.then(listItem => res.status(201).json(listItem.serialize()))
@@ -243,7 +243,7 @@ app.put('/Shopping-List/:id', (req, res) => {
 	}
 
 	const updated = {};
-	const updateableFields = ['ingrediant', 'amount'];
+	const updateableFields = ['ingredient', 'amount'];
 	updateableFields.forEach(field => {
 		if (field in req.body) {
 			updated[field] = req.body[field];

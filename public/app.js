@@ -49,7 +49,7 @@ function displayShoppingList(data) {
     console.log(data);
     for (index in data.shoppingList) {
         $('.js-shopping-list').append(
-            '<li>' + data.shoppingList[index].ingrediant + '</li>');
+            '<li>' + data.shoppingList[index].ingredient + '</li>');
     }
     $('body').append('<hr>');
 }
@@ -98,7 +98,7 @@ function getAndDisplayShoppingList() {
         //     element.attr("id", item.id);
         //     let itemName = element.find(".js-shopping-item-name");
         //     let itemAmount = element.find(".js-shopping-item-amount");
-        //     itemName.text(item.ingrediant);
+        //     itemName.text(item.ingredient);
         //     itemAmount.text(item.amount);
         //     element.attr("data-checked", item.checked);
         //     if (item.checked) {
@@ -130,7 +130,7 @@ function handleShoppingListAdd() {
         e.preventDefault();
         addShoppingItem({
 
-            ingrediant: $(e.currentTarget)
+            ingredient: $(e.currentTarget)
                 .find("#js-new-item")
                 .val(),
             amount: $(e.currentTarget)
@@ -165,6 +165,21 @@ function handleShoppingListAdd() {
 //         updateShoppingListitem(item);
 //     });
 // }
+
+
+function addRecipe(recipe) {
+    console.log("Adding recipe: " + recipe);
+    $.ajax({
+        method: "POST",
+        url: RECIPES_URL,
+        data: JSON.stringify(recipe),
+        success: function (data) {
+            getAndDisplayRecipes();
+        },
+        dataType: "json",
+        contentType: "application/json"
+    });
+}
 
 function getAndDisplayRecipes() {
     console.log("Retrieving recipes");

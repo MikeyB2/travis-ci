@@ -6,22 +6,22 @@ mongoose.Promise = global.Promise;
 let MOCK_SHOPPING_LIST = {
     "shoppingList": [{
             "id": "1111111",
-            "ingrediant": "Onion",
+            "ingredient": "Onion",
             "amount": "1",
         },
         {
             "id": "2222222",
-            "ingrediant": "milk",
+            "ingredient": "milk",
             "amount": "1",
         },
         {
             "id": "333333",
-            "ingrediant": "ketchup",
+            "ingredient": "ketchup",
             "amount": "1",
         },
         {
             "id": "4444444",
-            "ingrediant": "syrup",
+            "ingredient": "syrup",
             "amount": "1",
         }
     ]
@@ -31,7 +31,7 @@ let MOCK_RECIPES = {
     "recipes": [{
             "id": "1111111",
             "recipeName": "milk shake",
-            "ingrediants": [{
+            "ingredients": [{
                     "amount": "2 tbs",
                     "item": "Chocolate Syrup"
                 },
@@ -49,7 +49,7 @@ let MOCK_RECIPES = {
         {
             "id": "2222222",
             "recipeName": "smoothie",
-            "ingrediants": [{
+            "ingredients": [{
                     "amount": "2 cups",
                     "item": "strawberries"
                 },
@@ -75,7 +75,7 @@ const recipeSchema = mongoose.Schema({
     recipeName: {
         type: String
     },
-    ingrediants: {
+    ingredients: {
         type: String
     },
     instructions: {
@@ -89,13 +89,13 @@ recipeSchema.methods.serialize = function () {
     return {
         id: this._id,
         recipeName: this.recipeName,
-        ingrediants: this.ingrediants,
+        ingredients: this.ingredients,
         instructions: this.instructions,
     };
 };
 
 const shoppingListSchema = mongoose.Schema({
-    ingrediant: {
+    ingredient: {
         type: String
     },
     amount: {
@@ -108,7 +108,7 @@ const shoppingListSchema = mongoose.Schema({
 shoppingListSchema.methods.serialize = function () {
     return {
         id: this._id,
-        ingrediant: this.ingrediant,
+        ingredient: this.ingredient,
         amount: this.amount,
     };
 };
