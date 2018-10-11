@@ -139,18 +139,22 @@ function getAndDisplayRecipes() {
     console.log("Retrieving recipes");
     $.getJSON(RECIPES_URL, function (recipes) {
         console.log("Rendering recipes" + recipes);
-        // var recipesElement = recipes.map(function (recipe) {
-        //     var element = $(recipeTemplate);
-        //     element.attr("id", recipe.id);
-        //     element.find(".js-recipe-name").text(recipe.name);
-        //     recipe.ingredients.forEach(function (ingredient) {
-        //         element
-        //             .find(".js-recipe-ingredients")
-        //             .append("<li>" + ingredient + "</li>");
-        //     });
-        //     return element;
-        // });
-        // $(".js-recipes").html(recipesElement);
+        let newRecipes = recipes.recipes;
+        let recipesElement = newRecipes.map(function (recipe) {
+            let ingredient = recipes.recipes.ingreients;
+            let element = $(recipeTemplate);
+            element.attr("id", recipe.id);
+            element.find(".js-recipe-name").text(recipe.name);
+            console.log('Recipe Test ' + recipe.name);
+            console.log("ingredient test: " + ingredient);
+            newRecipes.ingredients.forEach(function (ingredient) {
+                element
+                    .find(".js-recipe-ingredients")
+                    .append("<li>" + ingredient + "</li>");
+            });
+            return element;
+        });
+        $(".js-recipes").html(recipesElement);
     });
 }
 
@@ -195,7 +199,7 @@ function handleRecipeAdd() {
 // //  on page load do this
 $(function () {
     getAndDisplayShoppingList();
-    // getAndDisplayRecipes();
+    getAndDisplayRecipes();
 
     handleShoppingListAdd();
     handleShoppingListDelete();
