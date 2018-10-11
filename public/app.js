@@ -25,90 +25,25 @@ let recipeTemplate =
     "</div>";
 
 let serverBase = "//localhost:8080/";
-let RECIPES_URL = serverBase + "recipes";
-let SHOPPING_LIST_URL = serverBase + "shopping-list";
-
-// this function's name and argument can stay the
-// same after we have a live API, but its internal
-// implementation will change. Instead of using a
-// timeout function that returns mock data, it will
-// use jQuery's AJAX functionality to make a call
-// to the server and then run the callbackFn
-function getShoppingList(callbackFn) {
-    // we use a `setTimeout` to make this asynchronous
-    // as it would be with a real AJAX call.
-    setTimeout(function () {
-        callbackFn(MOCK_SHOPPING_LIST)
-    }, 1);
-}
-
-
-// this function stays the same when we connect
-// to real API later
-// function displayShoppingList(data) {
-//     console.log(data);
-//     for (index in data.shoppingList) {
-//         $('.js-shopping-list').append(
-//             '<li>' + data.shoppingList[index].ingredient + '</li>');
-//     }
-//     $('body').append('<hr>');
-// }
-
-
-
-// this function can stay the same even when we
-// // are connecting to real API
-// function getAndDisplayShoppingList() {
-//     getShoppingList(displayShoppingList);
-// }
-
-
-// function getRecipes(callbackFn) {
-// we use a `setTimeout` to make this asynchronous
-// as it would be with a real AJAX call.
-//     setTimeout(function () {
-//         callbackFn(MOCK_RECIPES)
-//     }, 1);
-// }
-
-
-// this function stays the same when we connect
-// to real API later
-// function displayRecipes(data) {
-//     console.log(data);
-//     for (index in data.recipes) {
-//         $('.recipes').append(
-//             '<ul>' + data.recipes[index].name + '</ul>');
-//     }
-//     $('body').append('<hr>');
-// }
-
-// this function can stay the same even when we
-// are connecting to real API
-// function getAndDisplayRecipes() {
-//     getRecipes(displayRecipes);
-// }
+let RECIPES_URL = serverBase + "Recipes/";
+let SHOPPING_LIST_URL = serverBase + "Shopping-List/";
 
 function getAndDisplayShoppingList() {
     console.log("Retrieving shopping list");
     $.getJSON(SHOPPING_LIST_URL, function (items) {
-        console.log('Shopping list ' + items);
-        console.log("Rendering shopping list ingredient " + items.listItems[0].ingredient);
         let newItems = items.listItems;
-        console.log('NewItem ' + newItems);
         let itemElements = newItems.map(function (item) {
             let element = $(shoppingItemTemplate);
-            console.log('testing:' + element + item);
-            // element.attr("id", item.id);
-            // let itemName = element.find(".js-shopping-item-name");
-            // let itemAmount = element.find(".js-shopping-item-amount");
-            // itemName.text(item.ingredient);
-            // itemAmount.text(item.amount);
-            // element.attr("data-checked", item.checked);
-            // if (item.checked) {
-            //     itemName.addClass("shopping-item__checked");
-            //     itemAmount.addClass("shopping-item__checked");
-            // }
+            element.attr("id", item.id);
+            let itemName = element.find(".js-shopping-item-name");
+            let itemAmount = element.find(".js-shopping-item-amount");
+            itemName.text(item.ingredient);
+            itemAmount.text(item.amount);
+            element.attr("data-checked", item.checked);
+            if (item.checked) {
+                itemName.addClass("shopping-item__checked");
+                itemAmount.addClass("shopping-item__checked");
+            }
             return element;
         });
         $(".js-shopping-list").html(itemElements);
@@ -119,6 +54,20 @@ function addShoppingItem(item) {
     console.log("Adding shopping item: " + item);
     $.ajax({
         method: "POST",
+        url: SHOPPING_LIST_URL,
+        data: JSON.stringify(item),
+        success: function (data) {
+            getAndDisplayShoppingList();
+        },
+        dataType: "json",
+        contentType: "application/json"
+    });
+}
+function deleteShoppingItem(item) {
+    console.log('DELETING ITEM ' + item);
+    console.log(SHOPPING_LIST_URL + item);
+    $.ajax({
+        method: "DELETE",
         url: SHOPPING_LIST_URL,
         data: JSON.stringify(item),
         success: function (data) {
@@ -145,30 +94,31 @@ function handleShoppingListAdd() {
     });
 }
 
-// function handleShoppingListDelete() {
-//     $(".js-shopping-list").on("click", ".js-shopping-item-delete", function (e) {
-//         e.preventDefault();
-//         deleteShoppingItem(
-//             $(e.currentTarget)
-//             .closest(".js-shopping-item")
-//             .attr("id")
-//         );
-//     });
-// }
+function handleShoppingListDelete() {
+    $(".js-shopping-list").on("click", ".js-shopping-item-delete", function (e) {
+        e.preventDefault();
+        deleteShoppingItem(
+            $(e.currentTarget)
+                .closest(".js-shopping-item")
+                .attr("id")
+        );
+    });
+}
 
 
-// function handleShoppingCheckedToggle() {
-//     $(".js-shopping-list").on("click", ".js-shopping-item-toggle", function (e) {
-//         e.preventDefault();
-//         var element = $(e.currentTarget).closest(".js-shopping-item");
-//         var item = {
-//             id: element.attr("id"),
-//             checked: !JSON.parse(element.attr("data-checked")),
-//             name: element.find(".js-shopping-item-name").text()
-//         };
-//         updateShoppingListitem(item);
-//     });
-// }
+function handleShoppingCheckedToggle() {
+    $(".js-shopping-list").on("click", ".js-shopping-item-toggle", function (e) {
+        console.log('CHECKED');
+        e.preventDefault();
+        // let element = $(e.currentTarget).closest(".js-shopping-item");
+        // let item = {
+        //     id: element.attr("id"),
+        //     checked: !JSON.parse(element.attr("data-checked")),
+        //     ingredient: element.find(".js-shopping-item-name").text()
+        // };
+        // updateShoppingListitem(item);
+    });
+}
 
 
 function addRecipe(recipe) {
@@ -244,12 +194,12 @@ function handleRecipeAdd() {
 
 // //  on page load do this
 $(function () {
-    // getAndDisplayShoppingList();
+    getAndDisplayShoppingList();
     // getAndDisplayRecipes();
 
     handleShoppingListAdd();
-    // handleShoppingListDelete();
-    // handleShoppingCheckedToggle();
+    handleShoppingListDelete();
+    handleShoppingCheckedToggle();
 
     handleRecipeAdd();
     // handleRecipeDelete();
