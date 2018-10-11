@@ -9,24 +9,12 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.json());
 
-const {
-	router: usersRouter
-} = require('./users');
-const {
-	router: authRouter,
-	localStrategy,
-	jwtStrategy
-} = require('./auth');
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
-const {
-	DATABASE_URL,
-	PORT
-} = require('./config');
+const { DATABASE_URL, PORT } = require('./config');
 
-const {
-	Recipe,
-	ShoppingList
-} = require('./models');
+const { Recipe, ShoppingList } = require('./models');
 app.use(express.static('public'));
 
 passport.use(localStrategy);
@@ -40,7 +28,7 @@ const jwtAuth = passport.authenticate('jwt', {
 });
 
 // CORS
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
@@ -50,8 +38,8 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.get("/", (req, res) => {
-	res.sendFile(__dirname + "/public/login.html");
+app.get('/', (req, res) => {
+	res.sendFile(__dirname + '/public/login.html');
 });
 
 //GET Authentication
@@ -61,11 +49,9 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 	});
 });
 
-
 // GET ,Recipes
 app.get('/recipes', (req, res) => {
-	Recipe
-		.find()
+	Recipe.find()
 		.then(recipes => {
 			res.json({
 				recipes: recipes.map(recipe => recipe.serialize())
@@ -79,11 +65,9 @@ app.get('/recipes', (req, res) => {
 		});
 });
 
-
 // GET Recipes by ID
 app.get('/recipes/:id', (req, res) => {
-	Recipe
-		.findById(req.params.id)
+	Recipe.findById(req.params.id)
 		.then(recipe => res.json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -92,7 +76,6 @@ app.get('/recipes/:id', (req, res) => {
 			});
 		});
 });
-
 
 // POST Recipes
 app.post('/recipes', (req, res) => {
@@ -106,12 +89,11 @@ app.post('/recipes', (req, res) => {
 		}
 	}
 
-	Recipe
-		.create({
-			recipeName: req.body.recipeName,
-			ingredients: req.body.ingredients,
-			instructions: req.body.instructions
-		})
+	Recipe.create({
+		recipeName: req.body.recipeName,
+		ingredients: req.body.ingredients,
+		instructions: req.body.instructions
+	})
 		.then(recipe => res.status(201).json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -119,20 +101,15 @@ app.post('/recipes', (req, res) => {
 				error: 'WHAT DID YOU DO?!'
 			});
 		});
-
 });
-
 
 // DELETE Recipe
 app.delete('/recipes/:id', (req, res) => {
-	Recipe
-		.findByIdAndRemove(req.params.id)
-		.then(() => {
-			console.log(`Deleted Recipe with id \`${req.params.id}\``);
-			res.status(204).end();
-		});
+	Recipe.findByIdAndRemove(req.params.id).then(() => {
+		console.log(`Deleted Recipe with id \`${req.params.id}\``);
+		res.status(204).end();
+	});
 });
-
 
 // PUT update recipe
 app.put('/recipes/:id', (req, res) => {
@@ -150,23 +127,26 @@ app.put('/recipes/:id', (req, res) => {
 		}
 	});
 
-	Recipe
-		.findByIdAndUpdate(req.params.id, {
+	Recipe.findByIdAndUpdate(
+		req.params.id,
+		{
 			$set: updated
-		}, {
+		},
+		{
 			new: true
-		})
+		}
+	)
 		.then(updatedRecipe => res.status(204).end())
-		.catch(err => res.status(500).json({
-			message: 'WHAT DID YOU DO?!'
-		}));
+		.catch(err =>
+			res.status(500).json({
+				message: 'WHAT DID YOU DO?!'
+			})
+		);
 });
-
 
 // GET Shopping-list
 app.get('/Shopping-List', (req, res) => {
-	ShoppingList
-		.find()
+	ShoppingList.find()
 		.then(listItems => {
 			res.json({
 				listItems: listItems.map(listItem => listItem.serialize())
@@ -180,11 +160,9 @@ app.get('/Shopping-List', (req, res) => {
 		});
 });
 
-
 //GET shopping-list item
 app.get('/Shopping-List/:id', (req, res) => {
-	ShoppingList
-		.findById(req.params.id)
+	ShoppingList.findById(req.params.id)
 		.then(listItem => res.json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -193,7 +171,6 @@ app.get('/Shopping-List/:id', (req, res) => {
 			});
 		});
 });
-
 
 // POST New Shopping-list item
 app.post('/Shopping-List', (req, res) => {
@@ -207,11 +184,10 @@ app.post('/Shopping-List', (req, res) => {
 		}
 	}
 
-	ShoppingList
-		.create({
-			ingredient: req.body.ingredient,
-			amount: req.body.amount
-		})
+	ShoppingList.create({
+		ingredient: req.body.ingredient,
+		amount: req.body.amount
+	})
 		.then(listItem => res.status(201).json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -219,20 +195,15 @@ app.post('/Shopping-List', (req, res) => {
 				error: 'WHAT DID YOU DO?!'
 			});
 		});
-
 });
-
 
 //DELETE Shopping-list item
 app.delete('/Shopping-List/:id', (req, res) => {
-	Recipe
-		.findByIdAndRemove(req.params.id)
-		.then(() => {
-			console.log(`Deleted List Item with id \`${req.params.id}\``);
-			res.status(204).end();
-		});
+	ShoppingList.findByIdAndRemove(req.params.id).then(() => {
+		console.log(`Deleted List Item with id \`${req.params.id}\``);
+		res.status(204).end();
+	});
 });
-
 
 //PUT update shopping-list item
 app.put('/Shopping-List/:id', (req, res) => {
@@ -250,34 +221,43 @@ app.put('/Shopping-List/:id', (req, res) => {
 		}
 	});
 
-	ShoppingList
-		.findByIdAndUpdate(req.params.id, {
+	ShoppingList.findByIdAndUpdate(
+		req.params.id,
+		{
 			$set: updated
-		}, {
+		},
+		{
 			new: true
-		})
+		}
+	)
 		.then(updatedListItem => res.status(204).end())
-		.catch(err => res.status(500).json({
-			message: 'WHAT DID YOU DO?!'
-		}));
+		.catch(err =>
+			res.status(500).json({
+				message: 'WHAT DID YOU DO?!'
+			})
+		);
 });
 
 // Server Instructions
 function runServer(databaseUrl, port = PORT) {
 	return new Promise((resolve, reject) => {
-		mongoose.connect(databaseUrl, err => {
-			if (err) {
-				return reject(err);
+		mongoose.connect(
+			databaseUrl,
+			err => {
+				if (err) {
+					return reject(err);
+				}
+				server = app
+					.listen(port, () => {
+						console.log(`Your app is listening on port ${port}`);
+						resolve();
+					})
+					.on('error', err => {
+						mongoose.disconnect();
+						reject(err);
+					});
 			}
-			server = app.listen(port, () => {
-					console.log(`Your app is listening on port ${port}`);
-					resolve();
-				})
-				.on('error', err => {
-					mongoose.disconnect();
-					reject(err);
-				});
-		});
+		);
 	});
 }
 

@@ -26,7 +26,7 @@ function seedShoppingListData() {
     for (let i = 1; i <= 10; i++) {
         seedData.push({
             id: faker.random.alphaNumeric(),
-            ingrediant: faker.random.arrayElement(),
+            ingredient: faker.random.arrayElement(),
             amount: faker.random.word()
         });
     }
@@ -35,7 +35,7 @@ function seedShoppingListData() {
 
 function generateShoppingList() {
     return {
-        ingrediant: faker.random.arrayElement(),
+        ingredient: faker.random.arrayElement(),
         amount: faker.random.word()
     };
 }
@@ -88,14 +88,14 @@ describe('shopping list API resource', function () {
 
                     res.body.listItems.forEach(function (listItem) {
                         expect(listItem).to.be.a('object');
-                        expect(listItem).to.include.keys('ingrediant', 'amount');
+                        expect(listItem).to.include.keys('ingredient', 'amount');
                     });
                     // check to make sure response data matches db data
                     resShoppingList = res.body.listItems[0];
                     return ShoppingList.findById(resShoppingList.id);
                 })
                 .then(listItem => {
-                    expect(resShoppingList.ingrediant).to.equal(listItem.ingrediant);
+                    expect(resShoppingList.ingredient).to.equal(listItem.ingredient);
                     expect(resShoppingList.amount).to.equal(listItem.amount);
                 });
         });
@@ -113,14 +113,14 @@ describe('shopping list API resource', function () {
                     expect(res).to.be.json;
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys(
-                        'ingrediant', 'amount');
+                        'ingredient', 'amount');
                     expect(res.body.id).to.not.be.null;
-                    expect(res.body.ingrediant).to.equal(newListItem.ingrediant);
+                    expect(res.body.ingredient).to.equal(newListItem.ingredient);
                     expect(res.body.amount).to.equal(newListItem.amount);
                     return ShoppingList.findById(res.body.id);
                 })
                 .then(function (listItem) {
-                    expect(listItem.ingrediant).to.equal(newListItem.ingrediant);
+                    expect(listItem.ingredient).to.equal(newListItem.ingredient);
                     expect(listItem.amount).to.equal(newListItem.amount);
                 });
         });
@@ -132,7 +132,7 @@ describe('shopping list API resource', function () {
         // check data
         it('should update fields you send over', function () {
             const updateData = {
-                ingrediant: faker.random.arrayElement(),
+                ingredient: faker.random.arrayElement(),
                 amount: faker.random.word()
             };
 
@@ -150,7 +150,7 @@ describe('shopping list API resource', function () {
                     return ShoppingList.findById(updateData.id);
                 })
                 .then(listItem => {
-                    expect(listItem.ingrediant).to.equal(updateData.ingrediant);
+                    expect(listItem.ingredient).to.equal(updateData.ingredient);
                     expect(listItem.amount).to.equal(updateData.amount);
                 });
         });
