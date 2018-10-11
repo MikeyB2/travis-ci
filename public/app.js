@@ -93,21 +93,23 @@ function getAndDisplayShoppingList() {
     console.log("Retrieving shopping list");
     $.getJSON(SHOPPING_LIST_URL, function (items) {
         console.log("Rendering shopping list" + items.listItems);
-        // let itemElements = items.map(function (item) {
-        //     let element = $(shoppingItemTemplate);
-        //     element.attr("id", item.id);
-        //     let itemName = element.find(".js-shopping-item-name");
-        //     let itemAmount = element.find(".js-shopping-item-amount");
-        //     itemName.text(item.ingredient);
-        //     itemAmount.text(item.amount);
-        //     element.attr("data-checked", item.checked);
-        //     if (item.checked) {
-        //         itemName.addClass("shopping-item__checked");
-        //         itemAmount.addClass("shopping-item__checked");
-        //     }
-        //     return element;
-        // });
-        // $(".js-shopping-list").html(itemElements);
+        let newItems = Array.prototype.slice.call(items);
+        console.log(newItems);
+        let itemElements = newItems.map(function (item) {
+            let element = $(shoppingItemTemplate);
+            element.attr("id", item.id);
+            let itemName = element.find(".js-shopping-item-name");
+            let itemAmount = element.find(".js-shopping-item-amount");
+            itemName.text(item.ingredient);
+            itemAmount.text(item.amount);
+            element.attr("data-checked", item.checked);
+            if (item.checked) {
+                itemName.addClass("shopping-item__checked");
+                itemAmount.addClass("shopping-item__checked");
+            }
+            return element;
+        });
+        $(".js-shopping-list").html(itemElements);
     });
 }
 
