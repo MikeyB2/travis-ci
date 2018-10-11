@@ -94,8 +94,7 @@ function getAndDisplayShoppingList() {
     $.getJSON(SHOPPING_LIST_URL, function (items) {
         console.log('Shopping list ' + items);
         console.log("Rendering shopping list ingredient " + items.listItems[0].ingredient);
-        let newItems = [];
-        newItems = Array.prototype.slice.call(items);
+        let newItems = items.listItems;
         console.log('NewItem ' + newItems);
         let itemElements = newItems.map(function (item) {
             let element = $(shoppingItemTemplate);
