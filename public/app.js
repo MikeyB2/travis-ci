@@ -13,6 +13,7 @@ let shoppingItemTemplate =
 
 let recipeTemplate =
     '<div class="recipe js-recipe">' +
+    '<hr> TITLE' +
     '<h3 class="js-recipe-name"><h3>' +
     '<hr>' +
     '<ul class="js-recipe-ingredients">' +
@@ -108,8 +109,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -119,6 +120,7 @@ function handleShoppingCheckedToggle() {
         console.log('CHECKED');
         e.preventDefault();
         let element = $(e.currentTarget).closest('.js-shopping-item');
+        console.log('Element: ' + element.listItems);
         let item = {
             id: element.attr('id'),
             ingredient: element.find('.js-shopping-item-name').text(),
@@ -154,12 +156,18 @@ function getAndDisplayRecipes() {
             element.attr("id", recipe.id);
             element.find(".js-recipe-name").text(recipe.recipeName);
             console.log('Recipe Test: ' + recipe.recipeName);
+            console.log('Recipe ingredients: ' + recipe.ingredients);
+            console.log('Recipe: ' + recipe.recipes);
 
-            recipe.ingredients.forEach(function (ingredient) {
-                console.log("ingredient test: " + ingredient);
+            Object.keys(newRecipes).forEach(function (ingredient) {
+                console.log("ingredient test0: " + newRecipes);
+                console.log("ingredient test1: " + recipe.ingredients);
+                console.log("ingredient test2: " + element);
+                console.log("ingredient test3: " + ingredient);
+                let newIngredient = recipe.ingredients;
                 element
                     .find(".js-recipe-ingredients")
-                    .append("<li>" + ingredient + "</li>");
+                    .append("<li>" + newIngredient + "</li>");
             });
             return element;
         });
