@@ -9,12 +9,24 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.json());
 
-const { router: usersRouter } = require('./users');
-const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const {
+	router: usersRouter
+} = require('./users');
+const {
+	router: authRouter,
+	localStrategy,
+	jwtStrategy
+} = require('./auth');
 
-const { DATABASE_URL, PORT } = require('./config');
+const {
+	DATABASE_URL,
+	PORT
+} = require('./config');
 
-const { Recipe, ShoppingList } = require('./models');
+const {
+	Recipe,
+	ShoppingList
+} = require('./models');
 app.use(express.static('public'));
 
 passport.use(localStrategy);
@@ -28,7 +40,7 @@ const jwtAuth = passport.authenticate('jwt', {
 });
 
 // CORS
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
 	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
@@ -90,10 +102,10 @@ app.post('/recipes', (req, res) => {
 	}
 
 	Recipe.create({
-		recipeName: req.body.recipeName,
-		ingredients: req.body.ingredients,
-		instructions: req.body.instructions
-	})
+			recipeName: req.body.recipeName,
+			ingredients: req.body.ingredients,
+			instructions: req.body.instructions
+		})
 		.then(recipe => res.status(201).json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -128,14 +140,12 @@ app.put('/recipes/:id', (req, res) => {
 	});
 
 	Recipe.findByIdAndUpdate(
-		req.params.id,
-		{
-			$set: updated
-		},
-		{
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedRecipe => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -185,9 +195,9 @@ app.post('/Shopping-List', (req, res) => {
 	}
 
 	ShoppingList.create({
-		ingredient: req.body.ingredient,
-		amount: req.body.amount
-	})
+			ingredient: req.body.ingredient,
+			amount: req.body.amount
+		})
 		.then(listItem => res.status(201).json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -214,7 +224,7 @@ app.put('/Shopping-List/:id', (req, res) => {
 	}
 
 	const updated = {};
-	const updateableFields = ['ingredient', 'amount'];
+	const updateableFields = ['ingredient', 'amount', 'checked'];
 	updateableFields.forEach(field => {
 		if (field in req.body) {
 			updated[field] = req.body[field];
@@ -222,14 +232,12 @@ app.put('/Shopping-List/:id', (req, res) => {
 	});
 
 	ShoppingList.findByIdAndUpdate(
-		req.params.id,
-		{
-			$set: updated
-		},
-		{
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedListItem => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({

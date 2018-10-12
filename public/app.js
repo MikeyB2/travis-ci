@@ -4,90 +4,99 @@ let shoppingItemTemplate =
     '<div class="shopping-item-controls">' +
     '<button class="js-shopping-item-toggle">' +
     '<span class="button-label">check</span>' +
-    "</button>" +
+    '</button>' +
     '<button class="js-shopping-item-delete">' +
     '<span class="button-label">delete</span>' +
-    "</button>" +
-    "</div>" +
-    "</li>";
+    '</button>' +
+    '</div>' +
+    '</li>';
 
 let recipeTemplate =
     '<div class="recipe js-recipe">' +
     '<h3 class="js-recipe-name"><h3>' +
-    "<hr>" +
+    '<hr>' +
     '<ul class="js-recipe-ingredients">' +
-    "</ul>" +
+    '</ul>' +
     '<div class="recipe-controls">' +
     '<button class="js-recipe-delete">' +
     '<span class="button-label">delete</span>' +
-    "</button>" +
-    "</div>" +
-    "</div>";
+    '</button>' +
+    '</div>' +
+    '</div>';
 
-let serverBase = "//localhost:8080/";
-let RECIPES_URL = serverBase + "Recipes/";
-let SHOPPING_LIST_URL = serverBase + "Shopping-List/";
+let serverBase = '//localhost:8080/';
+let RECIPES_URL = serverBase + 'Recipes';
+let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
 
 function getAndDisplayShoppingList() {
-    console.log("Retrieving shopping list");
+    console.log('Retrieving shopping list');
     $.getJSON(SHOPPING_LIST_URL, function (items) {
         let newItems = items.listItems;
         let itemElements = newItems.map(function (item) {
             let element = $(shoppingItemTemplate);
-            element.attr("id", item.id);
-            let itemName = element.find(".js-shopping-item-name");
-            let itemAmount = element.find(".js-shopping-item-amount");
+            element.attr('id', item.id);
+            let itemName = element.find('.js-shopping-item-name');
+            let itemAmount = element.find('.js-shopping-item-amount');
             itemName.text(item.ingredient);
             itemAmount.text(item.amount);
-            element.attr("data-checked", item.checked);
+            element.attr('data-checked', item.checked);
             if (item.checked) {
-                itemName.addClass("shopping-item__checked");
-                itemAmount.addClass("shopping-item__checked");
+                itemName.addClass('shopping-item__checked');
+                itemAmount.addClass('shopping-item__checked');
             }
             return element;
         });
-        $(".js-shopping-list").html(itemElements);
+        $('.js-shopping-list').html(itemElements);
     });
 }
 
 function addShoppingItem(item) {
-    console.log("Adding shopping item: " + item);
+    console.log('Adding shopping item: ' + item);
     $.ajax({
-        method: "POST",
+        method: 'POST',
         url: SHOPPING_LIST_URL,
         data: JSON.stringify(item),
         success: function (data) {
             getAndDisplayShoppingList();
         },
-        dataType: "json",
-        contentType: "application/json"
+        dataType: 'json',
+        contentType: 'application/json'
     });
 }
+
 function deleteShoppingItem(item) {
     console.log('DELETING ITEM ' + item);
     console.log(SHOPPING_LIST_URL + item);
     $.ajax({
-        method: "DELETE",
-        url: SHOPPING_LIST_URL,
+        method: 'DELETE',
+        url: SHOPPING_LIST_URL + '/' + item,
+        success: getAndDisplayShoppingList
+    });
+}
+
+function updateShoppingListitem(item) {
+    console.log('Updating shopping list item `' + item.id + '`');
+    $.ajax({
+        url: SHOPPING_LIST_URL + '/' + item.id,
+        method: 'PUT',
         data: JSON.stringify(item),
         success: function (data) {
             getAndDisplayShoppingList();
         },
-        dataType: "json",
-        contentType: "application/json"
+        dataType: 'json',
+        contentType: 'application/json'
     });
 }
 
 function handleShoppingListAdd() {
-    $("#js-shopping-list-form").submit(function (e) {
+    $('#js-shopping-list-form').submit(function (e) {
         e.preventDefault();
         addShoppingItem({
-
             ingredient: $(e.currentTarget)
-                .find("#js-new-item")
+                .find('#js-new-item')
                 .val(),
             amount: $(e.currentTarget)
-                .find("#js-new-amount")
+                .find('#js-new-amount')
                 .val(),
             checked: false
         });
@@ -95,59 +104,59 @@ function handleShoppingListAdd() {
 }
 
 function handleShoppingListDelete() {
-    $(".js-shopping-list").on("click", ".js-shopping-item-delete", function (e) {
+    $('.js-shopping-list').on('click', '.js-shopping-item-delete', function (e) {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-                .closest(".js-shopping-item")
-                .attr("id")
+            .closest('.js-shopping-item')
+            .attr('id')
         );
     });
 }
 
-
 function handleShoppingCheckedToggle() {
-    $(".js-shopping-list").on("click", ".js-shopping-item-toggle", function (e) {
+    $('.js-shopping-list').on('click', '.js-shopping-item-toggle', function (e) {
         console.log('CHECKED');
         e.preventDefault();
-        // let element = $(e.currentTarget).closest(".js-shopping-item");
-        // let item = {
-        //     id: element.attr("id"),
-        //     checked: !JSON.parse(element.attr("data-checked")),
-        //     ingredient: element.find(".js-shopping-item-name").text()
-        // };
-        // updateShoppingListitem(item);
+        let element = $(e.currentTarget).closest('.js-shopping-item');
+        let item = {
+            id: element.attr('id'),
+            ingredient: element.find('.js-shopping-item-name').text(),
+            checked: !JSON.parse(element.attr('data-checked'))
+        };
+        console.log('Update: ' + item);
+        updateShoppingListitem(item);
     });
 }
 
-
 function addRecipe(recipe) {
-    console.log("Adding recipe: " + recipe);
+    console.log('Adding recipe: ' + recipe);
     $.ajax({
-        method: "POST",
+        method: 'POST',
         url: RECIPES_URL,
         data: JSON.stringify(recipe),
         success: function (data) {
             getAndDisplayRecipes();
         },
-        dataType: "json",
-        contentType: "application/json"
+        dataType: 'json',
+        contentType: 'application/json'
     });
 }
 
 function getAndDisplayRecipes() {
-    console.log("Retrieving recipes");
+    console.log('Retrieving recipes');
     $.getJSON(RECIPES_URL, function (recipes) {
-        console.log("Rendering recipes" + recipes);
         let newRecipes = recipes.recipes;
+        console.log("Rendering recipes " + newRecipes);
         let recipesElement = newRecipes.map(function (recipe) {
-            let ingredient = recipes.recipes.ingreients;
+            // let ingredient = recipe;
             let element = $(recipeTemplate);
             element.attr("id", recipe.id);
-            element.find(".js-recipe-name").text(recipe.name);
-            console.log('Recipe Test ' + recipe.name);
-            console.log("ingredient test: " + ingredient);
-            newRecipes.ingredients.forEach(function (ingredient) {
+            element.find(".js-recipe-name").text(recipe.recipeName);
+            console.log('Recipe Test: ' + recipe.recipeName);
+
+            recipe.ingredients.forEach(function (ingredient) {
+                console.log("ingredient test: " + ingredient);
                 element
                     .find(".js-recipe-ingredients")
                     .append("<li>" + ingredient + "</li>");
@@ -157,8 +166,6 @@ function getAndDisplayRecipes() {
         $(".js-recipes").html(recipesElement);
     });
 }
-
-
 
 // function handleRecipeDelete() {
 //     $(".js-recipes").on("click", ".js-recipe-delete", function (e) {
@@ -172,29 +179,30 @@ function getAndDisplayRecipes() {
 // }
 
 function handleRecipeAdd() {
-    $("#js-recipe-form").submit(function (e) {
+    $('#js-recipe-form').submit(function (e) {
         e.preventDefault();
+        console.log('Instructions: ');
         let ingredients = $(e.currentTarget)
-            .find("#ingredients-list")
+            .find('#ingredients-list')
             .val()
-            .split(",")
+            .split(',')
             .map(function (ingredient) {
+                console.log('Ingredient: ' + ingredient);
+
                 return ingredient.trim();
             });
+        let instructions = $(e.currentTarget)
+            .find('#instructions')
+            .val();
         addRecipe({
             recipeName: $(e.currentTarget)
-                .find("#recipe-name")
+                .find('#recipe-name')
                 .val(),
             ingredients: ingredients,
-            instructions: $(e.currentTarget)
-                .find("#instructions")
-                .val(),
+            instructions: instructions
         });
     });
 }
-
-
-
 
 // //  on page load do this
 $(function () {
@@ -207,4 +215,4 @@ $(function () {
 
     handleRecipeAdd();
     // handleRecipeDelete();
-})
+});
