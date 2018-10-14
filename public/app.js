@@ -18,6 +18,9 @@ let recipeTemplate =
     '<hr>' +
     '<ul class="js-recipe-ingredients">' +
     '</ul>' +
+    '<hr>' +
+    '<h3>Instructions</h3>' +
+    '<p class="js-recipe-instructions"></p>' +
     '<div class="recipe-controls">' +
     '<button class="js-recipe-delete">' +
     '<span class="button-label">delete</span>' +
@@ -109,8 +112,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-                .closest('.js-shopping-item')
-                .attr('id')
+            .closest('.js-shopping-item')
+            .attr('id')
         );
     });
 }
@@ -168,6 +171,7 @@ function getAndDisplayRecipes() {
                 element
                     .find(".js-recipe-ingredients")
                     .append("<li>" + newIngredient + "</li>");
+                element.find(".js-recipe-instructions").text(recipe.instructions);
             });
             return element;
         });
