@@ -51,7 +51,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/public/login.html');
+	res.sendFile(__dirname + '/public/home.html');
 });
 
 //GET Authentication
@@ -102,10 +102,10 @@ app.post('/recipes', (req, res) => {
 	}
 
 	Recipe.create({
-			recipeName: req.body.recipeName,
-			ingredients: req.body.ingredients,
-			instructions: req.body.instructions
-		})
+		recipeName: req.body.recipeName,
+		ingredients: req.body.ingredients,
+		instructions: req.body.instructions
+	})
 		.then(recipe => res.status(201).json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -140,12 +140,12 @@ app.put('/recipes/:id', (req, res) => {
 	});
 
 	Recipe.findByIdAndUpdate(
-			req.params.id, {
-				$set: updated
-			}, {
-				new: true
-			}
-		)
+		req.params.id, {
+			$set: updated
+		}, {
+			new: true
+		}
+	)
 		.then(updatedRecipe => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -195,9 +195,9 @@ app.post('/Shopping-List', (req, res) => {
 	}
 
 	ShoppingList.create({
-			ingredient: req.body.ingredient,
-			amount: req.body.amount
-		})
+		ingredient: req.body.ingredient,
+		amount: req.body.amount
+	})
 		.then(listItem => res.status(201).json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -232,12 +232,12 @@ app.put('/Shopping-List/:id', (req, res) => {
 	});
 
 	ShoppingList.findByIdAndUpdate(
-			req.params.id, {
-				$set: updated
-			}, {
-				new: true
-			}
-		)
+		req.params.id, {
+			$set: updated
+		}, {
+			new: true
+		}
+	)
 		.then(updatedListItem => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({

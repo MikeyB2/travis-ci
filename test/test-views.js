@@ -61,3 +61,25 @@ describe("Meals page", function () {
             });
     });
 });
+
+describe("Welcome page", function () {
+    it("should exist", function () {
+        return chai
+            .request(app)
+            .get("/welcome.html")
+            .then(function (res) {
+                expect(res).to.have.status(200);
+            });
+    });
+});
+
+describe("Home page", function () {
+    it("should exist", function () {
+        return chai
+            .request(app)
+            .get("/home.html")
+            .then(function (res) {
+                expect(res).to.have.status(200);
+            });
+    });
+});

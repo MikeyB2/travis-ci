@@ -5,94 +5,116 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="./img/thumbnail.png" type="image/gif">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./style.css">
 	<title>Meal Plan</title>
 </head>
 
 <body>
-	<ul>
-		<h3>Sunday</h3>
-		<form action="">
-			<div class="js-recipesOptions">
-				<select name="meal">
-					<option value="Breakfast">Breakfast</option>
-					<option value="Lunch">Lunch</option>
-					<option value="Dinner">Dinner</option>
-					<option value="Snack">Snack</option>
-				</select>
-				<select name="recipe">
-					<option value="js-recipe-name recipe-name">List of Recipes</option>
-				</select> <button type="button">Select</button>
-			</div>
-		</form>
-		<hr>
-		<h3>Monday</h3>
-		<form action="">
-			<select name="meal">
-				<option value="Breakfast">Breakfast</option>
-				<option value="Lunch">Lunch</option>
-				<option value="Dinner">Dinner</option>
-				<option value="Snack">Snack</option>
-			</select>
-			<button type="button">Select</button>
-		</form>
-		<hr>
-		<h3>Tuesday</h3>
-		<form action="">
-			<select name="meal">
-				<option value="Breakfast">Breakfast</option>
-				<option value="Lunch">Lunch</option>
-				<option value="Dinner">Dinner</option>
-				<option value="Snack">Snack</option>
-			</select>
-			<button type="button">Select</button>
-		</form>
-		<hr>
-		<h3>Wednesday</h3>
-		<form action="">
-			<select name="meal">
-				<option value="Breakfast">Breakfast</option>
-				<option value="Lunch">Lunch</option>
-				<option value="Dinner">Dinner</option>
-				<option value="Snack">Snack</option>
-			</select>
-			<button type="button">Select</button>
-		</form>
-		<hr>
-		<h3>Thursday</h3>
-		<form action="">
-			<select name="meal">
-				<option value="Breakfast">Breakfast</option>
-				<option value="Lunch">Lunch</option>
-				<option value="Dinner">Dinner</option>
-				<option value="Snack">Snack</option>
-			</select>
-			<button type="button">Select</button>
-		</form>
-		<hr>
-		<h3>Friday</h3>
-		<form action="">
-			<select name="meal">
-				<option value="Breakfast">Breakfast</option>
-				<option value="Lunch">Lunch</option>
-				<option value="Dinner">Dinner</option>
-				<option value="Snack">Snack</option>
-			</select>
-			<button type="button">Select</button>
-		</form>
-		<hr>
-		<h3>Saturday</h3>
-		<form action="">
-			<select name="meal">
-				<option value="Breakfast">Breakfast</option>
-				<option value="Lunch">Lunch</option>
-				<option value="Dinner">Dinner</option>
-				<option value="Snack">Snack</option>
-			</select>
-			<button type="button">Select</button>
-		</form>
-		<hr>
-	</ul>
+	<div class="topnav" id="topNav">
+		<a href="./meals.html" class="active">Meals</a>
+		<div id="myLinks">
+			<a href="./welcome.html">Welcome</a>
+			<a href="./recipes.html">Recipes</a>
+			<a href="./shopping-list.html">Shopping-List</a>
+		</div>
+		<!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+		<a href="javascript:void(0);" class="icon" id="icon" onclick="myFunction()">
+			<i class="fa fa-bars"></i></a>
+	</div>
+	<section class="meals">
+		<ul>
+			<h3>Sunday</h3>
+			<form action="">
+				<div class="js-recipesOptions day">
+					<select name="meal">
+						<option value="Breakfast">Breakfast</option>
+						<option value="Lunch">Lunch</option>
+						<option value="Dinner">Dinner</option>
+						<option value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="dropDownRecipes js-recipe-list">
+						<option value="js-recipe-name recipe-name">Select Recipes</option>
+					</select>
+					<button type="button" class="select-btn">Add</button>
+				</div>
+			</form>
+			<h3>Monday</h3>
+			<form action="">
+				<div class="js-recipesOptions day">
+					<select name="meal">
+						<option value="Breakfast">Breakfast</option>
+						<option value="Lunch">Lunch</option>
+						<option value="Dinner">Dinner</option>
+						<option value="Snack">Snack</option>
+					</select>
+					<button type="button" class="select-btn">Add</button>
+				</div>
+			</form>
+			<h3>Tuesday</h3>
+			<form action="">
+				<div class="js-recipesOptions day">
+					<select name="meal">
+						<option value="Breakfast">Breakfast</option>
+						<option value="Lunch">Lunch</option>
+						<option value="Dinner">Dinner</option>
+						<option value="Snack">Snack</option>
+					</select>
+					<button type="button" class="select-btn">Add</button>
+				</div>
+			</form>
+			<h3>Wednesday</h3>
+			<form action="">
+				<div class="js-recipesOptions day">
+					<select name="meal">
+						<option value="Breakfast">Breakfast</option>
+						<option value="Lunch">Lunch</option>
+						<option value="Dinner">Dinner</option>
+						<option value="Snack">Snack</option>
+					</select>
+					<button type="button" class="select-btn">Add</button>
+				</div>
+			</form>
+			<h3>Thursday</h3>
+			<form action="">
+				<div class="js-recipesOptions day">
+					<select name="meal">
+						<option value="Breakfast">Breakfast</option>
+						<option value="Lunch">Lunch</option>
+						<option value="Dinner">Dinner</option>
+						<option value="Snack">Snack</option>
+					</select>
+					<button type="button" class="select-btn">Add</button>
+				</div>
+			</form>
+			<h3>Friday</h3>
+			<form action="">
+				<div class="js-recipesOptions day">
+					<select name="meal">
+						<option value="Breakfast">Breakfast</option>
+						<option value="Lunch">Lunch</option>
+						<option value="Dinner">Dinner</option>
+						<option value="Snack">Snack</option>
+					</select>
+					<button type="button" class="select-btn">Add</button>
+				</div>
+			</form>
+			<h3>Saturday</h3>
+			<form action="">
+				<div class="js-recipesOptions day">
+					<select name="meal">
+						<option value="Breakfast">Breakfast</option>
+						<option value="Lunch">Lunch</option>
+						<option value="Dinner">Dinner</option>
+						<option value="Snack">Snack</option>
+					</select>
+					<button type="button" class="select-btn">Add</button>
+				</div>
+			</form>
+		</ul>
+	</section>
+	<footer><a href="http://www.mbryantjr.com/">Design By Mike</a></footer>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="./app.js"></script>
 </body>

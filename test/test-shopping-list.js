@@ -26,8 +26,7 @@ function seedShoppingListData() {
     for (let i = 1; i <= 10; i++) {
         seedData.push({
             id: faker.random.alphaNumeric(),
-            ingredient: faker.random.arrayElement(),
-            amount: faker.random.word()
+            ingredient: faker.random.arrayElement()
         });
     }
     return ShoppingList.insertMany(seedData);
@@ -35,8 +34,7 @@ function seedShoppingListData() {
 
 function generateShoppingList() {
     return {
-        ingredient: faker.random.arrayElement(),
-        amount: faker.random.word()
+        ingredient: faker.random.arrayElement()
     };
 }
 
@@ -88,7 +86,7 @@ describe('shopping list API resource', function () {
 
                     res.body.listItems.forEach(function (listItem) {
                         expect(listItem).to.be.a('object');
-                        expect(listItem).to.include.keys('ingredient', 'amount');
+                        expect(listItem).to.include.keys('ingredient');
                     });
                     // check to make sure response data matches db data
                     resShoppingList = res.body.listItems[0];
@@ -96,7 +94,6 @@ describe('shopping list API resource', function () {
                 })
                 .then(listItem => {
                     expect(resShoppingList.ingredient).to.equal(listItem.ingredient);
-                    expect(resShoppingList.amount).to.equal(listItem.amount);
                 });
         });
     });
@@ -113,15 +110,13 @@ describe('shopping list API resource', function () {
                     expect(res).to.be.json;
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys(
-                        'ingredient', 'amount');
+                        'ingredient');
                     expect(res.body.id).to.not.be.null;
                     expect(res.body.ingredient).to.equal(newListItem.ingredient);
-                    expect(res.body.amount).to.equal(newListItem.amount);
                     return ShoppingList.findById(res.body.id);
                 })
                 .then(function (listItem) {
                     expect(listItem.ingredient).to.equal(newListItem.ingredient);
-                    expect(listItem.amount).to.equal(newListItem.amount);
                 });
         });
     });
@@ -132,8 +127,7 @@ describe('shopping list API resource', function () {
         // check data
         it('should update fields you send over', function () {
             const updateData = {
-                ingredient: faker.random.arrayElement(),
-                amount: faker.random.word()
+                ingredient: faker.random.arrayElement()
             };
 
             return ShoppingList
@@ -151,7 +145,6 @@ describe('shopping list API resource', function () {
                 })
                 .then(listItem => {
                     expect(listItem.ingredient).to.equal(updateData.ingredient);
-                    expect(listItem.amount).to.equal(updateData.amount);
                 });
         });
     });

@@ -7,7 +7,12 @@ body {
   text-align: center;
   width: 100%;
   display: inline-block;
-}
+  margin: 0;
+  }
+
+  ul {
+    padding-inline-start: 0;
+  }
 
 button,
 input[type="text"],
@@ -16,23 +21,134 @@ textarea {
   border-radius: 5px;
 }
 
+button {
+  color: #fefefe;
+  background: #333;
+  border: #04ff00 solid 1px;
+}
+
 button:hover {
   cursor: pointer;
+  background: #aaa;
+  border: #04ff00 solid 1px;
 }
 
 .container {
   max-width: 600px;
   margin: 0 auto;
 }
+h1, h2, h3, h4, h5, label {
+  color: black;
+  text-decoration: none;
+}
 
 .app-inputs {
-  width: 50%;
+  width: 100%;
   padding: 10px;
 }
 
 .submit-btn {
   margin-top: 10px;
   width: 50%;
+}
+
+.delete-btn {
+  width: 25%;
+  background: black;
+}
+
+.delete-btn:hover{
+  background: #BE4A47;
+  border: solid 1px #BE4A47;
+}
+
+/* tabs */
+/* Style the navigation menu */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+  
+  width: 100%;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+  width: 100%;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #04ff00;
+  color: white;
+}
+
+.logo {
+  width: 100%;
+  display: inline-block;
+  height: 700px;
+}
+
+
+
+#about, #how-to {
+  display: flex;
+  height: 500px;
+}
+
+.about {
+  background: #333;
+  height: 500px;
+  width: 500px;
+  text-align: justify;
+  font-size: 50px;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.info {
+  display: inline-block;
+  text-align: start;
+  width: 75%;
+  padding: 25px;
+  font-size: 30px;
+  border: solid 1px #aaa;
+}
+
+.begin {
+  list-style-type: none;
+  width: 75%;
+
+}
+
+.end {
+  display: inline-block;
+  width: 500px;
 }
 
 /* Login form */
@@ -106,16 +222,16 @@ button:hover {
 
 .recipe-name {
   text-decoration: underline;
+  font-size: 30px;
 }
 
 .recipe-ingredients,
 .recipe-instructions {
   list-style-type: none;
   display: block;
-  color: grey;
   font-style: italic;
   align-content: center;
-  border: 1px solid grey;
+  border: 1px solid #fefefe;
   font-size: 15px;
   padding: 10px;
   margin: 15px;
@@ -124,6 +240,37 @@ button:hover {
 .recipe-controls {
   margin-bottom: 10px;
 }
+
+.recipes-results {
+  color: #fefefe;
+  background: #333;
+}
+
+.recipes-results h3, h4 {
+  color: #fefefe;
+}
+
+/* Meals */
+/* 
+.meals {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+.meal option {
+  width: 25%;
+}
+.select-btn {
+  width: 25%;
+} */
+
+/* .day {
+  align-content: center;
+  border: 1px solid grey;
+  font-size: 15px;
+  padding: 10px;
+  margin: 15px;
+} */
 
 /* Shopping-List */
 
@@ -140,13 +287,14 @@ button:hover {
 
 .shopping-list>li {
   margin-bottom: 20px;
-  border: 1px solid grey;
+  border: 1px solid #fefefe;
   padding: 20px;
+  background: #333;
+  color: #fefefe;  
 }
 
 .shopping-item {
   display: block;
-  color: grey;
   font-style: italic;
   font-size: 20px;
   margin-bottom: 15px;
@@ -154,4 +302,16 @@ button:hover {
 
 .shopping-item__checked {
   text-decoration: line-through;
+}
+
+
+@media screen and (max-width: 600px) {
+  .delete-btn {
+    width: 50%;
+    font-size: 12px;
+  }
+
+  .recipe-ingredients, .recipe-instructions {
+    font-size: 12px;
+  }
 }

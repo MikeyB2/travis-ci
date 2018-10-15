@@ -2,11 +2,11 @@ let shoppingItemTemplate =
     '<li class="js-shopping-item">' +
     '<p><span class="shopping-item js-shopping-item-name"></span><span class="shopping-item js-shopping-item-amount"></span></p>' +
     '<div class="shopping-item-controls">' +
-    '<button class="js-shopping-item-toggle">' +
-    '<span class="button-label">check</span>' +
-    '</button>' +
-    '<button class="js-shopping-item-delete">' +
-    '<span class="button-label">delete</span>' +
+    // '<button class="js-shopping-item-toggle">' +
+    // '<span class="button-label">Done</span>' +
+    // '</button>' +
+    '<button class="js-shopping-item-delete delete-btn">' +
+    '<span class="button-label">Delete | Done</span>' +
     '</button>' +
     '</div>' +
     '</li>';
@@ -14,26 +14,46 @@ let shoppingItemTemplate =
 let recipeTemplate =
     '<div class="recipe js-recipe">' +
     '<h3 class="js-recipe-name recipe-name"><h3>' +
-    '<h4 class="recipe-name">Ingredients</h4>' +
+    '<h4 class="ingredients">Ingredients</h4>' +
     '<ul class="js-recipe-ingredients recipe-ingredients">' +
     '</ul>' +
-    '<h4 class="recipe-name">Instructions</h4>' +
+    '<h4 class="instructions">Instructions</h4>' +
     '<p class="js-recipe-instructions recipe-instructions"></p>' +
     '<div class="recipe-controls">' +
-    '<button class="js-recipe-delete">' +
-    '<span class="button-label delete-btn">delete</span>' +
+    '<button class="js-recipe-delete delete-btn">' +
+    '<span class="button-label">Delete</span>' +
     '</button>' +
     '</div>' +
     '</div>';
 
-// let recipeOptionTemplate =
-//     '<select name="recipe">' +
-//     '<option value="js-recipe-name recipe-name">`${newRecipes}`</option>' +
-//     '</select> <button type="button">Select</button>';
+let optionsTemplate =
+    '<option value="js-recipe-name recipe-name"></option>';
 
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
 let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
+
+function recipePopulateDropDown() {
+    $.getJSON(RECIPES_URL, function (recipes) {
+        let newRecipes = recipes.recipes;
+        console.log('All Recipes: ' + `${newRecipes}`);
+        let recipesElement = newRecipes.map(function (recipe) {
+            // let ingredient = recipe;
+            let element = $(optionsTemplate);
+            element.find(".js-recipe-name").append("<option>" + recipe.recipeNam + "</option>");//text(recipe.recipeName);
+            console.log('Recipe Name: ' + recipe.recipeName);
+            // element
+            //     .find(".js-recipe-ingredients")
+            //     .append("<li>" + splitIngredient + "</li>");
+            // element.find(".js-recipe-instructions").text(recipe.instructions);
+            // // });
+            return element;
+        });
+        $(".js-recipes-list").html(recipesElement);
+        console.log(recipesElement);
+    });
+
+};
 
 function getAndDisplayShoppingList() {
     console.log('Retrieving shopping list');
@@ -115,8 +135,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -184,26 +204,24 @@ function getAndDisplayRecipes() {
             element.find(".js-recipe-name").text(recipe.recipeName);
             console.log('Recipe Name: ' + recipe.recipeName);
             console.log('Recipe ingredients: ' + recipe.ingredients);
-            Object.keys(newRecipes).forEach(function (ingredient) {
-                //     console.log("ingredient test1: " + recipe.ingredients);
-                //     console.log("ingredient test2: " + element);
-                console.log("ingredient test3: " + ingredient);
-                let newIngredient = recipe.ingredients;
-                console.log('Another Test: ' + newIngredient[ingredient]); // returns letters of ingredient
-                console.log('Ingredients: ' + newIngredient);
-                // let splitIngredient = newIngredient
-                //     .split(',')
-                //     .map(function (ingredient) {
-                //         console.log('Ingredient5: ' + ingredient);
+            // Object.keys(newRecipes).forEach(function (ingredient) {
+            //     console.log("ingredient test1: " + recipe.ingredients);
+            //     console.log("ingredient test2: " + element);
+            // console.log("ingredient test3: " + ingredient);
+            let newIngredient = recipe.ingredients;
+            console.log('Ingredients: ' + newIngredient);
+            let splitIngredient = newIngredient
+                .split(',')
+                .map(function (ingredient) {
+                    console.log('Ingredient5: ' + ingredient);
 
-                //         return ingredient.trim();
-                //     });
-                // console.log('split: ' + splitIngredient);
-                // element
-                //     .find(".js-recipe-ingredients")
-                //     .append("<li>" + newIngredient + "</li>");
-                element.find(".js-recipe-instructions").text(recipe.instructions);
-            });
+                    return ingredient.trim();
+                });
+            element
+                .find(".js-recipe-ingredients")
+                .append("<li>" + splitIngredient + "</li>");
+            element.find(".js-recipe-instructions").text(recipe.instructions);
+            // });
             return element;
         });
         $(".js-recipes").html(recipesElement);
@@ -215,8 +233,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest(".js-recipe")
-            .attr("id")
+                .closest(".js-recipe")
+                .attr("id")
         );
     });
 }
@@ -244,12 +262,24 @@ function handleRecipeAdd() {
         });
     });
 }
+/* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
+function myFunction() {
+    console.log('Click!!');
+    // $('#topNav').on('click', '.icon', function (e) {
+    let x = document.getElementById("myLinks");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+    // });
+}
 
 // //  on page load do this
 $(function () {
     getAndDisplayShoppingList();
     getAndDisplayRecipes();
-    // displayRecipeOption();
+    recipePopulateDropDown();
 
     handleShoppingListAdd();
     handleShoppingListDelete();

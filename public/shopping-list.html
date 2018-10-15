@@ -5,22 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/thumbnail.png" type="image/gif">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./style.css">
     <title>Shopping-List</title>
 </head>
 
 <body>
+    <div class="topnav">
+        <a href="./shopping-list.html" class="active">Shopping-List</a>
+        <div id="myLinks">
+            <a href="./welcome.html">Welcome</a>
+            <a href="./recipes.html">Recipes</a>
+            <a href="./meals.html">Meals</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i></a>
+    </div>
     <section class="shopping-list-form">
         <h2>Shopping list</h2>
         <form id="js-shopping-list-form">
             <label for="shopping-list-entry">Add an item</label><br>
-            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-item" placeholder="milk">
+            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-item" placeholder="milk"
+                required>
             <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-amount" placeholder="1 gallon">
             <button class="submit-btn" type="submit">Add item</button>
         </form>
         <ol class="shopping-list js-shopping-list">
         </ol>
     </section>
+    <footer><a href="http://www.mbryantjr.com/">Design By Mike</a></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="./app.js"></script>
 </body>
