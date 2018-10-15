@@ -10,16 +10,16 @@
 </head>
 
 <body>
-    <section>
+    <section class="shopping-list-form">
         <h2>Shopping list</h2>
         <form id="js-shopping-list-form">
-            <label for="shopping-list-entry">Add an item</label>
-            <input type="text" name="shopping-list-entry" id="js-new-item" placeholder="milk">
-            <input type="text" name="shopping-list-entry" id="js-new-amount" placeholder="1 gallon">
-            <button type="submit">Add item</button>
+            <label for="shopping-list-entry">Add an item</label><br>
+            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-item" placeholder="milk">
+            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-amount" placeholder="1 gallon">
+            <button class="submit-btn" type="submit">Add item</button>
         </form>
-        <ul class="shopping-list js-shopping-list">
-        </ul>
+        <ol class="shopping-list js-shopping-list">
+        </ol>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="./app.js"></script>

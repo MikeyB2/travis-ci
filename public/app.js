@@ -13,20 +13,23 @@ let shoppingItemTemplate =
 
 let recipeTemplate =
     '<div class="recipe js-recipe">' +
-    '<hr> TITLE' +
-    '<h3 class="js-recipe-name"><h3>' +
-    '<hr>' +
-    '<ul class="js-recipe-ingredients">' +
+    '<h3 class="js-recipe-name recipe-name"><h3>' +
+    '<h4 class="recipe-name">Ingredients</h4>' +
+    '<ul class="js-recipe-ingredients recipe-ingredients">' +
     '</ul>' +
-    '<hr>' +
-    '<h3>Instructions</h3>' +
-    '<p class="js-recipe-instructions"></p>' +
+    '<h4 class="recipe-name">Instructions</h4>' +
+    '<p class="js-recipe-instructions recipe-instructions"></p>' +
     '<div class="recipe-controls">' +
     '<button class="js-recipe-delete">' +
-    '<span class="button-label">delete</span>' +
+    '<span class="button-label delete-btn">delete</span>' +
     '</button>' +
     '</div>' +
     '</div>';
+
+// let recipeOptionTemplate =
+//     '<select name="recipe">' +
+//     '<option value="js-recipe-name recipe-name">`${newRecipes}`</option>' +
+//     '</select> <button type="button">Select</button>';
 
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
@@ -148,29 +151,57 @@ function addRecipe(recipe) {
     });
 }
 
+function deleteRecipe(recipeId) {
+    console.log("Deleting recipe `" + recipeId + "`");
+    $.ajax({
+        url: RECIPES_URL + "/" + recipeId,
+        method: "DELETE",
+        success: getAndDisplayRecipes
+    });
+}
+
+// function displayRecipeOption() {
+//     $.getJSON(RECIPES_URL, function (recipes) {
+//         let recipesOptions = recipes.recipes;
+//         let recipesElement = recipesOptions.map(function (recipe) {
+//             let element = $(recipeOptionTemplate);
+//             element.attr("id", recipe.id);
+//             element.find(".js-recipe-name").text(recipe.recipeName);
+//         });
+//         $(".js-recipesOptions").html(recipesElement);
+//     });
+// }
+
 function getAndDisplayRecipes() {
     console.log('Retrieving recipes');
     $.getJSON(RECIPES_URL, function (recipes) {
         let newRecipes = recipes.recipes;
-        console.log("Rendering recipes " + newRecipes);
+        console.log('All Recipes: ' + `${newRecipes}`);
         let recipesElement = newRecipes.map(function (recipe) {
             // let ingredient = recipe;
             let element = $(recipeTemplate);
             element.attr("id", recipe.id);
             element.find(".js-recipe-name").text(recipe.recipeName);
-            console.log('Recipe Test: ' + recipe.recipeName);
+            console.log('Recipe Name: ' + recipe.recipeName);
             console.log('Recipe ingredients: ' + recipe.ingredients);
-            console.log('Recipe: ' + recipe.recipes);
-
             Object.keys(newRecipes).forEach(function (ingredient) {
-                console.log("ingredient test0: " + newRecipes);
-                console.log("ingredient test1: " + recipe.ingredients);
-                console.log("ingredient test2: " + element);
+                //     console.log("ingredient test1: " + recipe.ingredients);
+                //     console.log("ingredient test2: " + element);
                 console.log("ingredient test3: " + ingredient);
                 let newIngredient = recipe.ingredients;
-                element
-                    .find(".js-recipe-ingredients")
-                    .append("<li>" + newIngredient + "</li>");
+                console.log('Another Test: ' + newIngredient[ingredient]); // returns letters of ingredient
+                console.log('Ingredients: ' + newIngredient);
+                // let splitIngredient = newIngredient
+                //     .split(',')
+                //     .map(function (ingredient) {
+                //         console.log('Ingredient5: ' + ingredient);
+
+                //         return ingredient.trim();
+                //     });
+                // console.log('split: ' + splitIngredient);
+                // element
+                //     .find(".js-recipe-ingredients")
+                //     .append("<li>" + newIngredient + "</li>");
                 element.find(".js-recipe-instructions").text(recipe.instructions);
             });
             return element;
@@ -179,28 +210,26 @@ function getAndDisplayRecipes() {
     });
 }
 
-// function handleRecipeDelete() {
-//     $(".js-recipes").on("click", ".js-recipe-delete", function (e) {
-//         e.preventDefault();
-//         deleteRecipe(
-//             $(e.currentTarget)
-//             .closest(".js-recipe")
-//             .attr("id")
-//         );
-//     });
-// }
+function handleRecipeDelete() {
+    $(".js-recipes").on("click", ".js-recipe-delete", function (e) {
+        e.preventDefault();
+        deleteRecipe(
+            $(e.currentTarget)
+            .closest(".js-recipe")
+            .attr("id")
+        );
+    });
+}
 
 function handleRecipeAdd() {
     $('#js-recipe-form').submit(function (e) {
         e.preventDefault();
-        console.log('Instructions: ');
         let ingredients = $(e.currentTarget)
             .find('#ingredients-list')
             .val()
             .split(',')
             .map(function (ingredient) {
-                console.log('Ingredient: ' + ingredient);
-
+                console.log('Ingredient5: ' + ingredient);
                 return ingredient.trim();
             });
         let instructions = $(e.currentTarget)
@@ -220,11 +249,12 @@ function handleRecipeAdd() {
 $(function () {
     getAndDisplayShoppingList();
     getAndDisplayRecipes();
+    // displayRecipeOption();
 
     handleShoppingListAdd();
     handleShoppingListDelete();
     handleShoppingCheckedToggle();
 
     handleRecipeAdd();
-    // handleRecipeDelete();
+    handleRecipeDelete();
 });
