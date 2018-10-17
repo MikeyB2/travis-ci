@@ -26,33 +26,28 @@ let recipeTemplate =
     '</div>' +
     '</div>';
 
-let optionsTemplate =
-    '<option value="js-recipe-name recipe-name"></option>';
+
 
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
 let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
 
-function recipePopulateDropDown() {
-    $.getJSON(RECIPES_URL, function (recipes) {
-        let newRecipes = recipes.recipes;
-        console.log('All Recipes: ' + `${newRecipes}`);
-        let recipesElement = newRecipes.map(function (recipe) {
-            // let ingredient = recipe;
-            let element = $(optionsTemplate);
-            element.find(".js-recipe-name").append("<option>" + recipe.recipeNam + "</option>"); //text(recipe.recipeName);
-            console.log('Recipe Name: ' + recipe.recipeName);
-            // element
-            //     .find(".js-recipe-ingredients")
-            //     .append("<li>" + splitIngredient + "</li>");
-            // element.find(".js-recipe-instructions").text(recipe.instructions);
-            // // });
-            return element;
-        });
-        $(".js-recipes-list").html(recipesElement);
-        console.log(recipesElement);
-    });
+let dropDown = $('#dropDownRecipes');
+dropDown.empty();
+dropDown.append('<option selected="true" disabled>Select Recipe</option>');
+dropDown.prop('selectedIndex', 0);
 
+function recipePopulateDropDown() {
+    $.getJSON(RECIPES_URL, function (data) {
+        console.log('recipeList: ' + data.recipes[0].recipeName);
+        $.each(data, function (key, entry) {
+            console.log('entry: ' + entry[0].recipeName);
+
+            let optionsList = entry[0];
+            dropDown.append($('<option id="recipeOptions"></option>').attr('value', optionsList.recipeName).html(optionsList.recipeName));
+
+        })
+    });
 };
 
 function getAndDisplayShoppingList() {
@@ -135,8 +130,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -231,8 +226,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest(".js-recipe")
-            .attr("id")
+                .closest(".js-recipe")
+                .attr("id")
         );
     });
 }

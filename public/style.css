@@ -264,26 +264,14 @@ h4 {
 }
 
 /* Meals */
-/* 
-.meals {
-  display: inline-block;
-  width: 50%;
-  text-align: center;
-}
-.meal option {
-  width: 25%;
-}
-.select-btn {
-  width: 25%;
-} */
 
-/* .day {
-  align-content: center;
-  border: 1px solid grey;
+#recipeOptions {
+  color: #333;
+  width: 10%;
+  height: 30px;
+  border-radius: 10px;
   font-size: 15px;
-  padding: 10px;
-  margin: 15px;
-} */
+}
 
 /* Shopping-List */
 
@@ -335,7 +323,7 @@ h4 {
 }
 
 footer a {
-  color: #04ff00;
+  color: #52B7BD;
   text-decoration: none;
 }
 
