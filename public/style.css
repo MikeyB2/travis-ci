@@ -1,18 +1,26 @@
 * {
   box-sizing: border-box;
+  color: #fefefe;
+
+
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Rock Salt', 'Covered By Your Grace', 'Permanent Marker', cursive;
   text-align: center;
   width: 100%;
   display: inline-block;
   margin: 0;
-  }
+  background-image: url("img/chalk-board.jpg");
+  height: 1vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-  ul {
-    padding-inline-start: 0;
-  }
+ul {
+  padding-inline-start: 0;
+}
 
 button,
 input[type="text"],
@@ -24,23 +32,19 @@ textarea {
 button {
   color: #fefefe;
   background: #333;
-  border: #04ff00 solid 1px;
+  border: #fefefe solid 1px;
 }
 
 button:hover {
   cursor: pointer;
   background: #aaa;
-  border: #04ff00 solid 1px;
+  border: #fefefe solid 1px;
 }
 
-.container {
+/* .container {
   max-width: 600px;
   margin: 0 auto;
-}
-h1, h2, h3, h4, h5, label {
-  color: black;
-  text-decoration: none;
-}
+} */
 
 .app-inputs {
   width: 100%;
@@ -54,10 +58,10 @@ h1, h2, h3, h4, h5, label {
 
 .delete-btn {
   width: 25%;
-  background: black;
+  background: #52B7BD;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
   background: #BE4A47;
   border: solid 1px #BE4A47;
 }
@@ -66,9 +70,8 @@ h1, h2, h3, h4, h5, label {
 /* Style the navigation menu */
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: rgb(107, 106, 106);
   position: relative;
-  
   width: 100%;
 }
 
@@ -104,7 +107,7 @@ h1, h2, h3, h4, h5, label {
 
 /* Style the active link (or home/logo) */
 .active {
-  background-color: #04ff00;
+  background-color: #52B7BD;
   color: white;
 }
 
@@ -115,8 +118,15 @@ h1, h2, h3, h4, h5, label {
 }
 
 
+#logo {
+  width: 50%;
 
-#about, #how-to {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#about,
+#how-to {
   display: flex;
   height: 500px;
 }
@@ -138,6 +148,7 @@ h1, h2, h3, h4, h5, label {
   padding: 25px;
   font-size: 30px;
   border: solid 1px #aaa;
+  color: black;
 }
 
 .begin {
@@ -182,15 +193,17 @@ h1, h2, h3, h4, h5, label {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #333;
   margin: 15% auto;
   /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
   text-align: center;
+
   /* Could be more or less, depending on screen size */
 }
+
 
 /* The Close Button */
 .close {
@@ -209,15 +222,15 @@ h1, h2, h3, h4, h5, label {
 
 /* Recipes */
 
-.recipe {
-  border: 1px solid black;
-}
-
 .recipes-form {
   display: inline-block;
   align-content: center;
   text-align: center;
   width: 50%;
+}
+
+.recipe-form h2 {
+  color: #fefefe;
 }
 
 .recipe-name {
@@ -243,10 +256,10 @@ h1, h2, h3, h4, h5, label {
 
 .recipes-results {
   color: #fefefe;
-  background: #333;
 }
 
-.recipes-results h3, h4 {
+.recipes-results h3,
+h4 {
   color: #fefefe;
 }
 
@@ -287,10 +300,14 @@ h1, h2, h3, h4, h5, label {
 
 .shopping-list>li {
   margin-bottom: 20px;
-  border: 1px solid #fefefe;
+  border-radius: 5px;
   padding: 20px;
-  background: #333;
-  color: #fefefe;  
+  color: #fefefe;
+  list-style-type: none;
+}
+
+.shopping-list p {
+  border: 1px solid #aaa;
 }
 
 .shopping-item {
@@ -311,7 +328,54 @@ h1, h2, h3, h4, h5, label {
     font-size: 12px;
   }
 
-  .recipe-ingredients, .recipe-instructions {
+  .recipe-ingredients,
+  .recipe-instructions {
     font-size: 12px;
+  }
+}
+
+footer a {
+  color: #04ff00;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 770px) {
+  #welcome-main {
+    display: block;
+  }
+
+  .info {
+    font-size: 15px;
+  }
+
+  .about {
+    width: 100%;
+    font-size: 20px;
+  }
+
+  .about,
+  .info {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 880px) {
+
+
+  #about,
+  #how-to {
+    height: 500px;
+  }
+
+  .about,
+  .info {
+    width: 50%;
+  }
+
+}
+
+@media screen and (max-width: 1530px) {
+  .info {
+    font-size: 20px;
   }
 }

@@ -40,7 +40,7 @@ function recipePopulateDropDown() {
         let recipesElement = newRecipes.map(function (recipe) {
             // let ingredient = recipe;
             let element = $(optionsTemplate);
-            element.find(".js-recipe-name").append("<option>" + recipe.recipeNam + "</option>");//text(recipe.recipeName);
+            element.find(".js-recipe-name").append("<option>" + recipe.recipeNam + "</option>"); //text(recipe.recipeName);
             console.log('Recipe Name: ' + recipe.recipeName);
             // element
             //     .find(".js-recipe-ingredients")
@@ -135,8 +135,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-                .closest('.js-shopping-item')
-                .attr('id')
+            .closest('.js-shopping-item')
+            .attr('id')
         );
     });
 }
@@ -198,7 +198,6 @@ function getAndDisplayRecipes() {
         let newRecipes = recipes.recipes;
         console.log('All Recipes: ' + `${newRecipes}`);
         let recipesElement = newRecipes.map(function (recipe) {
-            // let ingredient = recipe;
             let element = $(recipeTemplate);
             element.attr("id", recipe.id);
             element.find(".js-recipe-name").text(recipe.recipeName);
@@ -221,7 +220,6 @@ function getAndDisplayRecipes() {
                 .find(".js-recipe-ingredients")
                 .append("<li>" + splitIngredient + "</li>");
             element.find(".js-recipe-instructions").text(recipe.instructions);
-            // });
             return element;
         });
         $(".js-recipes").html(recipesElement);
@@ -233,8 +231,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-                .closest(".js-recipe")
-                .attr("id")
+            .closest(".js-recipe")
+            .attr("id")
         );
     });
 }

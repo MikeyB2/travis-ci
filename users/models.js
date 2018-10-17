@@ -14,6 +14,10 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    // email: {
+    //     type: String,
+    //     default: ''
+    // },
     firstName: {
         type: String,
         default: ''
@@ -27,6 +31,7 @@ const UserSchema = mongoose.Schema({
 UserSchema.methods.serialize = function () {
     return {
         username: this.username || '',
+        // email: this.email || '',
         firstName: this.firstName || '',
         lastName: this.lastName || ''
     };

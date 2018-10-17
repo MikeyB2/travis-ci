@@ -13,7 +13,7 @@
 
 <body>
 	<div class="topnav">
-		<a href="./login.html" class="active">Login|Register</a>
+		<a href="./login.html" class="active">Login | Register</a>
 		<div id="myLinks">
 			<a href="./home.html">Home</a>
 		</div>
@@ -43,7 +43,7 @@
 				<span class="close">&times;</span>
 				<h2>New User Registration</h2>
 				<form>
-					<div>
+					<div id="modal-info">
 						<label for="firstName">First Name</label><br>
 						<input type="text" class="js-firstName app-inputs" required><br>
 						<label for="lasatName">Last Name</label><br>
@@ -52,6 +52,8 @@
 						<input type="text" class="js-username app-inputs" required><br>
 						<label for="password">Password</label><br>
 						<input type="text" class="js-password app-inputs" required>
+						<label for="email">Email</label><br>
+						<input type="text" class="js-email app-inputs" required>
 					</div>
 					<button type="submit" class="js-modal-submit submit-btn">Submit</button>
 				</form>
