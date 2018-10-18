@@ -39,7 +39,7 @@ describe('/api/user', function () {
         return closeServer();
     });
 
-    beforeEach(function () {});
+    beforeEach(function () { });
 
     afterEach(function () {
         return User.remove({});
@@ -55,12 +55,12 @@ describe('/api/user', function () {
             });
             it('Should return an array of users', function () {
                 return User.create({
-                        username,
-                        password,
-                        email,
-                        firstName,
-                        lastName
-                    }, {
+                    username,
+                    password,
+                    email,
+                    firstName,
+                    lastName
+                }, {
                         username: usernameB,
                         password: passwordB,
                         email: emailB,
@@ -254,11 +254,11 @@ describe('/api/user', function () {
             it('Should reject users with duplicate username', function () {
                 // Create an initial user
                 return User.create({
-                        username,
-                        password,
-                        firstName,
-                        lastName
-                    })
+                    username,
+                    password,
+                    firstName,
+                    lastName
+                })
                     .then(() =>
                         // Try to create a second user with the same username
                         chai.request(app).post('/api/users').send({
@@ -298,11 +298,13 @@ describe('/api/user', function () {
                         expect(res.body).to.have.keys(
                             'username',
                             'firstName',
-                            'lastName'
+                            'lastName',
+                            'email'
                         );
                         expect(res.body.username).to.equal(username);
                         expect(res.body.firstName).to.equal(firstName);
                         expect(res.body.lastName).to.equal(lastName);
+                        expect(res.body.email).to.equal(email);
                         return User.findOne({
                             username
                         });
@@ -333,11 +335,13 @@ describe('/api/user', function () {
                         expect(res.body).to.have.keys(
                             'username',
                             'firstName',
-                            'lastName'
+                            'lastName',
+                            'email'
                         );
                         expect(res.body.username).to.equal(username);
                         expect(res.body.firstName).to.equal(firstName);
                         expect(res.body.lastName).to.equal(lastName);
+                        expect(res.body.email).to.equal(email);
                         return User.findOne({
                             username
                         });

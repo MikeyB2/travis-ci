@@ -1,21 +1,20 @@
 * {
   box-sizing: border-box;
-
-
+}
+html {
+  position: relative;
+  min-height: 100%;
+  font-family:  cursive;
+  /*'Rock Salt', 'Covered By Your Grace', 'Permanent Marker',*/
 
 }
 
 body {
-  font-family: 'Rock Salt', 'Covered By Your Grace', 'Permanent Marker', cursive;
   text-align: center;
   width: 100%;
   display: inline-block;
   margin: 0;
-  background-image: url("img/chalk-board.jpg");
-  height: 1vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: 100%;
 }
 
 ul {
@@ -28,11 +27,17 @@ textarea {
   padding: 5px;
   border-radius: 5px;
 }
+textarea {
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
 
 button {
   color: #fefefe;
   background: #333;
-  border: #fefefe solid 1px;
+  border: #52B7BD solid 1px;
 }
 
 button:hover {
@@ -41,14 +46,35 @@ button:hover {
   border: #fefefe solid 1px;
 }
 
-/* .container {
+.white {
+  color: #fefefe;
+  min-height: 100%;
+  margin-bottom: 40px;
+  background-image: url("img/chalk-board.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
   max-width: 600px;
   margin: 0 auto;
-} */
+}
 
 .app-inputs {
   width: 100%;
   padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.app-inputs:hover {
+  border: 1px solid #52B7BD;
+}
+
+.app-inputs:focus {
+    background-color: #52B7BD;
+    color: #fefefe;
 }
 
 .submit-btn {
@@ -146,9 +172,8 @@ button:hover {
   text-align: start;
   width: 75%;
   padding: 25px;
-  font-size: 30px;
+  font-size: 22px;
   border: solid 1px #aaa;
-  color: black;
 }
 
 .begin {
@@ -193,15 +218,33 @@ button:hover {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #333;
+  background-color: #aaa;
   margin: 15% auto;
   /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
+  border-radius: 5px;
   width: 80%;
   text-align: center;
+}
 
-  /* Could be more or less, depending on screen size */
+.modal-input {
+  padding: 10px;
+  margin: 5px;
+}
+
+.modal-input:hover {
+  border: 1px solid #52B7BD;
+}
+
+.modal-btn {
+  border: 1px solid #52B7BD;
+  background: #52B7BD;
+}
+
+.modal-btn:hover{
+  background: #333;
+  border: 1px solid #52B7BD;
 }
 
 
@@ -218,6 +261,10 @@ button:hover {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.new-user {
+  color: #52B7BD;
 }
 
 /* Recipes */
@@ -265,7 +312,7 @@ h4 {
 
 /* Meals */
 
-#recipeOptions {
+.recipeOptions {
   color: #333;
   width: 10%;
   height: 30px;
@@ -325,6 +372,10 @@ h4 {
 footer a {
   color: #52B7BD;
   text-decoration: none;
+  position: absolute;
+  bottom: 0;
+  height: 30px;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 770px) {
@@ -348,13 +399,6 @@ footer a {
 }
 
 @media screen and (max-width: 880px) {
-
-
-  #about,
-  #how-to {
-    height: 500px;
-  }
-
   .about,
   .info {
     width: 50%;

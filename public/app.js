@@ -50,27 +50,16 @@ function recipePopulateDropDown() {
         // dropDown.empty();
         console.log('DropDown: ' + dropDown);
         dropDown.append('<option selected="true">Select Recipe</option>');
-        dropDown.prop('selectedIndex', 0);
+        // dropDown.prop('selectedIndex', 0);
         console.log('recipeList: ' + data.recipes[0].recipeName);
         $.each(data, function (key, entry) {
             console.log('entry: ' + entry[0].recipeName);
             let optionsList = entry[0];
-            dropDown.append($('<option id="recipeOptions"></option>').attr('value', optionsList.recipeName).text(optionsList.recipeName));
+            dropDown.append("<option value='optionList.recipeName'>" + optionsList.recipeName + "</option>");
+            // dropDown.append($('<option class="recipeOptions"></option>').attr('value', optionsList.recipeName).text(optionsList.recipeName));
         })
     });
 };
-
-// function displayRecipeOption() {
-//     $.getJSON(RECIPES_URL, function (recipes) {
-//         let recipesOptions = recipes.recipes;
-//         let recipesElement = recipesOptions.map(function (recipe) {
-//             let element = $(recipeOptionTemplate);
-//             element.attr("id", recipe.id);
-//             element.find(".js-recipe-name").text(recipe.recipeName);
-//         });
-//         $(".js-recipesOptions").html(recipesElement);
-//     });
-// }
 
 function getAndDisplayShoppingList() {
     console.log('Retrieving shopping list');
@@ -152,8 +141,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -238,8 +227,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest(".js-recipe")
-            .attr("id")
+                .closest(".js-recipe")
+                .attr("id")
         );
     });
 }

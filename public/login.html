@@ -8,10 +8,10 @@
 	<link rel="icon" href="./img/thumbnail.png" type="image/gif">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./style.css">
-	<title>Login|Sign Up</title>
+	<title>Login | Sign Up</title>
 </head>
 
-<body>
+<body class="white">
 	<div class="topnav">
 		<a href="./login.html" class="active">Login | Register</a>
 		<div id="myLinks">
@@ -22,7 +22,7 @@
 			<i class="fa fa-bars"></i></a>
 	</div>
 	<section class="login-form">
-		<h2>Login|Sign Up</h2>
+		<h2>Login | Sign Up</h2>
 		<form id="js-login-form">
 			<div>
 				<label for="Login">Username</label><br>
@@ -45,22 +45,23 @@
 				<form id="js-new-user">
 					<div id="modal-info">
 						<label for="firstName">First Name</label><br>
-						<input type="text" class="js-firstName app-inputs" required><br>
+						<input type="text" class="app-inputs modal-input" id="js-firstName" required><br>
 						<label for="lasatName">Last Name</label><br>
-						<input type="text" class="js-lastName app-inputs" required><br>
+						<input type="text" class="app-inputs modal-input" id="js-lastName" required><br>
 						<label for="username">Username</label><br>
-						<input type="text" class="js-username app-inputs" required><br>
+						<input type="text" class="app-inputs modal-input" id="js-username" required><br>
 						<label for="password">Password</label><br>
-						<input type="text" class="js-password app-inputs" required>
+						<input type="text" class="app-inputs modal-input" id="js-password" required>
 						<label for="email">Email</label><br>
-						<input type="text" class="js-email app-inputs" required>
+						<input type="text" class="app-inputs modal-input" id="js-email" required>
 					</div>
-					<button type="submit" class="js-modal-submit submit-btn">Submit</button>
+					<button type="submit" class="js-modal-submit submit-btn modal-btn">Submit</button>
 				</form>
 			</div>
 
 		</div>
 	</section>
+	<footer><a href="http://www.mbryantjr.com/" target="_blank">Design By Mike</a></footer>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="./modal.js"></script>
 	<script src="./app.js"></script>

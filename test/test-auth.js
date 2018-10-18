@@ -27,6 +27,7 @@ describe('Auth endpoints', function () {
     const password = 'examplePass';
     const firstName = 'Example';
     const lastName = 'User';
+    const email = 'Email;'
 
     before(function () {
         return runServer(TEST_DATABASE_URL);
@@ -42,7 +43,8 @@ describe('Auth endpoints', function () {
                 username,
                 password,
                 firstName,
-                lastName
+                lastName,
+                email
             })
         );
     });
@@ -117,7 +119,8 @@ describe('Auth endpoints', function () {
                     expect(payload.user).to.deep.equal({
                         username,
                         firstName,
-                        lastName
+                        lastName,
+                        email
                     });
                 });
         });
@@ -139,10 +142,10 @@ describe('Auth endpoints', function () {
         });
         it('Should reject requests with an invalid token', function () {
             const token = jwt.sign({
-                    username,
-                    firstName,
-                    lastName
-                },
+                username,
+                firstName,
+                lastName
+            },
                 'wrongSecret', {
                     algorithm: 'HS256',
                     expiresIn: '7d'
@@ -164,12 +167,12 @@ describe('Auth endpoints', function () {
         });
         it('Should reject requests with an expired token', function () {
             const token = jwt.sign({
-                    user: {
-                        username,
-                        firstName,
-                        lastName
-                    },
+                user: {
+                    username,
+                    firstName,
+                    lastName
                 },
+            },
                 JWT_SECRET, {
                     algorithm: 'HS256',
                     subject: username,
@@ -192,12 +195,12 @@ describe('Auth endpoints', function () {
         });
         it('Should return a valid auth token with a newer expiry date', function () {
             const token = jwt.sign({
-                    user: {
-                        username,
-                        firstName,
-                        lastName
-                    }
-                },
+                user: {
+                    username,
+                    firstName,
+                    lastName
+                }
+            },
                 JWT_SECRET, {
                     algorithm: 'HS256',
                     subject: username,
