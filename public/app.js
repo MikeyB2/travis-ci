@@ -31,24 +31,46 @@ let recipeTemplate =
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
 let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
+let USERS_URL = serverBase + 'api/' + 'User';
 
-let dropDown = $('#dropDownRecipes');
-dropDown.empty();
-dropDown.append('<option selected="true" disabled>Select Recipe</option>');
-dropDown.prop('selectedIndex', 0);
+/* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
+function myFunction() {
+    console.log('Click!!');
+    let x = document.getElementById("myLinks");
+    if (x.style.display === "block") {
+        x.style.display = "none";
+    } else {
+        x.style.display = "block";
+    }
+}
 
 function recipePopulateDropDown() {
     $.getJSON(RECIPES_URL, function (data) {
+        let dropDown = $('#dropDownRecipes');
+        // dropDown.empty();
+        console.log('DropDown: ' + dropDown);
+        dropDown.append('<option selected="true">Select Recipe</option>');
+        dropDown.prop('selectedIndex', 0);
         console.log('recipeList: ' + data.recipes[0].recipeName);
         $.each(data, function (key, entry) {
             console.log('entry: ' + entry[0].recipeName);
-
             let optionsList = entry[0];
-            dropDown.append($('<option id="recipeOptions"></option>').attr('value', optionsList.recipeName).html(optionsList.recipeName));
-
+            dropDown.append($('<option id="recipeOptions"></option>').attr('value', optionsList.recipeName).text(optionsList.recipeName));
         })
     });
 };
+
+// function displayRecipeOption() {
+//     $.getJSON(RECIPES_URL, function (recipes) {
+//         let recipesOptions = recipes.recipes;
+//         let recipesElement = recipesOptions.map(function (recipe) {
+//             let element = $(recipeOptionTemplate);
+//             element.attr("id", recipe.id);
+//             element.find(".js-recipe-name").text(recipe.recipeName);
+//         });
+//         $(".js-recipesOptions").html(recipesElement);
+//     });
+// }
 
 function getAndDisplayShoppingList() {
     console.log('Retrieving shopping list');
@@ -130,8 +152,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-                .closest('.js-shopping-item')
-                .attr('id')
+            .closest('.js-shopping-item')
+            .attr('id')
         );
     });
 }
@@ -175,17 +197,7 @@ function deleteRecipe(recipeId) {
     });
 }
 
-// function displayRecipeOption() {
-//     $.getJSON(RECIPES_URL, function (recipes) {
-//         let recipesOptions = recipes.recipes;
-//         let recipesElement = recipesOptions.map(function (recipe) {
-//             let element = $(recipeOptionTemplate);
-//             element.attr("id", recipe.id);
-//             element.find(".js-recipe-name").text(recipe.recipeName);
-//         });
-//         $(".js-recipesOptions").html(recipesElement);
-//     });
-// }
+
 
 function getAndDisplayRecipes() {
     console.log('Retrieving recipes');
@@ -226,8 +238,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-                .closest(".js-recipe")
-                .attr("id")
+            .closest(".js-recipe")
+            .attr("id")
         );
     });
 }
@@ -255,19 +267,48 @@ function handleRecipeAdd() {
         });
     });
 }
-/* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
-function myFunction() {
-    console.log('Click!!');
-    // $('#topNav').on('click', '.icon', function (e) {
-    let x = document.getElementById("myLinks");
-    if (x.style.display === "block") {
-        x.style.display = "none";
-    } else {
-        x.style.display = "block";
-    }
-    // });
+
+
+// new user submit form
+
+function addUser(user) {
+    console.log('Adding user: ' + user);
+    $.ajax({
+        method: 'POST',
+        url: USERS_URL,
+        data: JSON.stringify(user),
+        success: function (data) {
+            // getAndDisplayRecipes();
+        },
+        dataType: 'json',
+        contentType: 'application/json'
+    });
+    console.log('New User: ' + user);
 }
 
+function handleNewUserAdd() {
+    $('#js-new-user').submit(function (e) {
+        e.preventDefault();
+        addNewUser({
+            firstName: $(e.currentTarget)
+                .find('#js-firstName')
+                .val(),
+            lastName: $(e.currentTarget)
+                .find('#js-lastName')
+                .val(),
+            username: $(e.currentTarget)
+                .find('#js-username')
+                .val(),
+            password: $(e.currentTarget)
+                .find('#js-password')
+                .val(),
+            email: $(e.currentTarget)
+                .find('#js-email')
+                .val(),
+            checked: false
+        });
+    });
+}
 // //  on page load do this
 $(function () {
     getAndDisplayShoppingList();
