@@ -1,10 +1,11 @@
 * {
   box-sizing: border-box;
 }
+
 html {
   position: relative;
   min-height: 100%;
-  font-family:  cursive;
+  font-family: cursive;
   /*'Rock Salt', 'Covered By Your Grace', 'Permanent Marker',*/
 
 }
@@ -27,6 +28,7 @@ textarea {
   padding: 5px;
   border-radius: 5px;
 }
+
 textarea {
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -73,8 +75,8 @@ button:hover {
 }
 
 .app-inputs:focus {
-    background-color: #52B7BD;
-    color: #fefefe;
+  background-color: #52B7BD;
+  color: #fefefe;
 }
 
 .submit-btn {
@@ -177,8 +179,9 @@ button:hover {
 }
 
 .begin {
-  list-style-type: none;
   width: 75%;
+  text-align: left;
+  margin-left: 30px;
 
 }
 
@@ -242,7 +245,7 @@ button:hover {
   background: #52B7BD;
 }
 
-.modal-btn:hover{
+.modal-btn:hover {
   background: #333;
   border: 1px solid #52B7BD;
 }
@@ -399,6 +402,7 @@ footer a {
 }
 
 @media screen and (max-width: 880px) {
+
   .about,
   .info {
     width: 50%;
