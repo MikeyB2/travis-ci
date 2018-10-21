@@ -1,14 +1,12 @@
 let shoppingItemTemplate =
     '<li class="js-shopping-item">' +
-    '<p><span class="shopping-item js-shopping-item-name"></span><span class="shopping-item js-shopping-item-amount"></span></p>' +
-    '<div class="shopping-item-controls">' +
-    // '<button class="js-shopping-item-toggle">' +
-    // '<span class="button-label">Done</span>' +
-    // '</button>' +
+    '<p><span class="shopping-item js-shopping-item-name"></span><span class="shopping-item js-shopping-item-amount"></span>' +
+    // '<div class="shopping-item-controls">' +
     '<button class="js-shopping-item-delete delete-btn">' +
     '<span class="button-label">Delete | Done</span>' +
     '</button>' +
-    '</div>' +
+    // '</div>' +
+    '</p>' +
     '</li>';
 
 let recipeTemplate =
@@ -31,7 +29,6 @@ let recipeTemplate =
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
 let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
-let USERS_URL = serverBase + 'api/' + 'User';
 
 /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
 function myFunction() {
@@ -44,13 +41,29 @@ function myFunction() {
     }
 }
 
+window.onscroll = function () {
+    scrollFunction()
+};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        document.getElementById("topBtn").style.display = "block";
+    } else {
+        document.getElementById("topBtn").style.display = "none";
+    }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
 function recipePopulateDropDown() {
     $.getJSON(RECIPES_URL, function (data) {
         let dropDown = $('.dropDownRecipes');
         let recipeData = data.recipes;
-        // dropDown.empty();
         dropDown.append('<option selected="true">Select Recipe</option>');
-        for (let i = 0; i <= recipeData.length; i++) {
+        for (let i = 0; i < recipeData.length; i++) {
             let optionsList = recipeData[i];
             dropDown.append("<option value='optionList.recipeName'>" + optionsList.recipeName + "</option>");
         }

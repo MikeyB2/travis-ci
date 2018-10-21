@@ -32,7 +32,7 @@
 				<label for="Login">Password</label><br>
 				<input type="text" name="password" id="password" placeholder="password" class="app-inputs" required>
 			</div>
-			<button type="submit" class="app-inputs submit-btn">Login</button><br>
+			<button type="submit" class="app-inputs submit-btn" id="user-login">Login</button><br>
 			<a href="#" id="myBtn" class="new-user">New User</a>
 		</form>
 		<!-- The Modal -->
@@ -44,18 +44,18 @@
 				<h2>New User Registration</h2>
 				<form id="js-new-user">
 					<div id="modal-info">
-						<label for="firstName">First Name</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-firstName" required><br>
-						<label for="lasatName">Last Name</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-lastName" required><br>
 						<label for="username">Username</label><br>
 						<input type="text" class="app-inputs modal-input" id="js-username" required><br>
 						<label for="password">Password</label><br>
 						<input type="text" class="app-inputs modal-input" id="js-password" required>
 						<label for="email">Email</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-email" required>
+						<input type="text" class="app-inputs modal-input" id="js-email">
+						<label for="firstName">First Name</label><br>
+						<input type="text" class="app-inputs modal-input" id="js-firstName" required><br>
+						<label for="lasatName">Last Name</label><br>
+						<input type="text" class="app-inputs modal-input" id="js-lastName" required><br>
 					</div>
-					<button type="submit" class="js-modal-submit submit-btn modal-btn">Submit</button>
+					<button type="submit" class="submit-btn modal-btn" id="js-modal-submit">Submit</button>
 				</form>
 			</div>
 
@@ -64,6 +64,7 @@
 	<footer><a href="http://www.mbryantjr.com/" target="_blank">Design By Mike</a></footer>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="./modal.js"></script>
+	<script src="./userApp.js"></script>
 	<script src="./app.js"></script>
 </body>
 

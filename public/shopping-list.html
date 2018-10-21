@@ -18,16 +18,18 @@
             <a href="./welcome.html">Welcome</a>
             <a href="./recipes.html">Recipes</a>
             <a href="./meals.html">Meals</a>
+            <a href="/logout">Logout</a>
         </div>
         <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i></a>
     </div>
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
     <section class="shopping-list-form">
         <h2>Shopping list</h2>
         <form id="js-shopping-list-form">
             <label for="shopping-list-entry">Add New item</label><br>
-            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-item" placeholder="milk"
+            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-item" placeholder="Milk"
                 required>
             <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-amount" placeholder="Amount of Item if you like..">
             <button class="submit-btn" type="submit">Add to List</button>

@@ -6,9 +6,12 @@ const {
     User
 } = require('./models');
 
+
 const router = express.Router();
 
 const jsonParser = bodyParser.json();
+
+
 
 // Post to register a new user
 router.post('/', jsonParser, (req, res) => {
@@ -61,7 +64,7 @@ router.post('/', jsonParser, (req, res) => {
 
     const sizedFields = {
         username: {
-            min: 1
+            min: 6
         },
         password: {
             min: 10,
@@ -131,6 +134,7 @@ router.post('/', jsonParser, (req, res) => {
         })
         .then(user => {
             return res.status(201).json(user.serialize());
+            //  return res.redirect('/profile');
         })
         .catch(err => {
             // Forward validation errors on to the client, otherwise give a 500
@@ -155,6 +159,39 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).json({
             message: 'Internal server error'
         }));
+});
+
+// GET /logout
+router.get('/logout', function (req, res, next) {
+    if (req.session) {
+        // delete session object
+        req.session.destroy(function (err) {
+            if (err) {
+                return next(err);
+            } else {
+                return res.redirect('/');
+            }
+        });
+    }
+});
+
+let welcomePage = redirect('./welcome.html');
+
+router.get('/welcome', function (req, res, next) {
+    User.findById(req.session.userId)
+        .exec(function (error, user) {
+            if (error) {
+                return next(error);
+            } else {
+                if (user === null) {
+                    var err = new Error('Not authorized! Go back!');
+                    err.status = 400;
+                    return next(err);
+                } else {
+                    return redirect('./welcome.html');;
+                }
+            }
+        });
 });
 
 module.exports = {
