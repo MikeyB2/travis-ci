@@ -175,7 +175,7 @@ router.get('/logout', function (req, res, next) {
     }
 });
 
-let welcomePage = redirect('./welcome.html');
+// let welcomePage = redirect('./welcome.html');npm test
 
 router.get('/welcome', function (req, res, next) {
     User.findById(req.session.userId)

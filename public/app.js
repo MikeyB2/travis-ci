@@ -32,7 +32,6 @@ let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
 
 /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
 function myFunction() {
-    console.log('Click!!');
     let x = document.getElementById("myLinks");
     if (x.style.display === "block") {
         x.style.display = "none";
@@ -113,7 +112,7 @@ function getAndDisplayShoppingList() {
 }
 
 function addShoppingItem(item) {
-    console.log('Adding shopping item: ' + item);
+    console.log('Adding shopping item');
     $.ajax({
         method: 'POST',
         url: SHOPPING_LIST_URL,
@@ -127,8 +126,7 @@ function addShoppingItem(item) {
 }
 
 function deleteShoppingItem(item) {
-    console.log('DELETING ITEM ' + item);
-    console.log(SHOPPING_LIST_URL + item);
+    console.log('DELETING ITEM');
     $.ajax({
         method: 'DELETE',
         url: SHOPPING_LIST_URL + '/' + item,
@@ -137,7 +135,7 @@ function deleteShoppingItem(item) {
 }
 
 function updateShoppingListitem(item) {
-    console.log('Updating shopping list item `' + item.id + '`');
+    console.log('Updating shopping list item');
     $.ajax({
         url: SHOPPING_LIST_URL + '/' + item.id,
         method: 'PUT',
@@ -176,24 +174,24 @@ function handleShoppingListDelete() {
     });
 }
 
-function handleShoppingCheckedToggle() {
-    $('.js-shopping-list').on('click', '.js-shopping-item-toggle', function (e) {
-        console.log('CHECKED');
-        e.preventDefault();
-        let element = $(e.currentTarget).closest('.js-shopping-item');
-        console.log('Element: ' + element.listItems);
-        let item = {
-            id: element.attr('id'),
-            ingredient: element.find('.js-shopping-item-name').text(),
-            checked: !JSON.parse(element.attr('data-checked'))
-        };
-        console.log('Update: ' + item);
-        updateShoppingListitem(item);
-    });
-}
+// function handleShoppingCheckedToggle() {
+//     $('.js-shopping-list').on('click', '.js-shopping-item-toggle', function (e) {
+//         console.log('CHECKED');
+//         e.preventDefault();
+//         let element = $(e.currentTarget).closest('.js-shopping-item');
+//         console.log('Element: ' + element.listItems);
+//         let item = {
+//             id: element.attr('id'),
+//             ingredient: element.find('.js-shopping-item-name').text(),
+//             checked: !JSON.parse(element.attr('data-checked'))
+//         };
+//         console.log('Update: ' + item);
+//         updateShoppingListitem(item);
+//     });
+// }
 
 function addRecipe(recipe) {
-    console.log('Adding recipe: ' + recipe);
+    console.log('Adding recipe');
     $.ajax({
         method: 'POST',
         url: RECIPES_URL,
@@ -207,7 +205,7 @@ function addRecipe(recipe) {
 }
 
 function deleteRecipe(recipeId) {
-    console.log("Deleting recipe `" + recipeId + "`");
+    console.log("Deleting recipe");
     $.ajax({
         url: RECIPES_URL + "/" + recipeId,
         method: "DELETE",
@@ -221,24 +219,14 @@ function getAndDisplayRecipes() {
     console.log('Retrieving recipes');
     $.getJSON(RECIPES_URL, function (recipes) {
         let newRecipes = recipes.recipes;
-        console.log('All Recipes: ' + `${newRecipes}`);
         let recipesElement = newRecipes.map(function (recipe) {
             let element = $(recipeTemplate);
             element.attr("id", recipe.id);
             element.find(".js-recipe-name").text(recipe.recipeName);
-            console.log('Recipe Name: ' + recipe.recipeName);
-            console.log('Recipe ingredients: ' + recipe.ingredients);
-            // Object.keys(newRecipes).forEach(function (ingredient) {
-            //     console.log("ingredient test1: " + recipe.ingredients);
-            //     console.log("ingredient test2: " + element);
-            // console.log("ingredient test3: " + ingredient);
             let newIngredient = recipe.ingredients;
-            console.log('Ingredients: ' + newIngredient);
             let splitIngredient = newIngredient
                 .split(',')
                 .map(function (ingredient) {
-                    console.log('Ingredient5: ' + ingredient);
-
                     return ingredient.trim();
                 });
             element
@@ -270,7 +258,6 @@ function handleRecipeAdd() {
             .val()
             .split(',')
             .map(function (ingredient) {
-                console.log('Ingredient5: ' + ingredient);
                 return ingredient.trim();
             });
         let instructions = $(e.currentTarget)
@@ -289,44 +276,66 @@ function handleRecipeAdd() {
 
 // new user submit form
 
-function addUser(user) {
-    console.log('Adding user: ' + user);
-    $.ajax({
-        method: 'POST',
-        url: USERS_URL,
-        data: JSON.stringify(user),
-        success: function (data) {
-            // getAndDisplayRecipes();
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
-    console.log('New User: ' + user);
+// function addUser(user) {
+//     console.log('Adding user');
+//     $.ajax({
+//         method: 'POST',
+//         url: USERS_URL,
+//         data: JSON.stringify(user),
+//         success: function (data) {
+//             // getAndDisplayRecipes();
+//         },
+//         dataType: 'json',
+//         contentType: 'application/json'
+//     });
+// }
+
+function displayAccess() {
+    // $.getJSON(RECIPES_URL, function (recipes) {
+    //     let newRecipes = recipes.recipes;
+    //     let recipesElement = newRecipes.map(function (recipe) {
+    //         let element = $(recipeTemplate);
+    //         element.attr("id", recipe.id);
+    //         element.find(".js-recipe-name").text(recipe.recipeName);
+    //         let newIngredient = recipe.ingredients;
+    //         let splitIngredient = newIngredient
+    //             .split(',')
+    //             .map(function (ingredient) {
+    //                 return ingredient.trim();
+    //             });
+    //         element
+    //             .find(".js-recipe-ingredients")
+    //             .append("<li>" + splitIngredient + "</li>");
+    //         element.find(".js-recipe-instructions").text(recipe.instructions);
+    //         return element;
+    //     });
+    //     $(".js-recipes").html(recipesElement);
+    // });
 }
 
-function handleNewUserAdd() {
-    $('#js-new-user').submit(function (e) {
-        e.preventDefault();
-        addNewUser({
-            firstName: $(e.currentTarget)
-                .find('#js-firstName')
-                .val(),
-            lastName: $(e.currentTarget)
-                .find('#js-lastName')
-                .val(),
-            username: $(e.currentTarget)
-                .find('#js-username')
-                .val(),
-            password: $(e.currentTarget)
-                .find('#js-password')
-                .val(),
-            email: $(e.currentTarget)
-                .find('#js-email')
-                .val(),
-            checked: false
-        });
-    });
-}
+// function handleNewUserAdd() {
+//     $('#js-new-user').submit(function (e) {
+//         e.preventDefault();
+//         addNewUser({
+//             firstName: $(e.currentTarget)
+//                 .find('#js-firstName')
+//                 .val(),
+//             lastName: $(e.currentTarget)
+//                 .find('#js-lastName')
+//                 .val(),
+//             username: $(e.currentTarget)
+//                 .find('#js-username')
+//                 .val(),
+//             password: $(e.currentTarget)
+//                 .find('#js-password')
+//                 .val(),
+//             email: $(e.currentTarget)
+//                 .find('#js-email')
+//                 .val(),
+//             checked: false
+//         });
+//     });
+// }
 // //  on page load do this
 $(function () {
     getAndDisplayShoppingList();
@@ -335,7 +344,7 @@ $(function () {
 
     handleShoppingListAdd();
     handleShoppingListDelete();
-    handleShoppingCheckedToggle();
+    // handleShoppingCheckedToggle();
 
     handleRecipeAdd();
     handleRecipeDelete();

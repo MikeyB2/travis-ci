@@ -4,13 +4,14 @@ let USERS_URL = userServerBase + 'users';
 let USERSAUTH_URL = authServerBase + 'login';
 
 function addLogin(item) {
-    console.log('Adding shopping item: ' + item);
+    console.log('Requesting Access');
     $.ajax({
         method: 'POST',
         url: USERSAUTH_URL,
         data: JSON.stringify(item),
         success: function (data) {
-            console.log("Return User Login works: " + data);
+            console.log("Access Granted");
+            return "./welcome.html";
         },
         dataType: 'json',
         contentType: 'application/json'
@@ -18,13 +19,13 @@ function addLogin(item) {
 }
 
 function addNewUserLogin(item) {
-    console.log('Adding shopping item: ' + item);
+    console.log('creating user');
     $.ajax({
         method: 'POST',
         url: USERS_URL,
         data: JSON.stringify(item),
         success: function (data) {
-            console.log("New User Login works: " + data);
+            console.log("New User Created");
         },
         dataType: 'json',
         contentType: 'application/json'
@@ -42,7 +43,6 @@ function handleLogin() {
             password: $(e.currentTarget)
                 .find('#password')
                 .val(),
-            checked: false
         });
     });
 }
@@ -66,7 +66,6 @@ function handleNewUser() {
             lastName: $(e.currentTarget)
                 .find('#js-lastName')
                 .val(),
-            checked: false
         });
     });
 }
