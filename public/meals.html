@@ -29,101 +29,109 @@
 		<ul>
 			<h3>Sunday</h3>
 			<form action="">
-				<div id="js-recipe-add"></div>
+				<div>
+					<ul id="js-recipe-add-sunday" class="js-meals"></ul>
+				</div>
 				<div class="js-recipesOptions day" id="js-recipe-added">
-					<select class="recipeOptions" name="meal">
-						<option class="recipeOptions mealPlan" value="Breakfast">Breakfast</option>
-						<option class="recipeOptions" value="Lunch">Lunch</option>
-						<option class="recipeOptions" value="Dinner">Dinner</option>
-						<option class="recipeOptions" value="Snack">Snack</option>
+					<select class="recipeOptions mealPlan" name="meal" id="sunday">
+						<option class="recipeMeal" value="Breakfast">Breakfast</option>
+						<option class="recipeMeal" value="Lunch">Lunch</option>
+						<option class="recipeMeal" value="Dinner">Dinner</option>
+						<option class="recipeMeal" value="Snack">Snack</option>
 					</select>
-					<select name="recipe" id="dropDownRecipes" class="recipeOptions js-recipe-list dropDownRecipes">
+					<select name="recipe" id="js-sunday" class="js-recipe-list recipeOptions dropDownRecipes">
 					</select>
-					<button type="button" class="select-btn" onClick="addMeal()">Add</button>
+					<button type="button" class="select-btn" onClick="addMeal('sunday') ">Add</button>
 				</div>
 			</form>
 			<h3>Monday</h3>
 			<form action="">
+				<div id="js-recipe-add-monday" class="js-meals"></div>
 				<div class="js-recipesOptions day">
-					<select class="recipeOptions" name="meal">
+					<select class="recipeOptions mealPlan" name="meal" id="monday">
 						<option class="recipeOptions" value="Breakfast">Breakfast</option>
 						<option class="recipeOptions" value="Lunch">Lunch</option>
 						<option class="recipeOptions" value="Dinner">Dinner</option>
 						<option class="recipeOptions" value="Snack">Snack</option>
 					</select>
-					<select name="recipe" id="dropDownRecipes" class="recipeOptions js-recipe-list dropDownRecipes">
+					<select name="recipe" id="js-monday"" class=" recipeOptions js-recipe-list dropDownRecipes">
 					</select>
-					<button type="button" class="select-btn">Add</button>
+					<button type="button" class="select-btn" onClick="addMeal('monday')">Add</button>
 				</div>
 			</form>
 			<h3>Tuesday</h3>
 			<form action="">
+				<div id="js-recipe-add-tuesday" class="js-meals"></div>
 				<div class="js-recipesOptions day">
-					<select class="recipeOptions" name="meal">
+					<select class="recipeOptions" name="meal" id="tuesday">
 						<option class="recipeOptions" value="Breakfast">Breakfast</option>
 						<option class="recipeOptions" value="Lunch">Lunch</option>
 						<option class="recipeOptions" value="Dinner">Dinner</option>
 						<option class="recipeOptions" value="Snack">Snack</option>
 					</select>
-					<select name="recipe" id="dropDownRecipes" class="recipeOptions js-recipe-list dropDownRecipes">
+					<select name="recipe" id="js-tuesday"" class=" recipeOptions js-recipe-list dropDownRecipes">
 					</select>
-					<button type="button" class="select-btn">Add</button>
+					<button type="button" class="select-btn" onClick="addMeal('tuesday')">Add</button>
 				</div>
 			</form>
 			<h3>Wednesday</h3>
 			<form action="">
+				<div id="js-recipe-add-wednesday" class="js-meals"></div>
 				<div class="js-recipesOptions day">
-					<select class="recipeOptions" name="meal">
+					<select class="recipeOptions" name="meal" id="wednesday">
 						<option class="recipeOptions" value="Breakfast">Breakfast</option>
 						<option class="recipeOptions" value="Lunch">Lunch</option>
 						<option class="recipeOptions" value="Dinner">Dinner</option>
 						<option class="recipeOptions" value="Snack">Snack</option>
 					</select>
-					<select name="recipe" id="dropDownRecipes" class="recipeOptions js-recipe-list dropDownRecipes">
+					<select name="recipe" id="js-wednesday" class="recipeOptions js-recipe-list dropDownRecipes">
 					</select>
-					<button type="button" class="select-btn">Add</button>
+					<button type="button" class="select-btn" onClick="addMeal('wednesday')">Add</button>
 				</div>
 			</form>
 			<h3>Thursday</h3>
 			<form action="">
+				<div id="js-recipe-add-thursday" class="js-meals"></div>
 				<div class="js-recipesOptions day">
-					<select class="recipeOptions" name="meal">
+					<select class="recipeOptions" name="meal" id="thursday">
 						<option class="recipeOptions" value="Breakfast">Breakfast</option>
 						<option class="recipeOptions" value="Lunch">Lunch</option>
 						<option class="recipeOptions" value="Dinner">Dinner</option>
 						<option class="recipeOptions" value="Snack">Snack</option>
 					</select>
-					<select name="recipe" id="dropDownRecipes" class="recipeOptions js-recipe-list dropDownRecipes">
+					<select name="recipe" id="js-thursday" class="recipeOptions js-recipe-list dropDownRecipes">
 					</select>
-					<button type="button" class="select-btn">Add</button>
+					<button type="button" class="select-btn" onClick="addMeal('thursday')">Add</button>
 				</div>
 			</form>
 			<h3>Friday</h3>
 			<form action="">
+				<div id="js-recipe-add-friday" class="js-meals"></div>
 				<div class="js-recipesOptions day">
-					<select class="recipeOptions" name="meal">
+					<select class="recipeOptions" name="meal" id="friday">
 						<option class="recipeOptions" value="Breakfast">Breakfast</option>
 						<option class="recipeOptions" value="Lunch">Lunch</option>
 						<option class="recipeOptions" value="Dinner">Dinner</option>
 						<option class="recipeOptions" value="Snack">Snack</option>
 					</select>
-					<select name="recipe" id="dropDownRecipes" class="recipeOptions js-recipe-list dropDownRecipes">
+					<select name="recipe" id="js-friday" class="recipeOptions js-recipe-list dropDownRecipes">
 					</select>
-					<button type="button" class="select-btn">Add</button>
+					<button type="button" class="select-btn" onClick="addMeal('friday')">Add</button>
 				</div>
 			</form>
 			<h3>Saturday</h3>
 			<form action="">
+				<div id="js-recipe-add-saturday" class="js-meals"></div>
 				<div class="js-recipesOptions day">
-					<select class="recipeOptions" name="meal">
+					<select class="recipeOptions" name="meal" id="saturday">
 						<option class="recipeOptions" value="Breakfast">Breakfast</option>
 						<option class="recipeOptions" value="Lunch">Lunch</option>
 						<option class="recipeOptions" value="Dinner">Dinner</option>
 						<option class="recipeOptions" value="Snack">Snack</option>
 					</select>
-					<select name="recipe" id="dropDownRecipes" class="recipeOptions js-recipe-list dropDownRecipes">
+					<select name="recipe" id="js-saturday" class="recipeOptions js-recipe-list dropDownRecipes">
 					</select>
-					<button type="button" class="select-btn">Add</button>
+					<button type="button" class="select-btn" onClick="addMeal('saturday')">Add</button>
 				</div>
 			</form>
 		</ul>

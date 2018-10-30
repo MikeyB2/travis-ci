@@ -64,7 +64,8 @@ router.post('/', jsonParser, (req, res) => {
 
     const sizedFields = {
         username: {
-            min: 6
+            min: 6,
+            max: 20
         },
         password: {
             min: 10,
@@ -133,8 +134,9 @@ router.post('/', jsonParser, (req, res) => {
             });
         })
         .then(user => {
+            res.send('/public/welcome.html');
             return res.status(201).json(user.serialize());
-            //  return res.redirect('/profile');
+
         })
         .catch(err => {
             // Forward validation errors on to the client, otherwise give a 500
@@ -147,6 +149,7 @@ router.post('/', jsonParser, (req, res) => {
                 message: 'Internal server error'
             });
         });
+    res.send('/public/')
 });
 
 // Never expose all your users like below in a prod application

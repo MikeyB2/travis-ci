@@ -48,10 +48,29 @@ shoppingListSchema.methods.serialize = function () {
     };
 };
 
+const mealsSchema = mongoose.Schema({
+    meal: {
+        type: String
+    },
+    recipe: {
+        type: String
+    },
+});
+
+mealsSchema.methods.serialize = function () {
+    return {
+        id: this._id,
+        meal: this.meal,
+        recipe: this.recipe,
+    };
+};
+
+const Meals = mongoose.model('Meals', mealsSchema);
 const Recipe = mongoose.model('Recipes', recipeSchema);
 const ShoppingList = mongoose.model('Shopping-List', shoppingListSchema);
 
 module.exports = {
     Recipe,
-    ShoppingList
+    ShoppingList,
+    Meals
 };
