@@ -28,8 +28,8 @@ const {
 	ShoppingList,
 	Meals
 } = require('./models');
+
 app.use(express.static('public'));
-app.use('/api/protected/meals', express.static('public/meals'));
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
@@ -59,10 +59,10 @@ app.get('/', (req, res) => {
 //GET Authentication
 app.get('/api/protected', jwtAuth, (req, res) => {
 	// return res.redirect('/welcome');
-	// return res.json({
-	// 	data: 'rosebud'
-	// });
-	res.send('welcome')
+	return res.json({
+		data: 'rosebud'
+	});
+	// res.send('./public/welcome.html')
 });
 
 // // GET ,Meals
@@ -186,10 +186,10 @@ app.post('/recipes', (req, res) => {
 	}
 
 	Recipe.create({
-			recipeName: req.body.recipeName,
-			ingredients: req.body.ingredients,
-			instructions: req.body.instructions
-		})
+		recipeName: req.body.recipeName,
+		ingredients: req.body.ingredients,
+		instructions: req.body.instructions
+	})
 		.then(recipe => res.status(201).json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -224,12 +224,12 @@ app.put('/recipes/:id', (req, res) => {
 	});
 
 	Recipe.findByIdAndUpdate(
-			req.params.id, {
-				$set: updated
-			}, {
-				new: true
-			}
-		)
+		req.params.id, {
+			$set: updated
+		}, {
+			new: true
+		}
+	)
 		.then(updatedRecipe => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -279,9 +279,9 @@ app.post('/Shopping-List', (req, res) => {
 	}
 
 	ShoppingList.create({
-			ingredient: req.body.ingredient,
-			amount: req.body.amount
-		})
+		ingredient: req.body.ingredient,
+		amount: req.body.amount
+	})
 		.then(listItem => res.status(201).json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -316,12 +316,12 @@ app.put('/Shopping-List/:id', (req, res) => {
 	});
 
 	ShoppingList.findByIdAndUpdate(
-			req.params.id, {
-				$set: updated
-			}, {
-				new: true
-			}
-		)
+		req.params.id, {
+			$set: updated
+		}, {
+			new: true
+		}
+	)
 		.then(updatedListItem => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({

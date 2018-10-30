@@ -76,13 +76,13 @@ router.post('/', jsonParser, (req, res) => {
     };
     const tooSmallField = Object.keys(sizedFields).find(
         field =>
-        'min' in sizedFields[field] &&
-        req.body[field].trim().length < sizedFields[field].min
+            'min' in sizedFields[field] &&
+            req.body[field].trim().length < sizedFields[field].min
     );
     const tooLargeField = Object.keys(sizedFields).find(
         field =>
-        'max' in sizedFields[field] &&
-        req.body[field].trim().length > sizedFields[field].max
+            'max' in sizedFields[field] &&
+            req.body[field].trim().length > sizedFields[field].max
     );
 
     if (tooSmallField || tooLargeField) {
@@ -91,8 +91,8 @@ router.post('/', jsonParser, (req, res) => {
             reason: 'ValidationError',
             message: tooSmallField ?
                 `Must be at least ${sizedFields[tooSmallField]
-          .min} characters long` : `Must be at most ${sizedFields[tooLargeField]
-          .max} characters long`,
+                    .min} characters long` : `Must be at most ${sizedFields[tooLargeField]
+                        .max} characters long`,
             location: tooSmallField || tooLargeField
         });
     }
@@ -109,8 +109,8 @@ router.post('/', jsonParser, (req, res) => {
     lastName = lastName.trim();
 
     return User.find({
-            username
-        })
+        username
+    })
         .count()
         .then(count => {
             if (count > 0) {
@@ -179,23 +179,6 @@ router.get('/logout', function (req, res, next) {
 });
 
 // let welcomePage = redirect('./welcome.html');npm test
-
-router.get('/welcome', function (req, res, next) {
-    User.findById(req.session.userId)
-        .exec(function (error, user) {
-            if (error) {
-                return next(error);
-            } else {
-                if (user === null) {
-                    var err = new Error('Not authorized! Go back!');
-                    err.status = 400;
-                    return next(err);
-                } else {
-                    return redirect('./welcome.html');;
-                }
-            }
-        });
-});
 
 module.exports = {
     router

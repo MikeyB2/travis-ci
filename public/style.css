@@ -24,15 +24,17 @@ ul {
 
 button,
 input[type="text"],
-textarea {
+textarea,
+.password {
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 15px;
+  height: 36px;
 }
 
 textarea {
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
   resize: none;
 }
 
@@ -46,6 +48,11 @@ button:hover {
   cursor: pointer;
   background: #aaa;
   border: #fefefe solid 1px;
+}
+
+.add-btn,
+.delete-btn {
+  width: 75px;
 }
 
 .white {
@@ -68,6 +75,7 @@ button:hover {
   padding: 10px;
   border: none;
   outline: none;
+  margin-bottom: 10px;
 }
 
 .app-inputs:hover {
@@ -337,11 +345,15 @@ h4 {
 
 /* Meals */
 
+.meal-btn {
+  margin-left: 5px;
+}
+
 .recipeOptions {
   color: #333;
   width: 10%;
   height: 30px;
-  border-radius: 10px;
+  border-radius: 15px;
   font-size: 15px;
 }
 

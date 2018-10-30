@@ -11,6 +11,7 @@ function addLogin(item) {
         data: JSON.stringify(item),
         success: function (data) {
             console.log("Access Granted");
+            // res.send('./welcome.html');
 
         },
         dataType: 'json',

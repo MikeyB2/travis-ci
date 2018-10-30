@@ -38,6 +38,15 @@ function myFunction() {
     }
 }
 
+function password() {
+    let x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+
 window.onscroll = function () {
     scrollFunction();
 };
@@ -215,8 +224,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -271,8 +280,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest('.js-recipe')
-            .attr('id')
+                .closest('.js-recipe')
+                .attr('id')
         );
     });
 }
@@ -311,5 +320,4 @@ $(function () {
 
     handleRecipeAdd();
     handleRecipeDelete();
-    getSavedValue();
 });
