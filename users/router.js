@@ -76,13 +76,13 @@ router.post('/', jsonParser, (req, res) => {
     };
     const tooSmallField = Object.keys(sizedFields).find(
         field =>
-            'min' in sizedFields[field] &&
-            req.body[field].trim().length < sizedFields[field].min
+        'min' in sizedFields[field] &&
+        req.body[field].trim().length < sizedFields[field].min
     );
     const tooLargeField = Object.keys(sizedFields).find(
         field =>
-            'max' in sizedFields[field] &&
-            req.body[field].trim().length > sizedFields[field].max
+        'max' in sizedFields[field] &&
+        req.body[field].trim().length > sizedFields[field].max
     );
 
     if (tooSmallField || tooLargeField) {
@@ -109,8 +109,8 @@ router.post('/', jsonParser, (req, res) => {
     lastName = lastName.trim();
 
     return User.find({
-        username
-    })
+            username
+        })
         .count()
         .then(count => {
             if (count > 0) {
@@ -134,7 +134,6 @@ router.post('/', jsonParser, (req, res) => {
             });
         })
         .then(user => {
-            res.send('/public/welcome.html');
             return res.status(201).json(user.serialize());
 
         })
@@ -149,7 +148,6 @@ router.post('/', jsonParser, (req, res) => {
                 message: 'Internal server error'
             });
         });
-    res.send('/public/')
 });
 
 // Never expose all your users like below in a prod application

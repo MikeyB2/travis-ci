@@ -39,7 +39,7 @@ describe('/api/user', function () {
         return closeServer();
     });
 
-    beforeEach(function () { });
+    beforeEach(function () {});
 
     afterEach(function () {
         return User.remove({});
@@ -55,12 +55,12 @@ describe('/api/user', function () {
             });
             it('Should return an array of users', function () {
                 return User.create({
-                    username,
-                    password,
-                    email,
-                    firstName,
-                    lastName
-                }, {
+                        username,
+                        password,
+                        email,
+                        firstName,
+                        lastName
+                    }, {
                         username: usernameB,
                         password: passwordB,
                         email: emailB,
@@ -254,11 +254,11 @@ describe('/api/user', function () {
             it('Should reject users with duplicate username', function () {
                 // Create an new user
                 return User.create({
-                    username,
-                    password,
-                    firstName,
-                    lastName
-                })
+                        username,
+                        password,
+                        firstName,
+                        lastName
+                    })
                     .then(() =>
                         // Try to create a second user with the same username
                         chai.request(app).post('/api/users').send({
@@ -293,7 +293,7 @@ describe('/api/user', function () {
                         lastName
                     })
                     .then(res => {
-                        expect(res).to.have.status(200);
+                        expect(res).to.have.status(201);
                         expect(res.body).to.be.an('object');
                         expect(res.body).to.have.keys(
                             'username',
@@ -329,7 +329,7 @@ describe('/api/user', function () {
                         lastName: ` ${lastName} `
                     })
                     .then(res => {
-                        expect(res).to.have.status(200);
+                        expect(res).to.have.status(201);
                         expect(res.body).to.be.an('object');
                         expect(res.body).to.have.keys(
                             'username',
