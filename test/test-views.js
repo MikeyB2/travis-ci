@@ -77,7 +77,7 @@ describe("Home page", function () {
     it("should exist", function () {
         return chai
             .request(app)
-            .get("/home.html")
+            .get("/")
             .then(function (res) {
                 expect(res).to.have.status(200);
             });
