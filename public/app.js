@@ -27,6 +27,7 @@ let recipeTemplate =
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
 let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
+let MEALS_URL = serverBase + 'Meals';
 
 /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
 function myFunction() {
@@ -115,6 +116,29 @@ function handleMeal() {
 
 function splitIngredient() {
 
+};
+
+function displayMeals() {
+    console.log('Retrieving Meals');
+    $.getJSON(MEALS_URL, function (meals) {
+        console.log(meals);
+        // let newItems = items.listItems;
+        // let itemElements = newItems.map(function (item) {
+        //     let element = $(shoppingItemTemplate);
+        //     element.attr('id', item.id);
+        //     let itemName = element.find('.js-shopping-item-name');
+        //     let itemAmount = element.find('.js-shopping-item-amount');
+        //     itemName.text(item.ingredient);
+        //     itemAmount.text(item.amount);
+        //     element.attr('data-checked', item.checked);
+        //     if (item.checked) {
+        //         itemName.addClass('shopping-item__checked');
+        //         itemAmount.addClass('shopping-item__checked');
+        //     }
+        //     return element;
+        // });
+        // $('.js-shopping-list').html(itemElements);
+    });
 };
 
 function addIngredients(recipe) {
@@ -228,8 +252,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -284,8 +308,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest('.js-recipe')
-            .attr('id')
+                .closest('.js-recipe')
+                .attr('id')
         );
     });
 }
@@ -317,6 +341,7 @@ function handleRecipeAdd() {
 $(function () {
     getAndDisplayShoppingList();
     getAndDisplayRecipes();
+    displayMeals();
     recipePopulateDropDown();
 
     handleShoppingListAdd();

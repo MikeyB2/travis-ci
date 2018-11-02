@@ -4,6 +4,9 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const recipeSchema = mongoose.Schema({
+    // userId: {
+    //     type: String,
+    // },
     recipeName: {
         type: String
     },

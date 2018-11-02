@@ -11,7 +11,7 @@ function addLogin(item) {
         data: JSON.stringify(item),
         success: function (data) {
             console.log("Access Granted");
-            location.href = "/welcome.html"
+            location.href = "/welcome.html";
 
         },
         dataType: 'json',
