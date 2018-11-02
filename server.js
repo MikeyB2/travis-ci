@@ -55,6 +55,9 @@ app.use(function (req, res, next) {
 app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/home.html');
 });
+app.get('/userLogin', (req, res) => {
+	res.sendFile(__dirname + '/public/welcome.html');
+});
 
 //GET Authentication
 app.get('/api/protected', jwtAuth, (req, res) => {

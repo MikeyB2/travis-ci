@@ -36,6 +36,7 @@ textarea {
   border: 2px solid #ccc;
   border-radius: 15px;
   resize: none;
+  height: 45px;
 }
 
 button {
@@ -183,27 +184,63 @@ button:hover {
 
 #about,
 #how-to {
-  display: flex;
   height: 500px;
 }
 
 .about {
+  float: left;
   background: #333;
-  height: 500px;
-  width: 500px;
+  height: 100%;
+  width: 30%;
   text-align: justify;
-  font-size: 50px;
   padding-left: 30px;
   padding-top: 10px;
+  padding-right: 15px;
 }
 
 .info {
-  display: inline-block;
+  float: right;
   text-align: start;
-  width: 75%;
+  width: 70%;
+  height: 100%;
   padding: 25px;
   font-size: 22px;
   border: solid 1px #aaa;
+}
+
+@media screen and (max-width: 880px) {
+
+  .about,
+  .info {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #about,
+  #how-to {
+    height: 100%;
+  }
+
+
+  .recipeOptions {
+    width: 25% !important;
+    margin-bottom: 10px;
+  }
+
+
+
+}
+
+@media screen and (max-width: 460px) {
+  .recipeOptions {
+    width: 40% !important;
+    margin: 10px;
+  }
+
+  .modal-content {
+    width: 60% !important;
+  }
 }
 
 .begin {
@@ -349,9 +386,13 @@ h4 {
   margin-left: 5px;
 }
 
+.meals {
+  width: 100%;
+}
+
 .recipeOptions {
   color: #333;
-  width: 10%;
+  width: 20%;
   height: 30px;
   border-radius: 15px;
   font-size: 15px;
@@ -416,7 +457,7 @@ footer a {
   margin-top: 20px;
 }
 
-@media screen and (max-width: 770px) {
+/* @media screen and (max-width: 770px) {
   #welcome-main {
     display: block;
   }
@@ -427,26 +468,18 @@ footer a {
 
   .about {
     width: 100%;
-    font-size: 20px;
   }
 
   .about,
   .info {
     width: 100%;
   }
-}
+} */
 
-@media screen and (max-width: 880px) {
 
-  .about,
-  .info {
-    width: 50%;
-  }
 
-}
-
-@media screen and (max-width: 1530px) {
+/* @media screen and (max-width: 1530px) {
   .info {
     font-size: 20px;
   }
-}
+} */

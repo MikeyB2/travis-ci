@@ -109,6 +109,10 @@ function handleMealDelete() {
     });
 }
 
+function handleMeal() {
+
+}
+
 function splitIngredient() {
 
 };
@@ -224,8 +228,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-                .closest('.js-shopping-item')
-                .attr('id')
+            .closest('.js-shopping-item')
+            .attr('id')
         );
     });
 }
@@ -280,8 +284,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-                .closest('.js-recipe')
-                .attr('id')
+            .closest('.js-recipe')
+            .attr('id')
         );
     });
 }

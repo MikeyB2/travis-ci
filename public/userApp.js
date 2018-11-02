@@ -11,7 +11,7 @@ function addLogin(item) {
         data: JSON.stringify(item),
         success: function (data) {
             console.log("Access Granted");
-            // res.send('./welcome.html');
+            location.href = "/welcome.html"
 
         },
         dataType: 'json',
@@ -27,6 +27,9 @@ function addNewUserLogin(item) {
         data: JSON.stringify(item),
         success: function (data) {
             console.log("New User Created");
+            console.log("Access Granted");
+            location.href = "/welcome.html";
+            alert('Welcome!!');
         },
         dataType: 'json',
         contentType: 'application/json'
