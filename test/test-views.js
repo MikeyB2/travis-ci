@@ -4,10 +4,6 @@ const chaiHttp = require("chai-http");
 const expect = chai.expect;
 
 const {
-    Recipe,
-    ShoppingList
-} = require('../models');
-const {
     app
 } = require('../server');
 const {
