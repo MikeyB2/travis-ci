@@ -1,9 +1,11 @@
 let shoppingItemTemplate =
     '<li class="js-shopping-item">' +
     '<p><span class="shopping-item js-shopping-item-name"></span><span class="shopping-item js-shopping-item-amount"></span>' +
+    // '<div class="shopping-item-controls">' +
     '<button class="js-shopping-item-delete delete-btn">' +
     '<span class="button-label">Delete | Done</span>' +
     '</button>' +
+    // '</div>' +
     '</p>' +
     '</li>';
 
@@ -21,14 +23,6 @@ let recipeTemplate =
     '</button>' +
     '</div>' +
     '</div>';
-
-// let mealTemplate =
-//     '<li class="js-mealItem">' +
-//     '<p><strong><span class="js-meal-name"></span></strong><span class="js-recipe-name"></span>' +
-//     '<button class="js-meal-delete meal-btn"> Delete' +
-//     '</button>' +
-//     '</p>' +
-//     '</li>';
 
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
@@ -90,92 +84,61 @@ function recipePopulateDropDown() {
     });
 }
 
-function displayMeals(id) {
-    console.log('Retrieving Meals');
-
-    $.getJSON(MEALS_URL, function (meals) {
-        console.log(meals);
-        let newMeals = meals.meals;
-
-        let mealElements = newMeals.map(function (meal) {
-            let mealName = meal.meal;
-            let recipeName = meal.recipe;
-            let element = $(`<li class="js-mealItem">
-            <p><strong><span class="js-meal-name">${mealName}</span></strong><span class="js-recipe-name">${recipeName}</span>
-            <button type="button" class="js-meal-delete meal-btn"> Delete
-            </button>
-            </p>
-            </li>`);
-            // element.attr('id', meal.id);
-            return element[0].innerHTML;
-        });
-        console.log(newMeals);
-        $('#js-recipe-add-' + `${id}`).html(mealElements.toString());
-    });
-};
-
-function handleMealAdd(id) {
-    console.log('handle');
-    console.log(id);
-    $('#js-meal-' + `${id}`).submit(function (e) {
-        e.preventDefault();
-        console.log(id + 'inside');
-        addMeal({
-            meal: $(e.currentTarget)
-                .find('#' + `${id} :selected`)
-                .val(),
-            recipe: $(e.currentTarget)
-                .find('#js-' + `${id} :selected`)
-                .val(),
-            dow: id,
-        });
-
-    });
-}
-
-function addMeal(item) {
-    console.log('Adding Meal');
-    console.log(item);
-    console.log(item.dow);
-    let day = item.dow;
-    // $.ajax({
-    //     method: 'POST',
-    //     url: MEALS_URL,
-    //     data: JSON.stringify(item),
-    //     success: function (data) {
-    //         console.log(data);
-    //         displayMeals(day);
-    //     },
-    //     dataType: 'json',
-    //     contentType: 'application/json'
-    // });
+function addMeal(id) {
+    let meal = $('#' +
+        `${id} :selected`).text();
+    let recipe = $('#js-' +
+        `${id} :selected`).text();
+    let mealAdd = $('#js-recipe-add-' + `${id}`);
+    localStorage.setItem(meal, recipe);
+    mealAdd.append(
+        "<li><strong>" +
+        meal +
+        ": " +
+        "</strong>" +
+        recipe +
+        '<button class="js-meal-delete meal-btn"> Delete' +
+        "</button>" +
+        "</li>"
+    );
 }
 
 function handleMealDelete() {
-    $('.js-meals').on('click', '.js-meal-delete', function (e) {
+    $(".js-meals").on("click", ".js-meal-delete", function (e) {
         e.preventDefault();
-        console.log('DELETE');
-        deleteMeal(
-            $(e.currentTarget)
-                .closest('li')
-                .attr('id')
-        );
+        $(this).closest('li').remove();
     });
 }
 
-function deleteMeal(item) {
-    console.log('DELETING MEAL');
-    console.log(item);
-    $.ajax({
-        method: 'DELETE',
-        url: MEALS_URL + '/' + item,
-        success: displayMeals
-    });
+function handleMeal() {
 
 }
 
 function splitIngredient() {
 
+};
+
+function displayMeals() {
+    console.log('Retrieving Meals');
+    $.getJSON(MEALS_URL, function (meals) {
+        console.log(meals);
+        // let newItems = items.listItems;
+        // let itemElements = newItems.map(function (item) {
+        //     let element = $(shoppingItemTemplate);
+        //     element.attr('id', item.id);
+        //     let itemName = element.find('.js-shopping-item-name');
+        //     let itemAmount = element.find('.js-shopping-item-amount');
+        //     itemName.text(item.ingredient);
+        //     itemAmount.text(item.amount);
+        //     element.attr('data-checked', item.checked);
+        //     if (item.checked) {
+        //         itemName.addClass('shopping-item__checked');
+        //         itemAmount.addClass('shopping-item__checked');
+        //     }
+        //     return element;
+        // });
+        // $('.js-shopping-list').html(itemElements);
+    });
 };
 
 function addIngredients(recipe) {
@@ -205,6 +168,9 @@ function addIngredients(recipe) {
     //         contentType: 'application/json'
     //     });
     // }
+
+
+
 }
 
 function getAndDisplayShoppingList() {
@@ -218,6 +184,11 @@ function getAndDisplayShoppingList() {
             let itemAmount = element.find('.js-shopping-item-amount');
             itemName.text(item.ingredient);
             itemAmount.text(item.amount);
+            element.attr('data-checked', item.checked);
+            if (item.checked) {
+                itemName.addClass('shopping-item__checked');
+                itemAmount.addClass('shopping-item__checked');
+            }
             return element;
         });
         $('.js-shopping-list').html(itemElements);
