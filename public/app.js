@@ -1,11 +1,9 @@
 let shoppingItemTemplate =
     '<li class="js-shopping-item">' +
     '<p><span class="shopping-item js-shopping-item-name"></span><span class="shopping-item js-shopping-item-amount"></span>' +
-    // '<div class="shopping-item-controls">' +
     '<button class="js-shopping-item-delete delete-btn">' +
     '<span class="button-label">Delete | Done</span>' +
     '</button>' +
-    // '</div>' +
     '</p>' +
     '</li>';
 
@@ -23,6 +21,14 @@ let recipeTemplate =
     '</button>' +
     '</div>' +
     '</div>';
+
+let mealTemplate =
+    '<li class="js-mealItem">' +
+    '<p><strong><span class="js-meal-name"></span></strong><span class="js-recipe-name"></span>' +
+    '<button class="js-meal-delete meal-btn"> Delete' +
+    '</button>' +
+    '</p>' +
+    '</li>';
 
 let serverBase = '//localhost:8080/';
 let RECIPES_URL = serverBase + 'Recipes';
@@ -84,61 +90,86 @@ function recipePopulateDropDown() {
     });
 }
 
-function addMeal(id) {
-    let meal = $('#' +
-        `${id} :selected`).text();
-    let recipe = $('#js-' +
-        `${id} :selected`).text();
-    let mealAdd = $('#js-recipe-add-' + `${id}`);
-    localStorage.setItem(meal, recipe);
-    mealAdd.append(
-        "<li><strong>" +
-        meal +
-        ": " +
-        "</strong>" +
-        recipe +
-        '<button class="js-meal-delete meal-btn"> Delete' +
-        "</button>" +
-        "</li>"
-    );
-}
+function displayMeals(id) {
+    console.log('Retrieving Meals');
+    $.getJSON(MEALS_URL, function (meals) {
+        let newMeals = meals.meals;
+        let mealElements = newMeals.map(function (meal) {
+            let element = $(mealTemplate);
+            element.attr('id', meal.id);
+            let mealName = element.find('.js-meal-name');
+            let mealRecipe = element.find('.js-recipe-name');
+            mealName.text(meal.meal);
+            mealRecipe.text(meal.recipe);
+            return element;
+        });
+        console.log('IT WORKS');
+        console.log(mealElements);
+        $('.js-recipe-add-' + `${id}`).html(mealElements);
+    });
+};
 
-function handleMealDelete() {
-    $(".js-meals").on("click", ".js-meal-delete", function (e) {
+function handleMealAdd(id) {
+    console.log(id);
+    let day = id;
+    $('#js-meal-' + `${id}`).submit(function (e) {
         e.preventDefault();
-        $(this).closest('li').remove();
+        console.log(id + 'inside');
+        addMeal({
+            meal: $(e.currentTarget)
+                .find('#' + `${id} :selected`)
+                .val(),
+            recipe: $(e.currentTarget)
+                .find('#js-' + `${id} :selected`)
+                .val(),
+            day,
+        });
     });
 }
 
-function handleMeal() {
+function addMeal(item) {
+    console.log('Adding Meal');
+    console.log(item.day);
+    let day = item.day;
+    $.ajax({
+        method: 'POST',
+        url: MEALS_URL,
+        data: JSON.stringify(item),
+        success: function (data) {
+            displayMeals(day);
+        },
+        dataType: 'json',
+        contentType: 'application/json'
+    });
+}
+
+function handleMealDelete() {
+    $('.js-meals').on('click', '.js-meal-delete', function (e) {
+        e.preventDefault();
+        deleteMeal(
+            $(e.currentTarget)
+            .closest('.js-mealItem')
+            .attr('id')
+        );
+    });
+}
+
+function deleteMeal(item) {
+    // $(".js-meals").on("click", ".js-meal-delete", function (e) {
+    //     e.preventDefault();
+    //     $(this).closest('li').remove();
+    // });
+    console.log('DELETING MEAL');
+    $.ajax({
+        method: 'DELETE',
+        url: MEALS_URL + '/' + item,
+        success: displayMeals
+    });
 
 }
 
 function splitIngredient() {
 
-};
-
-function displayMeals() {
-    console.log('Retrieving Meals');
-    $.getJSON(MEALS_URL, function (meals) {
-        console.log(meals);
-        // let newItems = items.listItems;
-        // let itemElements = newItems.map(function (item) {
-        //     let element = $(shoppingItemTemplate);
-        //     element.attr('id', item.id);
-        //     let itemName = element.find('.js-shopping-item-name');
-        //     let itemAmount = element.find('.js-shopping-item-amount');
-        //     itemName.text(item.ingredient);
-        //     itemAmount.text(item.amount);
-        //     element.attr('data-checked', item.checked);
-        //     if (item.checked) {
-        //         itemName.addClass('shopping-item__checked');
-        //         itemAmount.addClass('shopping-item__checked');
-        //     }
-        //     return element;
-        // });
-        // $('.js-shopping-list').html(itemElements);
-    });
 };
 
 function addIngredients(recipe) {
@@ -168,9 +199,6 @@ function addIngredients(recipe) {
     //         contentType: 'application/json'
     //     });
     // }
-
-
-
 }
 
 function getAndDisplayShoppingList() {
@@ -184,11 +212,6 @@ function getAndDisplayShoppingList() {
             let itemAmount = element.find('.js-shopping-item-amount');
             itemName.text(item.ingredient);
             itemAmount.text(item.amount);
-            element.attr('data-checked', item.checked);
-            if (item.checked) {
-                itemName.addClass('shopping-item__checked');
-                itemAmount.addClass('shopping-item__checked');
-            }
             return element;
         });
         $('.js-shopping-list').html(itemElements);
@@ -252,8 +275,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-                .closest('.js-shopping-item')
-                .attr('id')
+            .closest('.js-shopping-item')
+            .attr('id')
         );
     });
 }
@@ -308,8 +331,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-                .closest('.js-recipe')
-                .attr('id')
+            .closest('.js-recipe')
+            .attr('id')
         );
     });
 }
