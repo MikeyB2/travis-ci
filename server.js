@@ -111,10 +111,10 @@ app.post('/recipes', (req, res) => {
 	}
 
 	Recipe.create({
-		recipeName: req.body.recipeName,
-		ingredients: req.body.ingredients,
-		instructions: req.body.instructions
-	})
+			recipeName: req.body.recipeName,
+			ingredients: req.body.ingredients,
+			instructions: req.body.instructions
+		})
 		.then(recipe => res.status(201).json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -149,12 +149,12 @@ app.put('/recipes/:id', (req, res) => {
 	});
 
 	Recipe.findByIdAndUpdate(
-		req.params.id, {
-			$set: updated
-		}, {
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedRecipe => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -205,9 +205,9 @@ app.post('/Shopping-List', (req, res) => {
 	}
 
 	ShoppingList.create({
-		ingredient: req.body.ingredient,
-		amount: req.body.amount
-	})
+			ingredient: req.body.ingredient,
+			amount: req.body.amount
+		})
 		.then(listItem => res.status(201).json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -242,12 +242,12 @@ app.put('/Shopping-List/:id', (req, res) => {
 	});
 
 	ShoppingList.findByIdAndUpdate(
-		req.params.id, {
-			$set: updated
-		}, {
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedListItem => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -282,11 +282,7 @@ app.delete('/Meals/:id', (req, res) => {
 
 // POST Meals
 app.post('/Meals', (req, res) => {
-<<<<<<< HEAD
 	const requiredFields = ['meal', 'recipe', 'day'];
-=======
-	const requiredFields = ['meal', 'recipe', 'dow'];
->>>>>>> 78b58466512bbbbdc3c4fa000371051ec4fa3540
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -298,17 +294,10 @@ app.post('/Meals', (req, res) => {
 	}
 
 	Meals.create({
-<<<<<<< HEAD
 			meal: req.body.meal,
 			recipe: req.body.recipe,
 			day: req.body.day,
 		})
-=======
-		meal: req.body.meal,
-		recipe: req.body.recipe,
-		dow: req.body.dow,
-	})
->>>>>>> 78b58466512bbbbdc3c4fa000371051ec4fa3540
 		.then(meal => res.status(201).json(meal.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -335,12 +324,12 @@ app.put('/meals/:id', (req, res) => {
 	});
 
 	Meals.findByIdAndUpdate(
-		req.params.id, {
-			$set: updated
-		}, {
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedMeal => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({

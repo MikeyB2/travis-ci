@@ -84,7 +84,6 @@ function recipePopulateDropDown() {
     });
 }
 
-<<<<<<< HEAD
 function displayMeals(id) {
     console.log('Retrieving Meals');
     $.getJSON(MEALS_URL, function (meals) {
@@ -140,25 +139,6 @@ function addMeal(item) {
         dataType: 'json',
         contentType: 'application/json'
     });
-=======
-function addMeal(id) {
-    let meal = $('#' +
-        `${id} :selected`).text();
-    let recipe = $('#js-' +
-        `${id} :selected`).text();
-    let mealAdd = $('#js-recipe-add-' + `${id}`);
-    localStorage.setItem(meal, recipe);
-    mealAdd.append(
-        "<li><strong>" +
-        meal +
-        ": " +
-        "</strong>" +
-        recipe +
-        '<button class="js-meal-delete meal-btn"> Delete' +
-        "</button>" +
-        "</li>"
-    );
->>>>>>> 78b58466512bbbbdc3c4fa000371051ec4fa3540
 }
 
 function handleMealDelete() {
@@ -168,7 +148,6 @@ function handleMealDelete() {
     });
 }
 
-<<<<<<< HEAD
 function deleteMeal(item) {
     console.log('DELETING MEAL');
     console.log('Delete Item', item);
@@ -177,10 +156,6 @@ function deleteMeal(item) {
         url: MEALS_URL + '/' + item,
         success: displayMeals
     });
-=======
-function handleMeal() {
-
->>>>>>> 78b58466512bbbbdc3c4fa000371051ec4fa3540
 }
 
 function splitIngredient() {}
@@ -318,8 +293,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-                .closest('.js-shopping-item')
-                .attr('id')
+            .closest('.js-shopping-item')
+            .attr('id')
         );
     });
 }
@@ -374,8 +349,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-                .closest('.js-recipe')
-                .attr('id')
+            .closest('.js-recipe')
+            .attr('id')
         );
     });
 }
