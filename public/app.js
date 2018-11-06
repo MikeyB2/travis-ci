@@ -46,11 +46,11 @@ function myFunction() {
 }
 
 function password() {
-    let x = document.getElementById("password");
-    if (x.type === "password") {
-        x.type = "text";
+    let x = document.getElementById('password');
+    if (x.type === 'password') {
+        x.type = 'text';
     } else {
-        x.type = "password";
+        x.type = 'password';
     }
 }
 
@@ -81,10 +81,10 @@ function recipePopulateDropDown() {
         dropDown.append('<option selected="true">Select Recipe</option>');
         for (let i = 0; i < recipeData.length; i++) {
             let optionsList = recipeData[i];
+            let recipeDropDown = optionsList.recipeName;
+            console.log(optionsList, 'test');
             dropDown.append(
-                "<option value='optionList.recipeName'>" +
-                optionsList.recipeName +
-                '</option>'
+                $(`<option value='${recipeDropDown}'>${recipeDropDown}</option>`)
             );
         }
     });
@@ -95,23 +95,27 @@ function displayMeals(id) {
     $.getJSON(MEALS_URL, function (meals) {
         let newMeals = meals.meals;
         let mealElements = newMeals.map(function (meal) {
-            let element = $(mealTemplate);
-            element.attr('id', meal.id);
-            let mealName = element.find('.js-meal-name');
-            let mealRecipe = element.find('.js-recipe-name');
-            mealName.text(meal.meal);
-            mealRecipe.text(meal.recipe);
+            console.log('Is this working?', meal);
+            let mealName = meal.meal;
+            let mealRecipe = meal.recipe;
+            console.log(mealName);
+            console.log(mealRecipe);
+            let element = $(`<li class="js-mealItem">
+            <p><strong><span class="js-meal-name">${mealName}</span></strong><span class="js-recipe-name">${mealRecipe}</span>
+            <button class="js-meal-delete meal-btn"> Delete
+            </button>
+            </p>
+            </li>`);
             return element;
         });
         console.log('IT WORKS');
         console.log(mealElements);
-        $('.js-recipe-add-' + `${id}`).html(mealElements);
+        $('.js-recipe-add-' + `${id}`).html(mealElements.innerHTML);
     });
-};
+}
 
 function handleMealAdd(id) {
     console.log(id);
-    let day = id;
     $('#js-meal-' + `${id}`).submit(function (e) {
         e.preventDefault();
         console.log(id + 'inside');
@@ -122,21 +126,21 @@ function handleMealAdd(id) {
             recipe: $(e.currentTarget)
                 .find('#js-' + `${id} :selected`)
                 .val(),
-            day,
+            day: id,
         });
     });
 }
 
 function addMeal(item) {
     console.log('Adding Meal');
-    console.log(item.day);
-    let day = item.day;
+    console.log(item);
+    let id = item.day;
     $.ajax({
         method: 'POST',
         url: MEALS_URL,
         data: JSON.stringify(item),
         success: function (data) {
-            displayMeals(day);
+            displayMeals(id);
         },
         dataType: 'json',
         contentType: 'application/json'
@@ -155,22 +159,16 @@ function handleMealDelete() {
 }
 
 function deleteMeal(item) {
-    // $(".js-meals").on("click", ".js-meal-delete", function (e) {
-    //     e.preventDefault();
-    //     $(this).closest('li').remove();
-    // });
     console.log('DELETING MEAL');
+    console.log('Delete Item', item);
     $.ajax({
         method: 'DELETE',
         url: MEALS_URL + '/' + item,
         success: displayMeals
     });
-
 }
 
-function splitIngredient() {
-
-};
+function splitIngredient() {}
 
 function addIngredients(recipe) {
     console.log('Adding Recipe Ingredient');
@@ -184,7 +182,6 @@ function addIngredients(recipe) {
         dataType: 'json',
         contentType: 'application/json'
     });
-
 
     // function addShoppingItem(item) {
     //     console.log('Adding shopping item');

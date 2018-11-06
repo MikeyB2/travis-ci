@@ -58,6 +58,9 @@ const mealsSchema = mongoose.Schema({
     recipe: {
         type: String
     },
+    day: {
+        type: String
+    }
 });
 
 mealsSchema.methods.serialize = function () {
@@ -65,6 +68,7 @@ mealsSchema.methods.serialize = function () {
         id: this._id,
         meal: this.meal,
         recipe: this.recipe,
+        day: this.day
     };
 };
 

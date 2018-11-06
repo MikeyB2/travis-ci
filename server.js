@@ -282,7 +282,7 @@ app.delete('/Meals/:id', (req, res) => {
 
 // POST Meals
 app.post('/Meals', (req, res) => {
-	const requiredFields = ['meal', 'recipe'];
+	const requiredFields = ['meal', 'recipe', 'day'];
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -296,6 +296,7 @@ app.post('/Meals', (req, res) => {
 	Meals.create({
 			meal: req.body.meal,
 			recipe: req.body.recipe,
+			day: req.body.day,
 		})
 		.then(meal => res.status(201).json(meal.serialize()))
 		.catch(err => {
