@@ -74,7 +74,6 @@ function recipePopulateDropDown() {
         for (let i = 0; i < recipeData.length; i++) {
             let optionsList = recipeData[i];
             let recipeDropDown = optionsList.recipeName;
-            console.log(optionsList);
             dropDown.append(
                 $(`<option value='${recipeDropDown}'>${recipeDropDown}</option>`)
             );
@@ -86,14 +85,16 @@ function displayMeals() {
     console.log('Retrieving Meals');
     $.getJSON(MEALS_URL, function (meals) {
         let newMeals = meals.meals;
-        console.log(newMeals[0].day, 'DAY');
-        let mealDay = newMeals[0].day;
+        console.log(newMeals[3].day, 'DAY');
+        let mealDay = newMeals[3].day;
         let mealElements = newMeals.map(function (meal) {
             console.log('Is this working?', meal);
             let mealName = meal.meal;
             let mealRecipe = meal.recipe;
+            let dayOfMeal = meal.day;
             console.log(mealName);
             console.log(mealRecipe);
+            console.log(dayOfMeal);
             let element = $(`<li class="js-mealItem">
             <p><strong><span class="js-meal-name">${mealName}</span></strong>:   <span class="js-recipe-name">${mealRecipe}</span>
             <button type="button" class="js-meal-delete meal-btn"> Delete
@@ -129,7 +130,6 @@ function handleMealAdd(id) {
 function addMeal(item) {
     console.log('Adding Meal');
     console.log(item);
-    let id = item.day;
     $.ajax({
         method: 'POST',
         url: MEALS_URL,
@@ -170,14 +170,14 @@ function handleMealDelete() {
         e.preventDefault();
         deleteMeal(
             $(e.currentTarget)
-            .closest('.js-mealItem')
-            .attr('id')
+                .closest('.js-mealItem')
+                .attr('id')
         );
     });
 }
 
 
-function splitIngredient() {}
+function splitIngredient() { }
 
 function addIngredients(recipe) {
     console.log('Adding Recipe Ingredient');
@@ -281,8 +281,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -337,8 +337,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest('.js-recipe')
-            .attr('id')
+                .closest('.js-recipe')
+                .attr('id')
         );
     });
 }
