@@ -36,7 +36,8 @@ function seedMealsData() {
 function generateMeal() {
     return {
         meal: faker.name.firstName(),
-        recipe: faker.name.lastName()
+        recipe: faker.name.lastName(),
+        day: faker.date.weekday()
     };
 }
 
@@ -112,10 +113,11 @@ describe('meals API resource', function () {
                     expect(res).to.be.json;
                     expect(res.body).to.be.a('object');
                     expect(res.body).to.include.keys(
-                        'meal', 'recipe');
+                        'meal', 'recipe', 'day');
                     expect(res.body.id).to.not.be.null;
                     expect(res.body.meal).to.equal(newMeal.meal);
                     expect(res.body.recipe).to.equal(newMeal.recipe);
+                    expect(res.body.day).to.equal(newMeal.day);
                     return Meals.findById(res.body.id);
                 })
                 .then(function (meals) {
