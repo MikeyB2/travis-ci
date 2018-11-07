@@ -316,7 +316,7 @@ app.put('/meals/:id', (req, res) => {
 	}
 
 	const updated = {};
-	const updateableFields = ['meal', 'recipe', 'dow'];
+	const updateableFields = ['meal', 'recipe', 'day'];
 	updateableFields.forEach(field => {
 		if (field in req.body) {
 			updated[field] = req.body[field];
