@@ -86,13 +86,14 @@ function displayMeals() {
     console.log('Retrieving Meals');
     $.getJSON(MEALS_URL, function (meals) {
         for (let i = 0; i < dayArray.length; i++) {
-            let monday = meals.meals.filter(item => item.day == dayArray[i]);
+            console.log(meals);
+            let dayOfWeek = meals.meals.filter(item => item.day == dayArray[i]);
             let mealDay = dayArray[i];
-            let mealElements = monday.map(function (meal) {
+            let mealElements = dayOfWeek.map(function (meal) {
                 let mealName = meal.meal;
                 let mealRecipe = meal.recipe;
                 let element = $(`<li class="js-mealItem" id=${meal.id}>
-            <p><strong><span class="js-meal-name">${mealName}</span></strong>:   <span class="js-recipe-name">${mealRecipe}</span>
+            <p><strong><span class="js-meal-name">${meal.meal}</span></strong>:   <span class="js-recipe-name">${meal.recipe}</span>
             <button type="button" class="js-meal-delete meal-btn "> Delete
             </button>
             </p>
@@ -106,19 +107,19 @@ function displayMeals() {
 
 function handleMealAdd(e, id) {
     console.log(id);
-    $('#js-meal-' + `${id}`).submit(function (e) {
-        e.preventDefault();
-        console.log(id + 'inside');
-        addMeal({
-            meal: $(e.currentTarget)
-                .find('#' + `${id} :selected`)
-                .val(),
-            recipe: $(e.currentTarget)
-                .find('#js-' + `${id} :selected`)
-                .val(),
-            day: id,
-        });
+    // $('#js-meal-' + `${id}`).submit(function (e) {
+    //     e.preventDefault();
+    //     console.log(id + 'inside');
+    addMeal({
+        meal: $(e.currentTarget)
+            .find('#' + `${id} :selected`)
+            .val(),
+        recipe: $(e.currentTarget)
+            .find('#js-' + `${id} :selected`)
+            .val(),
+        day: id,
     });
+    // });
 }
 
 function addMeal(item) {
