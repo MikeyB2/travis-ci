@@ -80,45 +80,31 @@ function recipePopulateDropDown() {
         }
     });
 }
+let dayArray = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
 function displayMeals() {
     console.log('Retrieving Meals');
     $.getJSON(MEALS_URL, function (meals) {
-        // for (let i = 0; i < meals.length; i++) {
-        let newMeals = meals.meals;
-        var mealDay = newMeals[0].day;
-        console.log(newMeals);
-        console.log(newMeals[0].day, 'DAY');
-        var mealElements = newMeals.map(function (meal) {
-            console.log('Is this working?', meal);
-            let mealName = meal.meal;
-            let mealRecipe = meal.recipe;
-            let dayOfMeal = meal.day;
-            console.log(mealName);
-            console.log(mealRecipe);
-            console.log(dayOfMeal);
-            let element = $(`<li class="js-mealItem">
+        for (let i = 0; i < dayArray.length; i++) {
+            let monday = meals.meals.filter(item => item.day == dayArray[i]);
+            let mealDay = dayArray[i];
+            let mealElements = monday.map(function (meal) {
+                let mealName = meal.meal;
+                let mealRecipe = meal.recipe;
+                let element = $(`<li class="js-mealItem" id=${meal.id}>
             <p><strong><span class="js-meal-name">${mealName}</span></strong>:   <span class="js-recipe-name">${mealRecipe}</span>
-            <button type="button" class="js-meal-delete meal-btn"> Delete
+            <button type="button" class="js-meal-delete meal-btn "> Delete
             </button>
             </p>
             </li>`);
-            return element;
-        });
-        // 
-        //     mealDay = newMeals[i].day;
-        //     console.log('is the day', mealDay);
-        //     return mealDay;
-        // };
-
-        console.log('IT WORKS');
-        console.log(mealElements);
-        return $('#js-recipe-add-' + `${mealDay}`).html(mealElements);
-
+                return element;
+            });
+            $('#js-recipe-add-' + `${mealDay}`).html(mealElements);
+        };
     });
 }
 
-function handleMealAdd(id) {
+function handleMealAdd(e, id) {
     console.log(id);
     $('#js-meal-' + `${id}`).submit(function (e) {
         e.preventDefault();
@@ -167,15 +153,14 @@ function handleMealDelete() {
         e.preventDefault();
         deleteMeal(
             $(e.currentTarget)
-            .closest('.js-mealItem')
-            .attr('id')
+                .closest('.js-mealItem')
+                .attr('id')
         );
-        console.log();
     });
 }
 
 
-function splitIngredient() {}
+function splitIngredient() { }
 
 function addIngredients(recipe) {
     console.log('Adding Recipe Ingredient');
@@ -281,8 +266,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -337,8 +322,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest('.js-recipe')
-            .attr('id')
+                .closest('.js-recipe')
+                .attr('id')
         );
     });
 }
