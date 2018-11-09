@@ -219,7 +219,6 @@ function getAndDisplayShoppingList() {
 
 function addShoppingItem(item) {
     console.log('Adding shopping item');
-    console.log('shopping list item', item);
     $.ajax({
         method: 'POST',
         url: SHOPPING_LIST_URL,

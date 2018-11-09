@@ -117,6 +117,7 @@ button:hover {
   cursor: pointer;
   padding: 15px;
   border-radius: 4px;
+  height: 47px;
 }
 
 #topBtn:hover {
@@ -374,6 +375,7 @@ button:hover {
 
 .recipes-results {
   color: #fefefe;
+  font-size: 20px;
 }
 
 .recipes-results h3,
@@ -386,6 +388,7 @@ h4 {
 .meal-btn {
   margin-left: 5px;
 }
+
 .meal-btn:hover {
   background: #BE4A47;
   border: solid 1px #BE4A47;
@@ -393,6 +396,11 @@ h4 {
 
 .meals {
   width: 100%;
+  font-size: 20px;
+}
+
+.js-meal-name {
+  text-decoration: underline;
 }
 
 .recipeOptions {
