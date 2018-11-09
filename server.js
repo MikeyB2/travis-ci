@@ -105,7 +105,6 @@ app.post('/recipes', (req, res) => {
 		if (!(field in req.body)) {
 			const message = `Missing \`${field}\` in request body`;
 			console.error(message);
-			alert(message);
 			return res.status(400).send(message);
 		}
 	}
@@ -199,7 +198,6 @@ app.post('/Shopping-List', (req, res) => {
 		if (!(field in req.body)) {
 			const message = `Missing \`${field}\` in request body`;
 			console.error(message);
-			alert(message);
 			return res.status(400).send(message);
 		}
 	}
@@ -288,7 +286,6 @@ app.post('/Meals', (req, res) => {
 		if (!(field in req.body)) {
 			const message = `Missing \`${field}\` in request body`;
 			console.error(message);
-			alert(message);
 			return res.status(400).send(message);
 		}
 	}
