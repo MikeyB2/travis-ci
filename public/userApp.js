@@ -5,6 +5,7 @@ let USERSAUTH_URL = authServerBase + 'login';
 
 function addLogin(item) {
     console.log('Requesting Access');
+    console.log('Return User Info', item);
     $.ajax({
         method: 'POST',
         url: USERSAUTH_URL,
@@ -21,6 +22,7 @@ function addLogin(item) {
 
 function addNewUserLogin(item) {
     console.log('creating user');
+    console.log('New User info', item);
     $.ajax({
         method: 'POST',
         url: USERS_URL,

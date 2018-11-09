@@ -264,6 +264,10 @@ button:hover {
   width: 50%;
 }
 
+.tealWord {
+  color: #52B7BD;
+}
+
 /* The Modal (background) */
 .modal {
   display: none;
