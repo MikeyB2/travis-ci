@@ -94,7 +94,6 @@ function displayMeals() {
     console.log('Retrieving Meals');
     $.getJSON(MEALS_URL, function (meals) {
         for (let i = 0; i < dayArray.length; i++) {
-            console.log(meals);
             let dayOfWeek = meals.meals.filter(item => item.day == dayArray[i]);
             let mealDay = dayArray[i];
             let mealElements = dayOfWeek.map(function (meal) {
@@ -115,27 +114,21 @@ function displayMeals() {
     });
 }
 
-function handleMealAdd(id) {
-    console.log(id);
-    $('#js-meal-' + `${id}`).submit(function (e) {
-        e.preventDefault();
-        console.log(id + 'inside');
-        addMeal({
-            meal: $(e.currentTarget)
-                .find('#' + `${id} :selected`)
-                .val(),
-            recipe: $(e.currentTarget)
-                .find('#js-' + `${id} :selected`)
-                .val(),
-            day: id
-        });
+function handleMealAdd(e, id) {
+    e.preventDefault();
+    addMeal({
+        meal: $(e.currentTarget)
+            .find('#' + `${id} :selected`)
+            .val(),
+        recipe: $(e.currentTarget)
+            .find('#js-' + `${id} :selected`)
+            .val(),
+        day: id
     });
 }
 
 function addMeal(item) {
     console.log('Adding Meal');
-    console.log(item);
-    console.log(item.recipe);
     let recipeIngredients = item.recipe;
     $.ajax({
         method: 'POST',
@@ -151,8 +144,6 @@ function addMeal(item) {
 }
 
 function deleteMeal(meal) {
-    console.log('DELETING MEAL');
-    console.log('Delete Item', meal);
     $.ajax({
         method: 'DELETE',
         url: MEALS_URL + '/' + meal,
@@ -232,7 +223,6 @@ function addShoppingItem(item) {
 }
 
 function deleteShoppingItem(item) {
-    console.log('DELETING ITEM');
     $.ajax({
         method: 'DELETE',
         url: SHOPPING_LIST_URL + '/' + item,

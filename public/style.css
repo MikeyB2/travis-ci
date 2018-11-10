@@ -429,17 +429,11 @@ h4 {
 }
 
 .shopping-list>li {
-  margin-bottom: 20px;
   border-radius: 5px;
-  padding: 20px;
   color: #fefefe;
   list-style-type: none;
   text-decoration: underline;
 }
-
-/* .shopping-list p {
-  border: 1px solid #aaa;
-} */
 
 .shopping-item {
   display: block;

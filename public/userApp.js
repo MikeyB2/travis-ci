@@ -3,6 +3,44 @@ let authServerBase = '//localhost:8080/api/auth/';
 let USERS_URL = userServerBase + 'users';
 let USERSAUTH_URL = authServerBase + 'login';
 
+function myFunction() {
+    let x = document.getElementById('myLinks');
+    if (x.style.display === 'block') {
+        x.style.display = 'none';
+    } else {
+        x.style.display = 'block';
+    }
+}
+
+function password() {
+    let x = document.getElementById('password');
+    if (x.type === 'password') {
+        x.type = 'text';
+    } else {
+        x.type = 'password';
+    }
+}
+
+window.onscroll = function () {
+    scrollFunction();
+};
+
+function scrollFunction() {
+    if (
+        document.body.scrollTop > 100 ||
+        document.documentElement.scrollTop > 100
+    ) {
+        document.getElementById('topBtn').style.display = 'block';
+    } else {
+        document.getElementById('topBtn').style.display = 'none';
+    }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
 function addLogin(item) {
     console.log('Requesting Access');
     console.log('Return User Info', item);
@@ -13,6 +51,7 @@ function addLogin(item) {
         success: function (data) {
             console.log("Access Granted");
             location.href = "/welcome.html";
+            alert('Welcome BACK To CSTM Made!!');
 
         },
         dataType: 'json',
@@ -31,7 +70,7 @@ function addNewUserLogin(item) {
             console.log("New User Created");
             console.log("Access Granted");
             location.href = "/welcome.html";
-            alert('Welcome!!');
+            alert('Welcome To CSTM Made!!');
         },
         dataType: 'json',
         contentType: 'application/json'
