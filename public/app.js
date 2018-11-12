@@ -99,10 +99,10 @@ function displayMeals() {
             let mealElements = dayOfWeek.map(function (meal) {
                 let element = $(`<li class="js-mealItem" id=${meal.id}>
             <p><strong><span class="js-meal-name">${
-							meal.meal
-						}</span></strong>:   <span class="js-recipe-name">${
-					meal.recipe
-				}</span>
+                    meal.meal
+                    }</span></strong>:   <span class="js-recipe-name">${
+                    meal.recipe
+                    }</span>
             <button type="button" class="js-meal-delete meal-btn "> Delete
             </button>
             </p>
@@ -156,8 +156,8 @@ function handleMealDelete() {
         e.preventDefault();
         deleteMeal(
             $(e.currentTarget)
-            .closest('.js-mealItem')
-            .attr('id')
+                .closest('.js-mealItem')
+                .attr('id')
         );
     });
 }
@@ -264,8 +264,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -320,8 +320,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest('.js-recipe')
-            .attr('id')
+                .closest('.js-recipe')
+                .attr('id')
         );
     });
 }

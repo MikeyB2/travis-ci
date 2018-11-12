@@ -4,9 +4,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const recipeSchema = mongoose.Schema({
-    // userId: {
-    //     type: String,
-    // },
+    username: { type: String },
     recipeName: {
         type: String
     },
@@ -23,6 +21,7 @@ const recipeSchema = mongoose.Schema({
 recipeSchema.methods.serialize = function () {
     return {
         id: this._id,
+        username: this.username,
         recipeName: this.recipeName,
         ingredients: this.ingredients,
         instructions: this.instructions,
@@ -30,6 +29,7 @@ recipeSchema.methods.serialize = function () {
 };
 
 const shoppingListSchema = mongoose.Schema({
+    username: { type: String },
     ingredient: {
         type: String
     },
@@ -46,12 +46,14 @@ const shoppingListSchema = mongoose.Schema({
 shoppingListSchema.methods.serialize = function () {
     return {
         id: this._id,
+        username: this.username,
         ingredient: this.ingredient,
         amount: this.amount,
     };
 };
 
 const mealsSchema = mongoose.Schema({
+    username: { type: String },
     meal: {
         type: String
     },
@@ -66,6 +68,7 @@ const mealsSchema = mongoose.Schema({
 mealsSchema.methods.serialize = function () {
     return {
         id: this._id,
+        username: this.username,
         meal: this.meal,
         recipe: this.recipe,
         day: this.day,

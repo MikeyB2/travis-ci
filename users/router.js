@@ -15,7 +15,7 @@ const jsonParser = bodyParser.json();
 
 // Post to register a new user
 router.post('/', jsonParser, (req, res) => {
-    const requiredFields = ['username', 'password'];
+    const requiredFields = ['username', 'password', 'email'];
     const missingField = requiredFields.find(field => !(field in req.body));
 
     if (missingField) {
@@ -27,7 +27,7 @@ router.post('/', jsonParser, (req, res) => {
         });
     }
 
-    const stringFields = ['username', 'password', 'firstName', 'lastName'];
+    const stringFields = ['username', 'password', 'email', 'firstName', 'lastName'];
     const nonStringField = stringFields.find(
         field => field in req.body && typeof req.body[field] !== 'string'
     );
@@ -67,13 +67,13 @@ router.post('/', jsonParser, (req, res) => {
     };
     const tooSmallField = Object.keys(sizedFields).find(
         field =>
-        'min' in sizedFields[field] &&
-        req.body[field].trim().length < sizedFields[field].min
+            'min' in sizedFields[field] &&
+            req.body[field].trim().length < sizedFields[field].min
     );
     const tooLargeField = Object.keys(sizedFields).find(
         field =>
-        'max' in sizedFields[field] &&
-        req.body[field].trim().length > sizedFields[field].max
+            'max' in sizedFields[field] &&
+            req.body[field].trim().length > sizedFields[field].max
     );
 
     if (tooSmallField || tooLargeField) {
@@ -91,15 +91,17 @@ router.post('/', jsonParser, (req, res) => {
     let {
         username,
         password,
+        email,
         firstName = '',
         lastName = ''
     } = req.body;
+    email = email.trim();
     firstName = firstName.trim();
     lastName = lastName.trim();
 
     return User.find({
-            username
-        })
+        username
+    })
         .count()
         .then(count => {
             if (count > 0) {
@@ -118,6 +120,7 @@ router.post('/', jsonParser, (req, res) => {
             return User.create({
                 username,
                 password: hash,
+                email,
                 firstName,
                 lastName
             });
@@ -146,17 +149,17 @@ router.get('/', (req, res) => {
 });
 
 // GET /logout
-router.get('/logout', function (req, res, next) {
-    if (req.session) {
-        req.session.destroy(function (err) {
-            if (err) {
-                return next(err);
-            } else {
-                return res.redirect('/');
-            }
-        });
-    }
-});
+// router.get('/logout', function (req, res, next) {
+//     if (req.session) {
+//         req.session.destroy(function (err) {
+//             if (err) {
+//                 return next(err);
+//             } else {
+//                 return res.redirect('/');
+//             }
+//         });
+//     }
+// });
 
 
 module.exports = {

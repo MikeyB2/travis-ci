@@ -65,13 +65,12 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 	return res.json({
 		data: 'rosebud'
 	});
-	// res.send('./public/welcome.html')
 });
 
 
 // GET ,Recipes
 app.get('/recipes', (req, res) => {
-	Recipe.find()
+	Recipe.find({ username: req.username })
 		.then(recipes => {
 			res.json({
 				recipes: recipes.map(recipe => recipe.serialize())
@@ -110,10 +109,10 @@ app.post('/recipes', (req, res) => {
 	}
 
 	Recipe.create({
-			recipeName: req.body.recipeName,
-			ingredients: req.body.ingredients,
-			instructions: req.body.instructions
-		})
+		recipeName: req.body.recipeName,
+		ingredients: req.body.ingredients,
+		instructions: req.body.instructions
+	})
 		.then(recipe => res.status(201).json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -148,12 +147,12 @@ app.put('/recipes/:id', (req, res) => {
 	});
 
 	Recipe.findByIdAndUpdate(
-			req.params.id, {
-				$set: updated
-			}, {
-				new: true
-			}
-		)
+		req.params.id, {
+			$set: updated
+		}, {
+			new: true
+		}
+	)
 		.then(updatedRecipe => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -164,7 +163,7 @@ app.put('/recipes/:id', (req, res) => {
 
 // GET Shopping-list
 app.get('/Shopping-List', (req, res) => {
-	ShoppingList.find()
+	ShoppingList.find({ username: req.username })
 		.then(listItems => {
 			res.json({
 				listItems: listItems.map(listItem => listItem.serialize())
@@ -203,9 +202,9 @@ app.post('/Shopping-List', (req, res) => {
 	}
 
 	ShoppingList.create({
-			ingredient: req.body.ingredient,
-			amount: req.body.amount
-		})
+		ingredient: req.body.ingredient,
+		amount: req.body.amount
+	})
 		.then(listItem => res.status(201).json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -240,12 +239,12 @@ app.put('/Shopping-List/:id', (req, res) => {
 	});
 
 	ShoppingList.findByIdAndUpdate(
-			req.params.id, {
-				$set: updated
-			}, {
-				new: true
-			}
-		)
+		req.params.id, {
+			$set: updated
+		}, {
+			new: true
+		}
+	)
 		.then(updatedListItem => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -256,7 +255,7 @@ app.put('/Shopping-List/:id', (req, res) => {
 
 // GET ,Meals
 app.get('/Meals', (req, res) => {
-	Meals.find()
+	Meals.find({ username: req.username })
 		.then(meals => {
 			res.json({
 				meals: meals.map(meal => meal.serialize())
@@ -291,10 +290,10 @@ app.post('/Meals', (req, res) => {
 	}
 
 	Meals.create({
-			meal: req.body.meal,
-			recipe: req.body.recipe,
-			day: req.body.day,
-		})
+		meal: req.body.meal,
+		recipe: req.body.recipe,
+		day: req.body.day,
+	})
 		.then(meal => res.status(201).json(meal.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -321,12 +320,12 @@ app.put('/meals/:id', (req, res) => {
 	});
 
 	Meals.findByIdAndUpdate(
-			req.params.id, {
-				$set: updated
-			}, {
-				new: true
-			}
-		)
+		req.params.id, {
+			$set: updated
+		}, {
+			new: true
+		}
+	)
 		.then(updatedMeal => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({

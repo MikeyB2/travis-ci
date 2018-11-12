@@ -51,6 +51,7 @@ function addLogin(item) {
         success: function (data) {
             console.log("Access Granted");
             location.href = "/welcome.html";
+            localStorage.setItem('username', item.username);
             alert('Welcome BACK To CSTM Made!!');
 
         },
@@ -70,6 +71,7 @@ function addNewUserLogin(item) {
             console.log("New User Created");
             console.log("Access Granted");
             location.href = "/welcome.html";
+            localStorage.setItem('username', item.username);
             alert('Welcome To CSTM Made!!');
         },
         dataType: 'json',
