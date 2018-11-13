@@ -2,6 +2,11 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const faker = require('faker');
 const mongoose = require('mongoose');
+const {
+    User
+} = require('../users');
+
+const jwt = require('jsonwebtoken');
 
 const expect = chai.expect;
 
@@ -14,6 +19,7 @@ const {
     app
 } = require('../server');
 const {
+    JWT_SECRET,
     TEST_DATABASE_URL
 } = require('../config');
 
@@ -26,6 +32,7 @@ function seedShoppingListData() {
     for (let i = 1; i <= 10; i++) {
         seedData.push({
             id: faker.random.alphaNumeric(),
+            username: faker.random.word(),
             ingredient: faker.random.arrayElement()
         });
     }
@@ -34,6 +41,7 @@ function seedShoppingListData() {
 
 function generateShoppingList() {
     return {
+        username: faker.random.word(),
         ingredient: faker.random.arrayElement()
     };
 }
@@ -46,6 +54,11 @@ function tearDownDb() {
 
 //api end point tests
 describe('shopping list API resource', function () {
+    const username = 'exampleUser';
+    const password = 'examplePass';
+    const email = 'example@example.com';
+    const firstName = 'Example';
+    const lastName = 'User';
 
     before(function () {
         return runServer(TEST_DATABASE_URL);
@@ -65,18 +78,48 @@ describe('shopping list API resource', function () {
 
     describe('GET endpoint', function () {
         it('should return all existing shopping list items', function () {
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             return chai.request(app)
                 .get('/Shopping-List')
+                .set('Authorization', `Bearer ${token}`)
                 .then(function (res) {
                     expect(res).to.have.status(200);
                 })
         });
         it('should return shopping list with right fields', function () {
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             // Strategy: Get back all posts, and ensure they have expected keys
 
             let resShoppingList;
             return chai.request(app)
                 .get('/Shopping-List')
+                .set('Authorization', `Bearer ${token}`)
                 .then(function (res) {
 
                     expect(res).to.have.status(200);
@@ -99,11 +142,26 @@ describe('shopping list API resource', function () {
     });
     describe('POST endpoint', function () {
         it('should add a new List Item', function () {
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
 
             const newListItem = generateShoppingList();
 
             return chai.request(app)
                 .post('/Shopping-List')
+                .set('Authorization', `Bearer ${token}`)
                 .send(newListItem)
                 .then(function (res) {
                     expect(res).to.have.status(201);
@@ -126,6 +184,20 @@ describe('shopping list API resource', function () {
         // update that List Item from the id
         // check data
         it('should update fields you send over', function () {
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             const updateData = {
                 ingredient: faker.random.arrayElement()
             };
@@ -137,6 +209,7 @@ describe('shopping list API resource', function () {
 
                     return chai.request(app)
                         .put(`/Shopping-List/${listItem.id}`)
+                        .set('Authorization', `Bearer ${token}`)
                         .send(updateData);
                 })
                 .then(res => {
@@ -153,6 +226,20 @@ describe('shopping list API resource', function () {
         //  get a List Item to retreive the id
         // delete that id
         it('should delete a List Item by id', function () {
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
 
             let item;
 
@@ -161,7 +248,8 @@ describe('shopping list API resource', function () {
                 .then(_item => {
                     item = _item;
                     console.log('Testing: ' + item);
-                    return chai.request(app).delete(`/Shopping-List/${item.id}`);
+                    return chai.request(app).delete(`/Shopping-List/${item.id}`)
+                        .set('Authorization', `Bearer ${token}`);
 
                 })
                 .then(res => {

@@ -69,8 +69,10 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 
 
 // GET ,Recipes
-app.get('/recipes', (req, res) => {
-	Recipe.find({ username: req.username })
+app.get('/recipes', jwtAuth, (req, res) => {
+	Recipe.find({
+			username: req.query.username
+		})
 		.then(recipes => {
 			res.json({
 				recipes: recipes.map(recipe => recipe.serialize())
@@ -85,7 +87,7 @@ app.get('/recipes', (req, res) => {
 });
 
 // GET Recipes by ID
-app.get('/recipes/:id', (req, res) => {
+app.get('/recipes/:id', jwtAuth, (req, res) => {
 	Recipe.findById(req.params.id)
 		.then(recipe => res.json(recipe.serialize()))
 		.catch(err => {
@@ -97,8 +99,8 @@ app.get('/recipes/:id', (req, res) => {
 });
 
 // POST Recipes
-app.post('/recipes', (req, res) => {
-	const requiredFields = ['recipeName', 'ingredients', 'instructions'];
+app.post('/recipes', jwtAuth, (req, res) => {
+	const requiredFields = ['recipeName', 'ingredients', 'instructions', 'username'];
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -109,10 +111,11 @@ app.post('/recipes', (req, res) => {
 	}
 
 	Recipe.create({
-		recipeName: req.body.recipeName,
-		ingredients: req.body.ingredients,
-		instructions: req.body.instructions
-	})
+			recipeName: req.body.recipeName,
+			ingredients: req.body.ingredients,
+			instructions: req.body.instructions,
+			username: req.body.username
+		})
 		.then(recipe => res.status(201).json(recipe.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -123,7 +126,7 @@ app.post('/recipes', (req, res) => {
 });
 
 // DELETE Recipe
-app.delete('/recipes/:id', (req, res) => {
+app.delete('/recipes/:id', jwtAuth, (req, res) => {
 	Recipe.findByIdAndRemove(req.params.id).then(() => {
 		console.log(`Deleted Recipe with id \`${req.params.id}\``);
 		res.status(204).end();
@@ -131,7 +134,7 @@ app.delete('/recipes/:id', (req, res) => {
 });
 
 // PUT update recipe
-app.put('/recipes/:id', (req, res) => {
+app.put('/recipes/:id', jwtAuth, (req, res) => {
 	if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		res.status(400).json({
 			error: 'Request path id and request body id values must match'
@@ -147,12 +150,12 @@ app.put('/recipes/:id', (req, res) => {
 	});
 
 	Recipe.findByIdAndUpdate(
-		req.params.id, {
-			$set: updated
-		}, {
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedRecipe => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -162,8 +165,10 @@ app.put('/recipes/:id', (req, res) => {
 });
 
 // GET Shopping-list
-app.get('/Shopping-List', (req, res) => {
-	ShoppingList.find({ username: req.username })
+app.get('/Shopping-List', jwtAuth, (req, res) => {
+	ShoppingList.find({
+			username: req.query.username
+		})
 		.then(listItems => {
 			res.json({
 				listItems: listItems.map(listItem => listItem.serialize())
@@ -178,7 +183,7 @@ app.get('/Shopping-List', (req, res) => {
 });
 
 //GET shopping-list item
-app.get('/Shopping-List/:id', (req, res) => {
+app.get('/Shopping-List/:id', jwtAuth, (req, res) => {
 	ShoppingList.findById(req.params.id)
 		.then(listItem => res.json(listItem.serialize()))
 		.catch(err => {
@@ -190,8 +195,8 @@ app.get('/Shopping-List/:id', (req, res) => {
 });
 
 // POST New Shopping-list item
-app.post('/Shopping-List', (req, res) => {
-	const requiredFields = ['ingredient'];
+app.post('/Shopping-List', jwtAuth, (req, res) => {
+	const requiredFields = ['ingredient', 'username'];
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -202,9 +207,10 @@ app.post('/Shopping-List', (req, res) => {
 	}
 
 	ShoppingList.create({
-		ingredient: req.body.ingredient,
-		amount: req.body.amount
-	})
+			ingredient: req.body.ingredient,
+			amount: req.body.amount,
+			username: req.body.username
+		})
 		.then(listItem => res.status(201).json(listItem.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -215,7 +221,7 @@ app.post('/Shopping-List', (req, res) => {
 });
 
 //DELETE Shopping-list item
-app.delete('/Shopping-List/:id', (req, res) => {
+app.delete('/Shopping-List/:id', jwtAuth, (req, res) => {
 	ShoppingList.findByIdAndRemove(req.params.id).then(() => {
 		console.log(`Deleted List Item with id \`${req.params.id}\``);
 		res.status(204).end();
@@ -223,7 +229,7 @@ app.delete('/Shopping-List/:id', (req, res) => {
 });
 
 //PUT update shopping-list item
-app.put('/Shopping-List/:id', (req, res) => {
+app.put('/Shopping-List/:id', jwtAuth, (req, res) => {
 	if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		res.status(400).json({
 			error: 'Request path id and request body id values must match'
@@ -239,12 +245,12 @@ app.put('/Shopping-List/:id', (req, res) => {
 	});
 
 	ShoppingList.findByIdAndUpdate(
-		req.params.id, {
-			$set: updated
-		}, {
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedListItem => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
@@ -254,8 +260,10 @@ app.put('/Shopping-List/:id', (req, res) => {
 });
 
 // GET ,Meals
-app.get('/Meals', (req, res) => {
-	Meals.find({ username: req.username })
+app.get('/Meals', jwtAuth, (req, res) => {
+	Meals.find({
+			username: req.query.username
+		})
 		.then(meals => {
 			res.json({
 				meals: meals.map(meal => meal.serialize())
@@ -270,7 +278,7 @@ app.get('/Meals', (req, res) => {
 });
 
 // DELETE Meal
-app.delete('/Meals/:id', (req, res) => {
+app.delete('/Meals/:id', jwtAuth, (req, res) => {
 	Meals.findByIdAndRemove(req.params.id).then(() => {
 		console.log(`Deleted Meal with id \`${req.params.id}\``);
 		res.status(204).end();
@@ -278,8 +286,8 @@ app.delete('/Meals/:id', (req, res) => {
 });
 
 // POST Meals
-app.post('/Meals', (req, res) => {
-	const requiredFields = ['meal', 'recipe', 'day'];
+app.post('/Meals', jwtAuth, (req, res) => {
+	const requiredFields = ['meal', 'recipe', 'day', 'username'];
 	for (let i = 0; i < requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -290,10 +298,11 @@ app.post('/Meals', (req, res) => {
 	}
 
 	Meals.create({
-		meal: req.body.meal,
-		recipe: req.body.recipe,
-		day: req.body.day,
-	})
+			meal: req.body.meal,
+			recipe: req.body.recipe,
+			day: req.body.day,
+			username: req.body.username
+		})
 		.then(meal => res.status(201).json(meal.serialize()))
 		.catch(err => {
 			console.error(err);
@@ -304,7 +313,7 @@ app.post('/Meals', (req, res) => {
 });
 
 // PUT update Meal
-app.put('/meals/:id', (req, res) => {
+app.put('/meals/:id', jwtAuth, (req, res) => {
 	if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 		res.status(400).json({
 			error: 'Request path id and request body id values must match'
@@ -320,18 +329,23 @@ app.put('/meals/:id', (req, res) => {
 	});
 
 	Meals.findByIdAndUpdate(
-		req.params.id, {
-			$set: updated
-		}, {
-			new: true
-		}
-	)
+			req.params.id, {
+				$set: updated
+			}, {
+				new: true
+			}
+		)
 		.then(updatedMeal => res.status(204).end())
 		.catch(err =>
 			res.status(500).json({
 				message: 'WHAT DID YOU DO?!'
 			})
 		);
+});
+
+app.get('/logout', (req, res) => {
+	req.logout();
+	res.redirect('/');
 });
 
 

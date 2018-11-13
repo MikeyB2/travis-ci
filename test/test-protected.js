@@ -25,6 +25,7 @@ chai.use(chaiHttp);
 describe('Protected endpoint', function () {
     const username = 'exampleUser';
     const password = 'examplePass';
+    const email = 'example@example.com';
     const firstName = 'Example';
     const lastName = 'User';
 
@@ -41,6 +42,7 @@ describe('Protected endpoint', function () {
             User.create({
                 username,
                 password,
+                email,
                 firstName,
                 lastName
             })
@@ -68,6 +70,7 @@ describe('Protected endpoint', function () {
         it('Should reject requests with an invalid token', function () {
             const token = jwt.sign({
                     username,
+                    email,
                     firstName,
                     lastName
                 },
@@ -94,6 +97,7 @@ describe('Protected endpoint', function () {
             const token = jwt.sign({
                     user: {
                         username,
+                        email,
                         firstName,
                         lastName
                     },
@@ -122,6 +126,7 @@ describe('Protected endpoint', function () {
             const token = jwt.sign({
                     user: {
                         username,
+                        email,
                         firstName,
                         lastName
                     }
@@ -140,7 +145,6 @@ describe('Protected endpoint', function () {
                 .then(res => {
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.an('object');
-                    expect(res.body.data).to.equal('rosebud');
                 });
         });
 

@@ -52,8 +52,13 @@ function addLogin(item) {
             console.log("Access Granted");
             location.href = "/welcome.html";
             localStorage.setItem('username', item.username);
+            localStorage.setItem('token', data.authToken);
             alert('Welcome BACK To CSTM Made!!');
 
+        },
+        error: function (request, status, error) {
+            let message = "There was a problem with your form: " + request.responseText;
+            window.alert(message);
         },
         dataType: 'json',
         contentType: 'application/json'
@@ -72,7 +77,12 @@ function addNewUserLogin(item) {
             console.log("Access Granted");
             location.href = "/welcome.html";
             localStorage.setItem('username', item.username);
+            localStorage.setItem('token', data.authToken);
             alert('Welcome To CSTM Made!!');
+        },
+        error: function (request, status, error) {
+            let message = "There was a problem with your form: " + request.responseText;
+            window.alert(message);
         },
         dataType: 'json',
         contentType: 'application/json'
@@ -83,6 +93,7 @@ function addNewUserLogin(item) {
 function handleLogin() {
     $('#js-login-form').submit(function (e) {
         e.preventDefault();
+        localStorage.setItem('user', $('#username').val());
         addLogin({
             username: $(e.currentTarget)
                 .find('#username')
@@ -97,6 +108,7 @@ function handleLogin() {
 function handleNewUser() {
     $('#js-new-user').submit(function (e) {
         e.preventDefault();
+        localStorage.setItem('user', $('#js-username').val());
         addNewUserLogin({
             username: $(e.currentTarget)
                 .find('#js-username')

@@ -2,9 +2,11 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const faker = require('faker');
 const mongoose = require('mongoose');
-
+const jwt = require('jsonwebtoken');
 const expect = chai.expect;
-
+const {
+    User
+} = require('../users');
 const {
     Recipe,
 } = require('../models');
@@ -14,6 +16,7 @@ const {
     app
 } = require('../server');
 const {
+    JWT_SECRET,
     TEST_DATABASE_URL
 } = require('../config');
 
@@ -32,6 +35,7 @@ function seedRecipeData() {
 function generateRecipe() {
     return {
         // id: faker.random.alphaNumeric(),
+        username: faker.random.word(),
         recipeName: faker.name.title(),
         ingredients: faker.random.arrayElement(),
         instructions: faker.lorem.paragraph()
@@ -45,13 +49,26 @@ function tearDownDb() {
 
 //api end point tests
 describe('recipe API resource', function () {
+    const username = 'exampleUser';
+    const password = 'examplePass';
+    const email = 'example@example.com';
+    const firstName = 'Example';
+    const lastName = 'User';
 
     before(function () {
         return runServer(TEST_DATABASE_URL);
     });
 
     beforeEach(function () {
-        return seedRecipeData();
+        return seedRecipeData(), User.hashPassword(password).then(password =>
+            User.create({
+                username,
+                password,
+                email,
+                firstName,
+                lastName
+            })
+        );;
     });
 
     afterEach(function () {
@@ -63,18 +80,47 @@ describe('recipe API resource', function () {
     });
     describe('GET endpoint', function () {
         it('should return all existing recipes', function () {
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             return chai.request(app)
                 .get('/recipes')
+                .set('Authorization', `Bearer ${token}`)
                 .then(function (res) {
                     expect(res).to.have.status(200);
                 })
         });
         it('should return recipes with right fields', function () {
             // Strategy: Get back all posts, and ensure they have expected keys
-
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             let resRecipe;
             return chai.request(app)
                 .get('/recipes')
+                .set('Authorization', `Bearer ${token}`)
                 .then(function (res) {
 
                     expect(res).to.have.status(200);
@@ -84,7 +130,7 @@ describe('recipe API resource', function () {
 
                     res.body.recipes.forEach(function (recipe) {
                         expect(recipe).to.be.a('object');
-                        expect(recipe).to.include.keys('recipeName', 'ingredients', 'instructions');
+                        expect(recipe).to.include.keys('recipeName', 'ingredients', 'instructions', 'username');
                     });
                     // check to make sure response data matches db data
                     resRecipe = res.body.recipes[0];
@@ -101,11 +147,25 @@ describe('recipe API resource', function () {
 
     describe('POST endpoint', function () {
         it('should add a new recipe', function () {
-
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             const newRecipe = generateRecipe();
 
             return chai.request(app)
                 .post('/recipes')
+                .set('Authorization', `Bearer ${token}`)
                 .send(newRecipe)
                 .then(function (res) {
                     expect(res).to.have.status(201);
@@ -130,14 +190,28 @@ describe('recipe API resource', function () {
         //  get a recipe to retreive the id
         // delete that id
         it('should delete a recipe by id', function () {
-
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             let recipe;
 
             return Recipe
                 .findOne()
                 .then(_recipe => {
                     recipe = _recipe;
-                    return chai.request(app).delete(`/recipes/${recipe.id}`);
+                    return chai.request(app).delete(`/recipes/${recipe.id}`)
+                        .set('Authorization', `Bearer ${token}`);
                 })
                 .then(res => {
                     console.log("Res: " + recipe.id)
@@ -155,6 +229,20 @@ describe('recipe API resource', function () {
         // update that recipe from the id
         // check data
         it('should update fields you send over', function () {
+            const token = jwt.sign({
+                    user: {
+                        username,
+                        email,
+                        firstName,
+                        lastName
+                    }
+                },
+                JWT_SECRET, {
+                    algorithm: 'HS256',
+                    subject: username,
+                    expiresIn: '7d'
+                }
+            );
             const updateData = {
                 recipeName: faker.name.title(),
                 ingredients: faker.random.arrayElement(),
@@ -168,6 +256,7 @@ describe('recipe API resource', function () {
 
                     return chai.request(app)
                         .put(`/recipes/${recipe.id}`)
+                        .set('Authorization', `Bearer ${token}`)
                         .send(updateData);
                 })
                 .then(res => {

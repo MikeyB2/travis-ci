@@ -94,6 +94,7 @@ describe('/api/user', function () {
                     .post('/api/users')
                     .send({
                         password,
+                        email,
                         firstName,
                         lastName
                     })
@@ -116,6 +117,7 @@ describe('/api/user', function () {
                     .post('/api/users')
                     .send({
                         username,
+                        email,
                         firstName,
                         lastName
                     })
@@ -138,6 +140,7 @@ describe('/api/user', function () {
                     .send({
                         username,
                         password,
+                        email,
                         firstName: 1234,
                         lastName
                     })
@@ -162,6 +165,7 @@ describe('/api/user', function () {
                     .send({
                         username,
                         password,
+                        email,
                         firstName,
                         lastName: 1234
                     })
@@ -186,6 +190,7 @@ describe('/api/user', function () {
                     .send({
                         username: ` ${username} `,
                         password,
+                        email,
                         firstName,
                         lastName
                     })
@@ -210,6 +215,7 @@ describe('/api/user', function () {
                     .send({
                         username,
                         password: ` ${password} `,
+                        email,
                         firstName,
                         lastName
                     })
@@ -234,6 +240,7 @@ describe('/api/user', function () {
                     .send({
                         username: '',
                         password,
+                        email,
                         firstName,
                         lastName
                     })
@@ -256,6 +263,7 @@ describe('/api/user', function () {
                 return User.create({
                         username,
                         password,
+                        email,
                         firstName,
                         lastName
                     })
@@ -264,6 +272,7 @@ describe('/api/user', function () {
                         chai.request(app).post('/api/users').send({
                             username,
                             password,
+                            email,
                             firstName,
                             lastName
                         })
@@ -289,6 +298,7 @@ describe('/api/user', function () {
                     .send({
                         username,
                         password,
+                        email,
                         firstName,
                         lastName
                     })
@@ -302,6 +312,7 @@ describe('/api/user', function () {
                             'email'
                         );
                         expect(res.body.username).to.equal(username);
+                        expect(res.body.email).to.equal(email);
                         expect(res.body.firstName).to.equal(firstName);
                         expect(res.body.lastName).to.equal(lastName);
                         return User.findOne({
@@ -310,6 +321,7 @@ describe('/api/user', function () {
                     })
                     .then(user => {
                         expect(user).to.not.be.null;
+                        expect(user.email).to.equal(email);
                         expect(user.firstName).to.equal(firstName);
                         expect(user.lastName).to.equal(lastName);
                         return user.validatePassword(password);
@@ -325,6 +337,7 @@ describe('/api/user', function () {
                     .send({
                         username,
                         password,
+                        email,
                         firstName: ` ${firstName} `,
                         lastName: ` ${lastName} `
                     })
@@ -338,6 +351,7 @@ describe('/api/user', function () {
                             'email'
                         );
                         expect(res.body.username).to.equal(username);
+                        expect(res.body.email).to.equal(email);
                         expect(res.body.firstName).to.equal(firstName);
                         expect(res.body.lastName).to.equal(lastName);
                         return User.findOne({
@@ -346,6 +360,7 @@ describe('/api/user', function () {
                     })
                     .then(user => {
                         expect(user).to.not.be.null;
+                        expect(user.email).to.equal(email);
                         expect(user.firstName).to.equal(firstName);
                         expect(user.lastName).to.equal(lastName);
                     });
@@ -357,6 +372,7 @@ describe('/api/user', function () {
                     .send({
                         username,
                         password: new Array(73).fill('a').join(''),
+                        email,
                         firstName,
                         lastName
                     })
@@ -374,13 +390,14 @@ describe('/api/user', function () {
                         expect(res.body.location).to.equal('password');
                     });
             });
-            it('Should reject users with password less than ten characters', function () {
+            it('Should reject users with password less than eight characters', function () {
                 return chai
                     .request(app)
                     .post('/api/users')
                     .send({
                         username,
-                        password: '123456789',
+                        password: '1234567',
+                        email,
                         firstName,
                         lastName
                     })
@@ -393,7 +410,7 @@ describe('/api/user', function () {
                         expect(res).to.have.status(422);
                         expect(res.body.reason).to.equal('ValidationError');
                         expect(res.body.message).to.equal(
-                            'Must be at least 10 characters long'
+                            'Must be at least 8 characters long'
                         );
                         expect(res.body.location).to.equal('password');
                     });

@@ -67,13 +67,13 @@ router.post('/', jsonParser, (req, res) => {
     };
     const tooSmallField = Object.keys(sizedFields).find(
         field =>
-            'min' in sizedFields[field] &&
-            req.body[field].trim().length < sizedFields[field].min
+        'min' in sizedFields[field] &&
+        req.body[field].trim().length < sizedFields[field].min
     );
     const tooLargeField = Object.keys(sizedFields).find(
         field =>
-            'max' in sizedFields[field] &&
-            req.body[field].trim().length > sizedFields[field].max
+        'max' in sizedFields[field] &&
+        req.body[field].trim().length > sizedFields[field].max
     );
 
     if (tooSmallField || tooLargeField) {
@@ -92,16 +92,16 @@ router.post('/', jsonParser, (req, res) => {
         username,
         password,
         email,
-        firstName = '',
-        lastName = ''
+        firstName,
+        lastName
     } = req.body;
     email = email.trim();
     firstName = firstName.trim();
     lastName = lastName.trim();
 
     return User.find({
-        username
-    })
+            username
+        })
         .count()
         .then(count => {
             if (count > 0) {

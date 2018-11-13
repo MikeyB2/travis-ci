@@ -245,6 +245,11 @@ button:hover {
   }
 }
 
+.danger {
+  color: #BE4A47;
+  font-size: 12px;
+}
+
 .begin {
   width: 75%;
   text-align: left;

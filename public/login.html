@@ -46,16 +46,16 @@
 				<form id="js-new-user">
 					<div id="modal-info">
 						<label for="username">Username</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-username" placeholder="Your Username" required><br>
-						<label for="password">Password</label><br>
-						<input type="password" class="app-inputs modal-input password" id="js-password" placeholder="Password Must Be 8 Characters"
-						 required>
-						<label for="email">Email</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-email" placeholder="Email Address">
+						<input type="text" class="app-inputs modal-input" id="js-username" placeholder="Required" required><br>
+						<label for="password">Password</label><br><span class="danger">Password Must Be atleast 8 Characters</span>
+						<input type="password" class="app-inputs modal-input password" id="js-password" placeholder="Required" required>
+
+						<label for="email">Email Address</label> <br>
+						<input type="text" class="app-inputs modal-input" id="js-email" placeholder="Required" required>
 						<label for="firstName">First Name</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-firstName" placeholder="First Name" required><br>
+						<input type="text" class="app-inputs modal-input" id="js-firstName" placeholder="First Name"><br>
 						<label for="lasatName">Last Name</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-lastName" placeholder="Last Name" required><br>
+						<input type="text" class="app-inputs modal-input" id="js-lastName" placeholder="Last Name"><br>
 					</div>
 					<button type="submit" class="submit-btn modal-btn" id="js-modal-submit">Submit</button>
 				</form>
@@ -63,7 +63,7 @@
 
 		</div>
 	</section>
-	<footer><a href="http://www.mbryantjr.com/" target="_blank">Design By Mike</a></footer>
+	<footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike 2018</a></footer>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="./modal.js"></script>
 	<script src="./userApp.js"></script>
