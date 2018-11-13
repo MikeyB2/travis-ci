@@ -79,7 +79,26 @@ function recipePopulateDropDown() {
             );
         }
     });
+    // $.ajax({
+    //     url: RECIPES_URL,
+    //     type: 'GET',
+    //     contentType: 'application/json',
+    //     headers: { "Authorization": 'Bearer ' + localStorage.getItem('token') },
+    //     success: function (data) {
+    //         let dropDown = $('.dropDownRecipes');
+    //         let recipeData = data.recipes;
+    //         dropDown.append('<option selected="true">Select Recipe</option>');
+    //         for (let i = 0; i < recipeData.length; i++) {
+    //             let optionsList = recipeData[i];
+    //             let recipeDropDown = optionsList.recipeName;
+    //             dropDown.append(
+    //                 $(`<option value='${recipeDropDown}'>${recipeDropDown}</option>`)
+    //             );
+    //         }
+    //     }
+    // });
 }
+
 let dayArray = [
     'sunday',
     'monday',
@@ -112,6 +131,48 @@ function displayMeals() {
             $('#js-recipe-add-' + `${mealDay}`).html(mealElements);
         }
     });
+    // $.ajax({
+    //     url: MEALS_URL,
+    //     type: 'GET',
+    //     contentType: 'application/json',
+    //     headers: { "Authorization": 'Bearer ' + localStorage.getItem('token') },
+    //     success: function (meals) {
+    //     for (let i = 0; i < dayArray.length; i++) {
+    //         let dayOfWeek = meals.meals.filter(item => item.day == dayArray[i]);
+    //         let mealDay = dayArray[i];
+    //         let mealElements = dayOfWeek.map(function (meal) {
+    //             let element = $(`<li class="js-mealItem" id=${meal.id}>
+    //             <p><strong><span class="js-meal-name">${
+    //                 meal.meal
+    //                 }</span></strong>:   <span class="js-recipe-name">${
+    //                 meal.recipe
+    //                 }</span>
+    //             <button type="button" class="js-meal-delete meal-btn "> Delete
+    //             </button>
+    //             </p>
+    //             </li>`);
+    //             return element;
+    //         });
+    //         $('#js-recipe-add-' + `${mealDay}`).html(mealElements);
+    //     }
+    // };
+    // });
+    // function callExpenseAPI(callback) {
+    //     var username = localStorage.getItem('user');
+    //     const settings = {
+    //         url: '/expenses',
+    //         contentType: 'application/json',
+    //         headers: {"Authorization": 'Bearer ' + localStorage.getItem('token')},
+    //         data: {
+    //             username: username
+    //         },
+    //         type: 'GET',
+    //         dataType: 'json',
+    //         cache: false,
+    //         success: callback
+    //     };
+    //     $.ajax(settings);
+    // }
 }
 
 function handleMealAdd(e, id) {
@@ -156,8 +217,8 @@ function handleMealDelete() {
         e.preventDefault();
         deleteMeal(
             $(e.currentTarget)
-            .closest('.js-mealItem')
-            .attr('id')
+                .closest('.js-mealItem')
+                .attr('id')
         );
     });
 }
@@ -264,8 +325,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -320,8 +381,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest('.js-recipe')
-            .attr('id')
+                .closest('.js-recipe')
+                .attr('id')
         );
     });
 }
