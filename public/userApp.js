@@ -53,7 +53,7 @@ function addLogin(item) {
             location.href = "/welcome.html";
             localStorage.setItem('user', item.username);
             localStorage.setItem('token', data.authToken);
-            alert('Welcome BACK To CSTM Made!!');
+            alert('Welcome To CSTM Made!!');
 
         },
         error: function (request, status, error) {
@@ -68,6 +68,26 @@ function addLogin(item) {
 function addNewUserLogin(item) {
     console.log('creating user');
     console.log('New User info', item);
+    $.ajax({
+        method: 'POST',
+        url: USERS_URL,
+        data: JSON.stringify(item),
+        success: function (data) {
+            console.log("New User Created");
+            console.log("Access Granted");
+            // localStorage.setItem('user', item.username);
+            // localStorage.setItem('token', data.authToken);
+            // alert('Welcome To CSTM Made!!');
+            // location.href = "/welcome.html";
+            addLogin(item)
+        },
+        error: function (request, status, error) {
+            let message = "There was a problem with your form: " + request.responseText;
+            window.alert(message);
+        },
+        dataType: 'json',
+        contentType: 'application/json'
+    });
     // $.ajax({
     //     method: 'POST',
     //     url: USERSAUTH_URL,
@@ -85,25 +105,6 @@ function addNewUserLogin(item) {
     //     dataType: 'json',
     //     contentType: 'application/json'
     // });
-    $.ajax({
-        method: 'POST',
-        url: USERS_URL,
-        data: JSON.stringify(item),
-        success: function (data) {
-            console.log("New User Created");
-            console.log("Access Granted");
-            location.href = "/welcome.html";
-            localStorage.setItem('user', item.username);
-            localStorage.setItem('token', data.authToken);
-            alert('Welcome To CSTM Made!!');
-        },
-        error: function (request, status, error) {
-            let message = "There was a problem with your form: " + request.responseText;
-            window.alert(message);
-        },
-        dataType: 'json',
-        contentType: 'application/json'
-    });
 }
 
 

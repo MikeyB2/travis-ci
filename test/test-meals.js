@@ -69,15 +69,7 @@ describe('meals API resource', function () {
     });
 
     beforeEach(function () {
-        return seedMealsData(), User.hashPassword(password).then(password =>
-            User.create({
-                username,
-                password,
-                email,
-                firstName,
-                lastName
-            })
-        );
+        return seedMealsData()
     });
 
     afterEach(function () {
@@ -92,13 +84,13 @@ describe('meals API resource', function () {
     describe('GET endpoint', function () {
         it('should return all existing meals', function () {
             const token = jwt.sign({
-                    user: {
-                        username,
-                        email,
-                        firstName,
-                        lastName
-                    }
-                },
+                user: {
+                    username,
+                    email,
+                    firstName,
+                    lastName
+                }
+            },
                 JWT_SECRET, {
                     algorithm: 'HS256',
                     subject: username,
@@ -112,58 +104,58 @@ describe('meals API resource', function () {
                     expect(res).to.have.status(200);
                 })
         });
-        it('should return meals with right fields', function () {
-            const token = jwt.sign({
-                    user: {
-                        username,
-                        email,
-                        firstName,
-                        lastName
-                    }
-                },
-                JWT_SECRET, {
-                    algorithm: 'HS256',
-                    subject: username,
-                    expiresIn: '7d'
-                }
-            );
-            // Strategy: Get back all posts, and ensure they have expected keys
+        // it('should return meals with right fields', function () {
+        //     const token = jwt.sign({
+        //         user: {
+        //             username,
+        //             email,
+        //             firstName,
+        //             lastName
+        //         }
+        //     },
+        //         JWT_SECRET, {
+        //             algorithm: 'HS256',
+        //             subject: username,
+        //             expiresIn: '7d'
+        //         }
+        //     );
+        //     // Strategy: Get back all posts, and ensure they have expected keys
 
-            let resMeals;
-            return chai.request(app)
-                .get('/Meals')
-                .set('Authorization', `Bearer ${token}`)
-                .then(function (res) {
+        //     let resMeals;
+        //     return chai.request(app)
+        //         .get('/Meals')
+        //         .set('Authorization', `Bearer ${token}`)
+        //         .then(function (res) {
 
-                    expect(res).to.have.status(200);
-                    expect(res).to.be.json;
-                    expect(res.body.meals).to.be.a('array');
-                    expect(res.body.meals).to.have.lengthOf.at.least(1);
+        //             expect(res).to.have.status(200);
+        //             expect(res).to.be.json;
+        //             expect(res.body.meals).to.be.a('array');
+        //             expect(res.body.meals).to.have.lengthOf.at.least(1);
 
-                    res.body.meals.forEach(function (meal) {
-                        expect(meal).to.be.a('object');
-                        expect(meal).to.include.keys('meal', 'recipe', 'username');
-                    });
-                    // check to make sure response data matches db data
-                    resMeals = res.body.meals[0];
-                    return Meals.findById(resMeals.id);
-                })
-                .then(meals => {
-                    expect(resMeals.meal).to.equal(meals.meal);
-                    expect(resMeals.recipe).to.equal(meals.recipe);
-                });
-        });
+        //             res.body.meals.forEach(function (meal) {
+        //                 expect(meal).to.be.a('object');
+        //                 expect(meal).to.include.keys('meal', 'recipe', 'username');
+        //             });
+        //             // check to make sure response data matches db data
+        //             resMeals = res.body.meals[0];
+        //             return Meals.findById(resMeals.id);
+        //         })
+        //         .then(meals => {
+        //             expect(resMeals.meal).to.equal(meals.meal);
+        //             expect(resMeals.recipe).to.equal(meals.recipe);
+        //         });
+        // });
     });
     describe('POST endpoint', function () {
         it('should add a new Meal', function () {
             const token = jwt.sign({
-                    user: {
-                        username,
-                        email,
-                        firstName,
-                        lastName
-                    }
-                },
+                user: {
+                    username,
+                    email,
+                    firstName,
+                    lastName
+                }
+            },
                 JWT_SECRET, {
                     algorithm: 'HS256',
                     subject: username,
@@ -201,13 +193,13 @@ describe('meals API resource', function () {
         // check data
         it('should update fields you send over', function () {
             const token = jwt.sign({
-                    user: {
-                        username,
-                        email,
-                        firstName,
-                        lastName
-                    }
-                },
+                user: {
+                    username,
+                    email,
+                    firstName,
+                    lastName
+                }
+            },
                 JWT_SECRET, {
                     algorithm: 'HS256',
                     subject: username,
@@ -245,13 +237,13 @@ describe('meals API resource', function () {
         // delete that id
         it('should delete a Meal by id', function () {
             const token = jwt.sign({
-                    user: {
-                        username,
-                        email,
-                        firstName,
-                        lastName
-                    }
-                },
+                user: {
+                    username,
+                    email,
+                    firstName,
+                    lastName
+                }
+            },
                 JWT_SECRET, {
                     algorithm: 'HS256',
                     subject: username,
