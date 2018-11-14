@@ -51,7 +51,7 @@ function addLogin(item) {
         success: function (data) {
             console.log("Access Granted");
             location.href = "/welcome.html";
-            localStorage.setItem('username', item.username);
+            localStorage.setItem('user', item.username);
             localStorage.setItem('token', data.authToken);
             alert('Welcome BACK To CSTM Made!!');
 
@@ -68,6 +68,23 @@ function addLogin(item) {
 function addNewUserLogin(item) {
     console.log('creating user');
     console.log('New User info', item);
+    // $.ajax({
+    //     method: 'POST',
+    //     url: USERSAUTH_URL,
+    //     data: JSON.stringify(item),
+    //     success: function (data) {
+    //         console.log("Access Granted");
+    //         location.href = "/welcome.html";
+    //         localStorage.setItem('user', item.username);
+    //         localStorage.setItem('token', data.authToken);
+    //     },
+    //     error: function (request, status, error) {
+    //         let message = "There was a problem with your form: " + request.responseText;
+    //         window.alert(message);
+    //     },
+    //     dataType: 'json',
+    //     contentType: 'application/json'
+    // });
     $.ajax({
         method: 'POST',
         url: USERS_URL,
@@ -76,7 +93,7 @@ function addNewUserLogin(item) {
             console.log("New User Created");
             console.log("Access Granted");
             location.href = "/welcome.html";
-            localStorage.setItem('username', item.username);
+            localStorage.setItem('user', item.username);
             localStorage.setItem('token', data.authToken);
             alert('Welcome To CSTM Made!!');
         },

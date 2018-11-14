@@ -11,10 +11,10 @@ const createAuthToken = function (user) {
     return jwt.sign({
         user
     }, config.JWT_SECRET, {
-            subject: user.username,
-            expiresIn: config.JWT_EXPIRY,
-            algorithm: 'HS256'
-        });
+        subject: user.username,
+        expiresIn: config.JWT_EXPIRY,
+        algorithm: 'HS256'
+    });
 };
 
 const localAuth = passport.authenticate('local', {
@@ -27,7 +27,6 @@ router.post('/login', localAuth, (req, res) => {
     res.json({
         authToken
     });
-    // return ('../public/welcome.html')
 });
 
 const jwtAuth = passport.authenticate('jwt', {

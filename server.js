@@ -61,7 +61,6 @@ app.get('/userLogin', (req, res) => {
 
 //GET Authentication
 app.get('/api/protected', jwtAuth, (req, res) => {
-	// return res.redirect('/welcome');
 	return res.json({
 		data: 'rosebud'
 	});

@@ -1,7 +1,20 @@
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
 
+const createAuthToken = function (user) {
+    return jwt.sign({
+        user
+    }, config.JWT_SECRET, {
+        subject: user.username,
+        expiresIn: config.JWT_EXPIRY,
+        algorithm: 'HS256'
+    });
+};
+const localAuth = passport.authenticate('local', {
+    session: false
+});
 const {
     User
 } = require('./models');
@@ -11,12 +24,14 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
-
-
 // Post to register a new user
 router.post('/', jsonParser, (req, res) => {
     const requiredFields = ['username', 'password', 'email'];
     const missingField = requiredFields.find(field => !(field in req.body));
+    const authToken = createAuthToken(req.user.serialize());
+    res.json({
+        authToken
+    });
 
     if (missingField) {
         return res.status(422).json({
@@ -147,20 +162,6 @@ router.get('/', (req, res) => {
             message: 'Internal server error'
         }));
 });
-
-// GET /logout
-// router.get('/logout', function (req, res, next) {
-//     if (req.session) {
-//         req.session.destroy(function (err) {
-//             if (err) {
-//                 return next(err);
-//             } else {
-//                 return res.redirect('/');
-//             }
-//         });
-//     }
-// });
-
 
 module.exports = {
     router
