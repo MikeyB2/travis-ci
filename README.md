@@ -1,8 +1,8 @@
 # CSTM Made - Meal planner
 
-![Screenshot of Meal Planner Page](https://github.com/MikeyB2/travis-ci/new/master/mealsSS.PNG)
+![Screenshot of Meal Planner Page](https://github.com/MikeyB2/travis-ci/new/master/public/img/mealsSS.PNG)
 
-*website: *
+_website: https://cstm-made.herokuapp.com/_
 
 This is a meal planner/recipe book/ shopping-list app that helps to make meal planning and shopping-list easier to create.
 
@@ -14,7 +14,6 @@ access to the meal planner page, your recipes page, and your shopping-list page.
 There are inputs on the Recipe page that are for the Recipe Name, Ingredients, and Instructions.  
 The Recipe Name and ingredients fields are required.  
 After you create your recipes you will be able to use them in the Meal Planner page.
-
 
 ### Meal Planner
 
@@ -36,7 +35,6 @@ There are inputs for ingredient and amount of the ingredient but only the ingred
 **Monthly Actuals vs. Budget** - shows total actuals and budget by category
 for the month selected at the top of the page
 
-
 ### Deleting recipes, meals, and shopping-list items
 
 To delete any of the items you have added there is a delete button next to all the items that will allow you to delete anything you add from you app.
@@ -44,9 +42,8 @@ To delete any of the items you have added there is a delete button next to all t
 ## New User Sign Up
 
 On the home page, new users can find a link up top to the login form and to create a new
-account you have to click the New User link below the login inputs. 
+account you have to click the New User link below the login inputs.
 A username, password, and email address are required to set up an account.
-
 
 ## Technology Used
 
@@ -55,5 +52,5 @@ This app utilizes HTML, CSS, Javascript, and JQuery.
 The server-side utilizes javascript, Node, Express, MongoDB & Mongoose, morgan, body-parser, and cors for Restful API construction. Passport, bcryptjs, jsonwebtoken
 are used for JWT tokenization.
 
-For testing, chai, chai-http, faker, and mocha 
-are used. 
+For testing, chai, chai-http, faker, and mocha
+are used.
