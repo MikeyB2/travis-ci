@@ -1,6 +1,6 @@
 # CSTM Made - Meal planner
 
-![Screenshot of Meal Planner Page](https://github.com/MikeyB2/travis-ci/new/master/public/img/mealsSS.PNG)
+![Screenshot of Meal Planner Page](https://github.com/MikeyB2/travis-ci/blob/master/public/img/mealsSS.png)
 
 _website: https://cstm-made.herokuapp.com/_
 
