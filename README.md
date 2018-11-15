@@ -1,6 +1,6 @@
 # CSTM Made - Meal planner
 
-![Screenshot of Meal Planner Page](https://github.com/MikeyB2/travis-ci/blob/master/public/img/mealsSS.png)
+![Screenshot of Meal Planner Page](https://raw.githubusercontent.com/MikeyB2/travis-ci/master/public/img/mealsSS.png)
 
 _website: https://cstm-made.herokuapp.com/_
 
@@ -32,8 +32,8 @@ To add a new meal, users have to select from the drop down which meal it is and 
 
 There are inputs for ingredient and amount of the ingredient but only the ingredient is required:
 
-**Monthly Actuals vs. Budget** - shows total actuals and budget by category
-for the month selected at the top of the page
+Add the item you want to add to your shopping-list by inputting the item name in the ingredient input.
+You can also add the amount or number of items you want but it is not required.
 
 ### Deleting recipes, meals, and shopping-list items
 
