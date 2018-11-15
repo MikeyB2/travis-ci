@@ -22,10 +22,9 @@ let recipeTemplate =
     '</div>' +
     '</div>';
 
-let serverBase = '//cstm-made.herokuapp.com/';
-let RECIPES_URL = serverBase + 'Recipes';
-let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
-let MEALS_URL = serverBase + 'Meals';
+let RECIPES_URL = '/Recipes';
+let SHOPPING_LIST_URL = '/Shopping-List';
+let MEALS_URL = '/Meals';
 
 /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
 function myFunction() {
