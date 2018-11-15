@@ -4,6 +4,6 @@ deploy:
   provider: heroku
   api_key:
     secure: iZCH7bNWQ47Np0C08cO9bJ36vg10wAFCXOh11Nky0hHk47kp36Vj9lX7DM1XsDwCYeBbM0OuRu39pigNZKhut0Fs/JoaojMjW1XtQ1z0M6HgARD2LhdkbDZ2+Fga1FmMq1bwYv8KwHVI/MbtwqaH7uIj6vYyzgzm6e1Bk7A6lwMAC3A+1J3DZuZzh9tpk5szX0nhxtpk01Pw237IkNJeLtGqQyxEjXUSXBqgw8xDX/Kzm63zWw7rpsL7WOeAALjUaCNHtWNl5/kXgk0Bzf0JBderJeJ2RYO7SS5zd8Q+IXeXn7hwnETLSbiWTTOM5cCpz93Vr7kcqlDK3DMTQlJ1TfunQCYvj0r4zE5NdJWXClHPrWMqR+1tAOR/3gSh1JlEkAUOel8tChtoDmqOGy7E/s0HeCUrXh8Kj0BHq8QqGym+M6e0K/se/jyy9hncuCizlKLAaj+sfAfTV8pM5ctMBUk00HfSuEgjH0hSdoHc7VLlahXuvHtqirua8itouZLBAWZzOkdApASGbHLkwdEf16p3rUtApHWdv6PH1aE8CBSKZwMCEWj90VV80W3bktu3ClR1Yaf828J7D4LxS9dm+okQaldkZ6pcZ9NynsG3/ouiTEYEsX73XqvA7jfigIfrQYJBwC9Doe+DStOiHWQHxGbsKUbfSsPY6M58Uli8wQY=
-  app: https://powerful-cliffs-40446.herokuapp.com/
+  app: https://cstm-made.herokuapp.com/
   on:
     repo: MikeyB2/travis-ci
