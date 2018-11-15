@@ -22,7 +22,7 @@ let recipeTemplate =
     '</div>' +
     '</div>';
 
-let serverBase = '//localhost:8080/';
+let serverBase = '//cstm-made.herokuapp.com/';
 let RECIPES_URL = serverBase + 'Recipes';
 let SHOPPING_LIST_URL = serverBase + 'Shopping-List';
 let MEALS_URL = serverBase + 'Meals';

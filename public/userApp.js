@@ -1,5 +1,5 @@
-let userServerBase = '//localhost:8080/api/';
-let authServerBase = '//localhost:8080/api/auth/';
+let userServerBase = '//cstm-made.herokuapp.com/api/';
+let authServerBase = '//cstm-made.herokuapp.com/api/auth/';
 let USERS_URL = userServerBase + 'users';
 let USERSAUTH_URL = authServerBase + 'login';
 
