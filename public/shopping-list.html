@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/thumbnail.png" type="image/gif">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Concert+One|Indie+Flower|Kalam|Permanent+Marker" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Cstm | Shopping-List</title>
+</head>
+
+<body class="white">
+    <div class="topnav">
+        <a href="./shopping-list.html" class="active">Shopping-List</a>
+        <div id="myLinks">
+            <a href="./welcome.html">Welcome</a>
+            <a href="./recipes.html">Recipes</a>
+            <a href="./meals.html">Meals</a>
+            <a href="./home.html" onclick="logout()">Logout</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i></a>
+    </div>
+    <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+    <section class="shopping-list-form">
+        <h2>Shopping list</h2>
+        <form id="js-shopping-list-form">
+            <label for="shopping-list-entry">Add New item</label><br>
+            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-item" placeholder="Milk"
+                required>
+            <input class="app-inputs" type="text" name="shopping-list-entry" id="js-new-amount" placeholder="Amount of Item if you like..">
+            <button class="submit-btn" type="submit">Add to List</button>
+        </form>
+        <ol class="shopping-list js-shopping-list">
+        </ol>
+    </section>
+    <footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike 2018</a></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+
+</html>

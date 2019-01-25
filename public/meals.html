@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="icon" href="./img/thumbnail.png" type="image/gif">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Concert+One|Indie+Flower|Kalam|Permanent+Marker" rel="stylesheet">
+	<link rel="stylesheet" href="./style.css">
+	<title>Cstm | Meal Plan</title>
+</head>
+
+<body class="white">
+	<div class="topnav" id="topNav">
+		<a href="./meals.html" class="active">Meals</a>
+		<div id="myLinks">
+			<a href="./welcome.html">Welcome</a>
+			<a href="./recipes.html">Recipes</a>
+			<a href="./shopping-list.html">Shopping-List</a>
+			<a href="./home.html" onclick="logout()">Logout</a>
+		</div>
+		<!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+		<a href="javascript:void(0);" class="icon" id="icon" onclick="myFunction()">
+			<i class="fa fa-bars"></i></a>
+	</div>
+	<button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+	<section class="meals">
+		<ul>
+			<h3>Sunday</h3>
+			<form class="meals" id="js-meal-sunday" onsubmit="handleMealAdd(event, 'sunday')">
+				<div id="js-recipe-add-sunday" class="js-meals">
+				</div>
+				<div class="js-recipesOptions day" id="js-recipe-added">
+					<select class="recipeOptions mealPlan" name="meal" id="sunday">
+						<option class="recipeMeal" value="Breakfast">Breakfast</option>
+						<option class="recipeMeal" value="Lunch">Lunch</option>
+						<option class="recipeMeal" value="Dinner">Dinner</option>
+						<option class="recipeMeal" value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="js-sunday" class="js-recipe-list recipeOptions dropDownRecipes">
+					</select>
+					<button type="submit" class="select-btn add-btn">Add</button>
+				</div>
+			</form>
+			<h3>Monday</h3>
+			<form class="meals" id="js-meal-monday" onsubmit="handleMealAdd(event, 'monday')">
+				<div id="js-recipe-add-monday" class="js-meals">
+				</div>
+				<div class="js-recipesOptions day">
+					<select class="recipeOptions mealPlan" name="meal" id="monday">
+						<option class="recipeOptions" value="Breakfast">Breakfast</option>
+						<option class="recipeOptions" value="Lunch">Lunch</option>
+						<option class="recipeOptions" value="Dinner">Dinner</option>
+						<option class="recipeOptions" value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="js-monday"" class=" recipeOptions js-recipe-list dropDownRecipes">
+					</select>
+					<button type="submit" class="select-btn add-btn">Add</button>
+				</div>
+			</form>
+			<h3>Tuesday</h3>
+			<form class="meals" id="js-meal-tuesday" onsubmit="handleMealAdd(event, 'tuesday')">
+				<div id="js-recipe-add-tuesday" class="js-meals">
+				</div>
+				<div class="js-recipesOptions day">
+					<select class="recipeOptions" name="meal" id="tuesday">
+						<option class="recipeOptions" value="Breakfast">Breakfast</option>
+						<option class="recipeOptions" value="Lunch">Lunch</option>
+						<option class="recipeOptions" value="Dinner">Dinner</option>
+						<option class="recipeOptions" value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="js-tuesday"" class=" recipeOptions js-recipe-list dropDownRecipes">
+					</select>
+					<button type="submit" class="select-btn add-btn">Add</button>
+				</div>
+			</form>
+			<h3>Wednesday</h3>
+			<form class="meals" id="js-meal-wednesday" onsubmit="handleMealAdd(event, 'wednesday')">
+				<div id="js-recipe-add-wednesday" class="js-meals">
+				</div>
+				<div class="js-recipesOptions day">
+					<select class="recipeOptions" name="meal" id="wednesday">
+						<option class="recipeOptions" value="Breakfast">Breakfast</option>
+						<option class="recipeOptions" value="Lunch">Lunch</option>
+						<option class="recipeOptions" value="Dinner">Dinner</option>
+						<option class="recipeOptions" value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="js-wednesday" class="recipeOptions js-recipe-list dropDownRecipes">
+					</select>
+					<button type="submit" class="select-btn add-btn">Add</button>
+				</div>
+			</form>
+			<h3>Thursday</h3>
+			<form class="meals" id="js-meal-thursday" onsubmit="handleMealAdd(event, 'thursday')">
+				<div id="js-recipe-add-thursday" class="js-meals">
+				</div>
+				<div class="js-recipesOptions day">
+					<select class="recipeOptions" name="meal" id="thursday">
+						<option class="recipeOptions" value="Breakfast">Breakfast</option>
+						<option class="recipeOptions" value="Lunch">Lunch</option>
+						<option class="recipeOptions" value="Dinner">Dinner</option>
+						<option class="recipeOptions" value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="js-thursday" class="recipeOptions js-recipe-list dropDownRecipes">
+					</select>
+					<button type="submit" class="select-btn add-btn">Add</button>
+				</div>
+			</form>
+			<h3>Friday</h3>
+			<form class="meals" id="js-meal-friday" onsubmit="handleMealAdd(event, 'friday')">
+				<div id="js-recipe-add-friday" class="js-meals">
+				</div>
+				<div class="js-recipesOptions day">
+					<select class="recipeOptions" name="meal" id="friday">
+						<option class="recipeOptions" value="Breakfast">Breakfast</option>
+						<option class="recipeOptions" value="Lunch">Lunch</option>
+						<option class="recipeOptions" value="Dinner">Dinner</option>
+						<option class="recipeOptions" value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="js-friday" class="recipeOptions js-recipe-list dropDownRecipes">
+					</select>
+					<button type="submit" class="select-btn add-btn">Add</button>
+				</div>
+			</form>
+			<h3>Saturday</h3>
+			<form class="meals" id="js-meal-saturday" onsubmit="handleMealAdd(event, 'saturday')">
+				<div id="js-recipe-add-saturday" class="js-meals">
+				</div>
+				<div class="js-recipesOptions day">
+					<select class="recipeOptions" name="meal" id="saturday">
+						<option class="recipeOptions" value="Breakfast">Breakfast</option>
+						<option class="recipeOptions" value="Lunch">Lunch</option>
+						<option class="recipeOptions" value="Dinner">Dinner</option>
+						<option class="recipeOptions" value="Snack">Snack</option>
+					</select>
+					<select name="recipe" id="js-saturday" class="recipeOptions js-recipe-list dropDownRecipes">
+					</select>
+					<button type="submit" class="select-btn add-btn">Add</button>
+				</div>
+			</form>
+		</ul>
+	</section>
+	<footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike 2018</a></footer>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="./app.js"></script>
+</body>
+
+</html>
