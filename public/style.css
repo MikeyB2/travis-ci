@@ -93,6 +93,12 @@ button:hover {
   width: 50%;
 }
 
+.demo-btn {
+  width: 100px;
+  border: 1px solid #52B7BD;
+  color: #52B7BD;
+}
+
 .delete-btn {
   width: 25%;
   background: #52B7BD;
