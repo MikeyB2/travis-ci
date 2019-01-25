@@ -92,6 +92,12 @@ button:hover {
   width: 50%;
 }
 
+.demo-btn {
+  width: 100px;
+  border: 1px solid #52B7BD;
+  color: #52B7BD;
+}
+
 .delete-btn {
   width: 25%;
   background: #52B7BD;
@@ -175,11 +181,16 @@ button:hover {
 }
 
 
+
+
 #logo {
   width: 50%;
-
   margin-top: 50px;
   margin-bottom: 50px;
+}
+
+#login-logo {
+  height: 10%;
 }
 
 #about,
@@ -355,6 +366,7 @@ button:hover {
   align-content: center;
   text-align: center;
   width: 50%;
+  margin-top: 40px;
 }
 
 .recipe-form h2 {
@@ -425,7 +437,8 @@ h4 {
   display: inline-block;
   align-content: center;
   text-align: center;
-  width: 50%;
+  width: 50%;  
+  margin-top: 40px;
 }
 
 .shopping-list {

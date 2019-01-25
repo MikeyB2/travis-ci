@@ -41,6 +41,14 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
 }
 
+function demo() {
+    console.log("DEMO");
+    addLogin({
+        username: "Testuser",
+        password: "Testuser12"
+    });
+}
+
 function addLogin(item) {
     console.log('Requesting Access');
     console.log('Return User Info', item);
