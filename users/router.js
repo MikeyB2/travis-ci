@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-
+// import { tokenUrl, instanceLocator, securityKey } from '../config';
 const passport = require('passport');
 
 const createAuthToken = function (user) {
@@ -25,6 +25,7 @@ const {
 const router = express.Router();
 
 const jsonParser = bodyParser.json();
+
 
 // Post to register a new user
 router.post('/', jsonParser, (req, res) => {

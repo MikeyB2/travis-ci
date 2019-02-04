@@ -1,10 +1,11 @@
 let shoppingItemTemplate =
+
     '<li class="js-shopping-item">' +
-    '<p><span class="shopping-item js-shopping-item-name"></span><span class="shopping-item js-shopping-item-amount"></span>' +
-    '<button class="js-shopping-item-delete delete-btn">' +
-    '<span class="button-label">Delete | Done</span>' +
+    '<input type="checkbox" name="check" class="strikethrough" value="1">' +
+    '<div class="shopping-item shopping-name js-shopping-item-name"></div><div class="shopping-item shopping-amount js-shopping-item-amount"></div>' +
+    '<button class="js-shopping-item-delete delete-btn delete-item-btn">' +
+    '<span class="button-label">Delete</span>' +
     '</button>' +
-    '</p>' +
     '</li>';
 
 let recipeTemplate =
@@ -127,10 +128,10 @@ function displayMeals() {
                 let mealElements = dayOfWeek.map(function (meal) {
                     let element = $(`<li class="js-mealItem" id=${meal.id}>
                     <p><strong><span class="js-meal-name">${
-                            meal.meal
-                            }</span></strong>:   <span class="js-recipe-name">${
-                            meal.recipe
-                            }</span>
+                        meal.meal
+                        }</span></strong>:   <span class="js-recipe-name">${
+                        meal.recipe
+                        }</span>
                     <button type="button" class="js-meal-delete meal-btn "> Delete
                     </button>
                     </p>
@@ -193,8 +194,8 @@ function handleMealDelete() {
         e.preventDefault();
         deleteMeal(
             $(e.currentTarget)
-            .closest('.js-mealItem')
-            .attr('id')
+                .closest('.js-mealItem')
+                .attr('id')
         );
     });
 }
@@ -343,8 +344,8 @@ function handleShoppingListDelete() {
         e.preventDefault();
         deleteShoppingItem(
             $(e.currentTarget)
-            .closest('.js-shopping-item')
-            .attr('id')
+                .closest('.js-shopping-item')
+                .attr('id')
         );
     });
 }
@@ -421,8 +422,8 @@ function handleRecipeDelete() {
         e.preventDefault();
         deleteRecipe(
             $(e.currentTarget)
-            .closest('.js-recipe')
-            .attr('id')
+                .closest('.js-recipe')
+                .attr('id')
         );
     });
 }
