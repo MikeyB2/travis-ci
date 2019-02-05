@@ -2,11 +2,14 @@ let shoppingItemTemplate =
 
     '<li class="js-shopping-item">' +
     '<input type="checkbox" name="check" class="strikethrough" value="1">' +
-    '<div class="shopping-item shopping-name js-shopping-item-name"></div><div class="shopping-item shopping-amount js-shopping-item-amount"></div>' +
-    '<button class="js-shopping-item-delete delete-btn delete-item-btn">' +
-    '<span class="button-label">Delete</span>' +
+    '<div class="shopping-item shopping-name js-shopping-item-name"></div></div>' +
+    '<button class="js-shopping-item-delete shopping-btn">' +
+    '<span><i class="fas fa-minus"></i></span>' +
     '</button>' +
-    '</li>';
+    '</li>' +
+    '<hr />';
+
+// <div class="shopping-item shopping-amount js-shopping-item-amount">
 
 let recipeTemplate =
     '<div class="recipe js-recipe">' +

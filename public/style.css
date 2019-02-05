@@ -190,7 +190,7 @@ button:hover {
 }
 
 #login-logo {
-  height: 10%;
+  width: 550px;
 }
 
 #about,
@@ -433,6 +433,31 @@ h4 {
 
 /* Shopping-List */
 
+.shopping {
+  color: #555;
+  min-height: 100%;
+  margin-bottom: 40px;
+  background-color: #F4DECB;
+
+}
+
+.shopping-submit-btn {
+  width: 40px;
+}
+
+.shopping-submit-btn:hover {
+  width: 40px;
+  background-color: #52B7BD;
+}
+
+.shopping-btn {
+  width: 40px;
+}
+.shopping-btn:hover {
+  width: 40px;
+  background-color: #BE4A47;
+}
+
 .shopping-list-form {
   display: inline-block;
   align-content: center;
@@ -441,18 +466,37 @@ h4 {
   margin-top: 40px;
 }
 
+.shopping-form {
+  padding-left: 40px;
+}
+
 .shopping-list {
   text-align: left;
   margin-top: 20px;
+  align-items: flex-end;
+}
+
+.shopping-inputs{
+    padding: 10px;
+    width: 85%;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    background-color: #F4DECB;
+    border-radius: 0px;
+    font-size: 20px;
+  
 }
 
 .shopping-list p {
   display: block;
 }
 
+
+
 .shopping-list>li {
   border-radius: 5px;
-  color: #fefefe;
+  color: #555;
   list-style-type: none;
   text-decoration: underline;
   display: flex;
@@ -462,14 +506,10 @@ h4 {
   display: block;
   font-style: italic;
   font-size: 20px;
-  margin-bottom: 15px;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 40px;
 }
 
-.strikethrough:checked + .shopping-item + .shopping-item{
-  text-decoration:line-through
-}
 .strikethrough:checked + .shopping-item {
   text-decoration:line-through
 }
@@ -478,14 +518,6 @@ h4 {
   height: 20px;
 }
 
-.delete-item-btn {
-  color: #52B7BD;
-  width: auto;
-  background-color: #888;
-  text-decoration: none;
-  float: right;
-
-}
 
 
 @media screen and (max-width: 600px) {
@@ -509,29 +541,20 @@ footer a {
   margin-top: 20px;
 }
 
-/* @media screen and (max-width: 770px) {
-  #welcome-main {
-    display: block;
+@media screen and (max-width: 700px) {
+.shopping-list-form {
+  width: 90%;
   }
-
-  .info {
-    font-size: 15px;
+}
+@media screen and (max-width: 500px) {
+.shopping-inputs {
+  width: 65%;
   }
+}
 
-  .about {
-    width: 100%;
+@media screen and (max-width: 1100px) {
+  #login-logo {
+    height: 10%;
+    width: 50%;
   }
-
-  .about,
-  .info {
-    width: 100%;
-  }
-} */
-
-
-
-/* @media screen and (max-width: 1530px) {
-  .info {
-    font-size: 20px;
-  }
-} */
+}
