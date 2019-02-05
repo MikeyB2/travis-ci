@@ -49,6 +49,21 @@ function demo() {
     });
 }
 
+
+function registerForm() {
+    console.log("timeout");
+    location.href = './login.html';
+    console.log("click");
+    $("#myBtn").click();
+}
+
+function register() {
+    console.log("Register");
+    setTimeout(registerForm, 500)
+
+
+}
+
 function addLogin(item) {
     console.log('Requesting Access');
     console.log('Return User Info', item);

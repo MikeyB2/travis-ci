@@ -13,7 +13,7 @@
     <title>Cstm | Recipes</title>
 </head>
 
-<body class="white">
+<body class="shopping">
     <div class="topnav">
         <a href="./recipes.html" class="active">Recipes</a>
         <div id="myLinks">
@@ -36,23 +36,67 @@
         <form id="js-recipe-form">
             <div>
                 <label for="recipe-name">Recipe name</label><br>
-                <input class="app-inputs" type="text" name="recipe-name" id="recipe-name"" placeholder=" Smoothie">
+                <input class="shopping-inputs" type="text" name="recipe-name" id="recipe-name"" placeholder=" Name"
+                    required>
+                <hr>
             </div>
             <div>
                 <label for="ingredients-list">Ingredients</label><br>
-                <input class="app-inputs" type="text" name="ingredients-list" id="ingredients-list" placeholder="Yogurt, Orange juice...">
+                <input class="shopping-inputs" type="text" name="ingredients-list" id="ingredients-list" placeholder="Yogurt, Orange juice..."
+                    required>
+                <hr>
             </div>
             <div>
                 <label for="instructions">Instructions</label><br>
-                <textarea class="app-inputs" type="text" name="instructions ingredients-list" id="instructions"
-                    placeholder="Instructions to create the recipe"></textarea>
+                <textarea class="shopping-inputs" type="text" name="instructions ingredients-list" id="instructions"
+                    placeholder="Instructions to create the recipe" required></textarea>
+
             </div>
+            <hr>
             <button class="submit-btn" type="submit">Add Recipe</button>
         </form>
-        <h2>Current Recipes</h2>
-        <ul class="recipes-results js-recipes">
-        </ul>
+        <hr>
+
+        <button class="accordion">
+            <h2><strong>Recipe Book</strong></h2>
+        </button>
+        <div class="panel">
+            <ul class="recipes-results js-recipes">
+            </ul>
+        </div>
+
+        <!-- <img src="./img/recipe-book.png"> -->
+
     </section>
+
+    <!-- <section class="recipe-book">
+        <button class="accordion">Breakfast</button>
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+
+        <button class="accordion">Chicken</button>
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+
+        <button class="accordion">Beef</button>
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+        <button class="accordion">Pork</button>
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+        <button class="accordion">Soups</button>
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+        <button class="accordion">Desserts</button>
+        <div class="panel">
+            <p>Lorem ipsum...</p>
+        </div>
+    </section> -->
     <footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike 2018</a></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="./app.js"></script>

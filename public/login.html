@@ -29,11 +29,13 @@
 			<div>
 				<label for="Login">Username</label><br>
 				<input type="text" name="username" id="username" placeholder="Username" class="app-inputs" required>
+				<hr>
 			</div>
 			<div>
 				<label for="Login">Password</label><br>
-				<input type="password" name="password" id="password" placeholder="Password Must Be 8 Characters" class="app-inputs password"
+				<input type="password" name="password" id="password" placeholder="Current Password" class="app-inputs password"
 				 required>
+				<hr>
 			</div>
 			<button type="submit" class="app-inputs submit-btn" id="user-login">Login</button><br>
 			<a href="#" id="myBtn" class="new-user">New User</a>
@@ -47,17 +49,22 @@
 				<h2>New User Registration</h2>
 				<form id="js-new-user">
 					<div id="modal-info">
-						<label for="username">Username</label><br>
-						<input type="text" class="app-inputs modal-input" id="js-username" placeholder="Required" required><br>
-						<label for="password">Password</label><br><span class="danger">Password Must Be atleast 8 Characters</span>
-						<input type="password" class="app-inputs modal-input password" id="js-password" placeholder="Required" required>
-
-						<label for="email">Email Address</label> <br>
-						<input type="text" class="app-inputs modal-input" id="js-email" placeholder="Required" required>
+						<label for="username">Username<span class="danger">*</span></label><br>
+						<input type="text" class="app-inputs modal-input" id="js-username" placeholder="Username" required><br>
+						<hr>
+						<label for="password">Password<span class="danger">*</span></label><br><span class="danger">Password Must Be
+							atleast 8 Characters</span>
+						<input type="password" class="app-inputs modal-input password" id="js-password" placeholder="Password" required>
+						<hr>
+						<label for="email">Email Address<span class="danger">*</span></label> <br>
+						<input type="text" class="app-inputs modal-input" id="js-email" placeholder="Email" required>
+						<hr>
 						<label for="firstName">First Name</label><br>
 						<input type="text" class="app-inputs modal-input" id="js-firstName" placeholder="First Name"><br>
+						<hr>
 						<label for="lasatName">Last Name</label><br>
 						<input type="text" class="app-inputs modal-input" id="js-lastName" placeholder="Last Name"><br>
+						<hr>
 					</div>
 					<button type="submit" class="submit-btn modal-btn" id="js-modal-submit">Submit</button>
 				</form>
@@ -69,7 +76,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="./modal.js"></script>
 	<script src="./userApp.js"></script>
-	<!-- <script src="./app.js"></script> -->
 </body>
 
 </html>

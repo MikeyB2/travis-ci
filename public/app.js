@@ -9,16 +9,19 @@ let shoppingItemTemplate =
     '</li>' +
     '<hr />';
 
-// <div class="shopping-item shopping-amount js-shopping-item-amount">
-
 let recipeTemplate =
     '<div class="recipe js-recipe">' +
     '<h3 class="js-recipe-name recipe-name"><h3>' +
+    '<hr>' +
     '<h4 class="ingredients">Ingredients</h4>' +
+    '<hr>' +
     '<ul class="js-recipe-ingredients recipe-ingredients">' +
     '</ul>' +
+    '<hr>' +
     '<h4 class="instructions">Instructions</h4>' +
+    '<hr>' +
     '<p class="js-recipe-instructions recipe-instructions"></p>' +
+    '<hr>' +
     '<div class="recipe-controls">' +
     '<button class="js-recipe-delete delete-btn">' +
     '<span class="button-label">Delete</span>' +
@@ -72,6 +75,27 @@ function topFunction() {
 function logout() {
     // localStorage.removeItem('user', 'token');
     localStorage.clear();
+}
+
+// ACCORDION FUNCTION
+
+let acc = document.getElementsByClassName("accordion");
+let i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
 }
 
 function recipePopulateDropDown() {
@@ -206,7 +230,6 @@ function handleMealDelete() {
 function splitIngredient(ingredients) {
     let username = localStorage.getItem('user');
     let newIngredients = ingredients.split(',');
-    console.log(ingredients);
     for (let i = 0; i < newIngredients.length; i++) {
         let currentIngredient = newIngredients[i];
         let postIngredient = {};
@@ -217,7 +240,7 @@ function splitIngredient(ingredients) {
 }
 
 function addIngredients(recipe) {
-    console.log('Adding Recipe Ingredient to Shopping-List');
+    console.log('Adding Recipe Ingredient(s) to Shopping-List');
     let username = localStorage.getItem('user');
     const settings = {
         url: RECIPES_URL,
@@ -281,7 +304,6 @@ function getAndDisplayShoppingList() {
 }
 
 function addShoppingItem(item) {
-    console.log('ingredient', item);
     console.log('Adding shopping item');
     $.ajax({
         method: 'POST',

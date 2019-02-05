@@ -28,6 +28,8 @@ textarea,
   padding: 5px;
   border-radius: 15px;
   height: 36px;
+  background-color: transparent;
+  font-size: 20px;
 }
 
 textarea {
@@ -48,6 +50,10 @@ button:hover {
   cursor: pointer;
   background: #aaa;
   border: #fefefe solid 1px;
+}
+
+hr {
+  height: 3px;
 }
 
 .add-btn,
@@ -72,18 +78,16 @@ button:hover {
 
 .app-inputs {
   width: 100%;
-  padding: 10px;
   border: none;
   outline: none;
-  margin-bottom: 10px;
 }
 
-.app-inputs:hover {
-  border: 1px solid #52B7BD;
+.app-inputs:hover:focus {
+  color: #fefefe;
 }
+
 
 .app-inputs:focus {
-  background-color: #52B7BD;
   color: #fefefe;
 }
 
@@ -96,6 +100,18 @@ button:hover {
   width: 100px;
   border: 1px solid #52B7BD;
   color: #52B7BD;
+}
+
+.register-btn {
+  width: 100px;
+  border: 1px solid #52B7BD;
+  color: #52B7BD;
+  padding: 5px;
+  border-radius: 15px;
+  height: 36px;
+  background-color: transparent;
+  font-size: 20px;
+  text-decoration: none;
 }
 
 .delete-btn {
@@ -149,7 +165,7 @@ button:hover {
   color: white;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 30px;
   display: block;
 }
 
@@ -169,8 +185,12 @@ button:hover {
 }
 
 /* Style the active link (or home/logo) */
-.active {
+.white .active {
   background-color: #52B7BD;
+  color: white;
+}
+.shopping .active {
+  background-color: #555;
   color: white;
 }
 
@@ -257,7 +277,7 @@ button:hover {
 
 .danger {
   color: #BE4A47;
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .begin {
@@ -307,24 +327,25 @@ button:hover {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #aaa;
+  background-color: #fefefe;
   margin: 15% auto;
   /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid #fefefe;
   border-radius: 5px;
   width: 50%;
   text-align: center;
+  color: #555;
 }
 
-.modal-input {
-  padding: 10px;
-  margin: 5px;
+.modal-content label {
+  font-size: 20px;
 }
 
-.modal-input:hover {
-  border: 1px solid #52B7BD;
+label {
+  font-size: 20px;
 }
+
 
 .modal-btn {
   border: 1px solid #52B7BD;
@@ -358,8 +379,13 @@ button:hover {
 
 /* Recipes */
 .recipe {
-  border: 1px solid #fefefe;
+  border: 1px solid #555;
+  box-shadow: 5px 10px 10px #555;
+  margin-top: 20px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
+
 
 .recipes-form {
   display: inline-block;
@@ -370,7 +396,7 @@ button:hover {
 }
 
 .recipe-form h2 {
-  color: #fefefe;
+  color: #555;
 }
 
 .recipe-name {
@@ -394,13 +420,58 @@ button:hover {
 }
 
 .recipes-results {
-  color: #fefefe;
+  color: #555;
   font-size: 20px;
+
 }
 
 .recipes-results h3,
 h4 {
+  color: #555;
+}
+
+/* Recipe Book */
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: transparent;
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  border-radius: 0px;
+  height: 120px;
+  font-family: 'Kalam', 'Indie Flower', 'Concert One', 'Permanent Marker';
+  font-size: 30px;
+  text-decoration: underline;
+}
+
+/* .accordion img {
+  width: 50%;
+  height: 500px;
+  border: 1px solid #fefefe;
+} */
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: #555;
+  border: solid 2px #555;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   color: #fefefe;
+
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  padding: 0 18px;
+  background-color: transparent;
+  display: none;
+  overflow: hidden;
 }
 
 /* Meals */
@@ -437,7 +508,7 @@ h4 {
   color: #555;
   min-height: 100%;
   margin-bottom: 40px;
-  background-color: #F4DECB;
+  background-color: #FFFFCC;
 
 }
 
@@ -481,8 +552,7 @@ h4 {
     width: 85%;
     border: none;
     outline: none;
-    margin-bottom: 10px;
-    background-color: #F4DECB;
+    background-color: #FFFFCC;
     border-radius: 0px;
     font-size: 20px;
   
