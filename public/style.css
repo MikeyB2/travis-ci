@@ -91,6 +91,18 @@ hr {
   color: #fefefe;
 }
 
+.login-input {
+  color: #fefefe; 
+}
+
+.modal-input:focus {
+  color: #555;
+}
+
+.modal-input:hover:focus {
+  color: #555;
+}
+
 .submit-btn {
   margin-top: 10px;
   width: 50%;
@@ -165,7 +177,7 @@ hr {
   color: white;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 25px;
   display: block;
 }
 

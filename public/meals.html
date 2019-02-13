@@ -6,9 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="icon" href="./img/thumbnail.png" type="image/gif">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-	 crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Concert+One|Indie+Flower|Kalam|Permanent+Marker" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Concert+One|Indie+Flower|Kalam|Permanent+Marker"
+		rel="stylesheet">
 	<link rel="stylesheet" href="./style.css">
 	<title>Cstm | Meal Plan</title>
 </head>
@@ -34,11 +35,10 @@
 	</header>
 	<section class="meals">
 		<!-- NEW MEAL PLANNER -->
-		<!-- <form id="js-recipe-form">
+		<!-- <form id="js-recipe-form" onsubmit="handleMealAdd(event, `${value}`)">
 			<div>
-				<label for="recipe-name">Day</label><br> -->
-		<!-- <input class="shopping-inputs" type="text" name="recipe-name" id="recipe-name"" placeholder=" Name" required> -->
-		<!-- <select class="recipeOptions mealPlan" name="meal" id="sunday" required>
+				<label for="recipe-name">Day</label><br>
+				<select class="recipeOptions mealPlan" name="meal" id="sunday" required>
 					<option class="recipeMeal" value="Sunday">Sunday</option>
 					<option class="recipeMeal" value="Monday">Monday</option>
 					<option class="recipeMeal" value="Tuesday">Tuesday</option>
@@ -49,10 +49,8 @@
 				</select>
 			</div>
 			<div>
-				<label for="ingredients-list">Meal</label><br> -->
-		<!-- <input class="shopping-inputs" type="text" name="ingredients-list" id="ingredients-list" placeholder="Breakfast, Lunch, Dinner, Snack"
-				 required> -->
-		<!-- <select class="recipeOptions mealPlan" name="meal" id="sunday" placeholder="Select Day" required>
+				<label for="ingredients-list">Meal</label><br>
+				<select class="recipeOptions mealPlan" name="meal" id="sunday" placeholder="Select Day" required>
 					<option class="recipeMeal" value="Breakfast">Breakfast</option>
 					<option class="recipeMeal" value="Lunch">Lunch</option>
 					<option class="recipeMeal" value="Dinner">Dinner</option>
@@ -60,13 +58,13 @@
 				</select>
 			</div>
 			<div>
-				<label for="ingredients-list">Recipe</label><br> -->
-		<!-- <input class="shopping-inputs" type="text" name="ingredients-list" id="ingredients-list" placeholder="Yogurt, Orange juice..."
-				 required> -->
-		<!-- <select name="recipe" id="js-sunday" class="js-recipe-list recipeOptions dropDownRecipes" required>
+				<label for="ingredients-list">Recipe</label><br>
+				<select name="recipe" id="js-sunday" class="js-recipe-list recipeOptions dropDownRecipes" required>
 				</select>
 			</div>
-			<button class="submit-btn" type="submit">Add Recipe</button> -->
+			<button class="submit-btn" type="submit">Add Recipe</button>
+			<button type="submit" class="select-btn add-btn">Add Recipe</button>
+		</form> -->
 		<ul>
 			<h3>Sunday</h3>
 			<form class="meals" id="js-meal-sunday" onsubmit="handleMealAdd(event, 'sunday')">
