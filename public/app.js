@@ -35,11 +35,11 @@ let MEALS_URL = '/Meals';
 
 /* Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
 function myFunction() {
-    let x = document.getElementById('myLinks');
-    if (x.style.display === 'block') {
-        x.style.display = 'none';
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
     } else {
-        x.style.display = 'block';
+        x.className = "topnav";
     }
 }
 
@@ -135,6 +135,22 @@ let dayArray = [
     'saturday'
 ];
 
+function getDay(e) {
+    console.log('Get Day called', e);
+
+    // let username = localStorage.getItem('user');
+    // addMeal({
+    //     meal: $(e.currentTarget)
+    //         .find('#' + `${e} :selected`)
+    //         .val(),
+    //     recipe: $(e.currentTarget)
+    //         .find('#js-' + `${e} :selected`)
+    //         .val(),
+    //     day: e,
+    //     username: username
+    // });
+}
+
 function displayMeals() {
     console.log('Retrieving Meals');
     let username = localStorage.getItem('user');
@@ -172,6 +188,7 @@ function displayMeals() {
 }
 
 function handleMealAdd(e, id) {
+    console.log(e);
     e.preventDefault();
     let username = localStorage.getItem('user');
     addMeal({

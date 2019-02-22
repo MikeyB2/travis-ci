@@ -6,24 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="./img/thumbnail.png" type="image/gif">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-        crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Concert+One|Indie+Flower|Kalam|Permanent+Marker" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Concert+One|Indie+Flower|Kalam|Permanent+Marker"
+        rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <title>Cstm | Recipes</title>
 </head>
 
 <body class="shopping">
-    <div class="topnav">
-        <a href="./recipes.html" class="active">Recipes</a>
-        <div id="myLinks">
-            <a href="./welcome.html">Welcome</a>
-            <a href="./meals.html">Meals</a>
-            <a href="./shopping-list.html">Shopping-List</a>
+    <div class="topnav" id="myTopnav">
+        <a href="./welcome.html">Welcome</a>
+        <a href="./recipes.html" class="nav-active">Recipes</a>
+        <a href="./meals.html">Meals</a>
+        <a href="./shopping-list.html">Shopping-List</a>
+        <div class="topnav-right">
             <a href="./home.html" onclick="logout()">Logout</a>
         </div>
         <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <a href="javascript:void(0);" class="icon" id="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i></a>
     </div>
     <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
@@ -36,20 +37,20 @@
         <form id="js-recipe-form">
             <div>
                 <label for="recipe-name">Recipe name</label><br>
-                <input class="shopping-inputs" type="text" name="recipe-name" id="recipe-name"" placeholder=" Name"
+                <input class="shopping-inputs" type="text" name="recipe-name" id="recipe-name" placeholder="Smoothie"
                     required>
                 <hr>
             </div>
             <div>
                 <label for="ingredients-list">Ingredients</label><br>
-                <input class="shopping-inputs" type="text" name="ingredients-list" id="ingredients-list" placeholder="Yogurt, Orange juice..."
-                    required>
+                <input class="shopping-inputs" type="text" name="ingredients-list" id="ingredients-list"
+                    placeholder="Yogurt, Orange juice..." required>
                 <hr>
             </div>
             <div>
                 <label for="instructions">Instructions</label><br>
                 <textarea class="shopping-inputs" type="text" name="instructions ingredients-list" id="instructions"
-                    placeholder="Instructions to create the recipe" required></textarea>
+                    placeholder="Add all ingredients and blend well!" required></textarea>
 
             </div>
             <hr>
@@ -97,7 +98,14 @@
             <p>Lorem ipsum...</p>
         </div>
     </section> -->
-    <footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike 2018</a></footer>
+    <footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike
+            <script language="JavaScript" type="text/javascript">
+                now = new Date
+                theYear = now.getYear()
+                if (theYear < 1900)
+                    theYear = theYear + 1900
+                document.write(theYear)
+            </script></a></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="./app.js"></script>
 </body>

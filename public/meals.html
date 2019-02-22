@@ -15,12 +15,12 @@
 </head>
 
 <body class="white">
-	<div class="topnav" id="topNav">
-		<a href="./meals.html" class="active">Meals</a>
-		<div id="myLinks">
-			<a href="./welcome.html">Welcome</a>
-			<a href="./recipes.html">Recipes</a>
-			<a href="./shopping-list.html">Shopping-List</a>
+	<div class="topnav" id="myTopnav">
+		<a href="./welcome.html">Welcome</a>
+		<a href="./recipes.html">Recipes</a>
+		<a href="./meals.html" class="nav-active">Meals</a>
+		<a href="./shopping-list.html">Shopping-List</a>
+		<div class="topnav-right">
 			<a href="./home.html" onclick="logout()">Logout</a>
 		</div>
 		<!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
@@ -35,22 +35,22 @@
 	</header>
 	<section class="meals">
 		<!-- NEW MEAL PLANNER -->
-		<!-- <form id="js-recipe-form" onsubmit="handleMealAdd(event, `${value}`)">
+		<!-- <form id="js-recipe-form" onsubmit="handleMealAdd(event, getDay($`#days`))">
 			<div>
 				<label for="recipe-name">Day</label><br>
-				<select class="recipeOptions mealPlan" name="meal" id="sunday" required>
-					<option class="recipeMeal" value="Sunday">Sunday</option>
-					<option class="recipeMeal" value="Monday">Monday</option>
-					<option class="recipeMeal" value="Tuesday">Tuesday</option>
-					<option class="recipeMeal" value="Wednesday">Wednesday</option>
-					<option class="recipeMeal" value="Thursday">Thursday</option>
-					<option class="recipeMeal" value="Saturday">Saturday</option>
-					<option class="recipeMeal" value="Sunday">Sunday</option>
+				<select class="recipeOptions mealPlan" name="meal" id="days" required>
+					<option class="recipeMeal" value="Sunday" id="sunday">Sunday</option>
+					<option class="recipeMeal" value="Monday" id="monday">Monday</option>
+					<option class="recipeMeal" value="Tuesday" id="tuesday">Tuesday</option>
+					<option class="recipeMeal" value="Wednesday" id="wednesday">Wednesday</option>
+					<option class="recipeMeal" value="Thursday" id="thursday">Thursday</option>
+					<option class="recipeMeal" value="Friday" id="friday">Friday</option>
+					<option class="recipeMeal" value="Saturday" id="saturday">Saturday</option>
 				</select>
 			</div>
 			<div>
-				<label for="ingredients-list">Meal</label><br>
-				<select class="recipeOptions mealPlan" name="meal" id="sunday" placeholder="Select Day" required>
+				<label for="Meals">Meal</label><br>
+				<select class="recipeOptions mealPlan" name="meal" id="meals" placeholder="Select Day" required>
 					<option class="recipeMeal" value="Breakfast">Breakfast</option>
 					<option class="recipeMeal" value="Lunch">Lunch</option>
 					<option class="recipeMeal" value="Dinner">Dinner</option>
@@ -65,6 +65,8 @@
 			<button class="submit-btn" type="submit">Add Recipe</button>
 			<button type="submit" class="select-btn add-btn">Add Recipe</button>
 		</form> -->
+
+		<!-- New meal planner form ^^^^^^^^^^ -->
 		<ul>
 			<h3>Sunday</h3>
 			<form class="meals" id="js-meal-sunday" onsubmit="handleMealAdd(event, 'sunday')">
@@ -180,7 +182,14 @@
 			</form>
 		</ul>
 	</section>
-	<footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike 2018</a></footer>
+	<footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike
+			<script language="JavaScript" type="text/javascript">
+				now = new Date
+				theYear = now.getYear()
+				if (theYear < 1900)
+					theYear = theYear + 1900
+				document.write(theYear)
+			</script></a></footer>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="./app.js"></script>
 </body>

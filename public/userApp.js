@@ -4,11 +4,11 @@ let USERS_URL = userServerBase + 'users';
 let USERSAUTH_URL = authServerBase + 'login';
 
 function myFunction() {
-    let x = document.getElementById('myLinks');
-    if (x.style.display === 'block') {
-        x.style.display = 'none';
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav" || x.className === "nav-active") {
+        x.className += " responsive";
     } else {
-        x.style.display = 'block';
+        x.className = "topnav";
     }
 }
 
@@ -98,10 +98,6 @@ function addNewUserLogin(item) {
         success: function (data) {
             console.log("New User Created");
             console.log("Access Granted");
-            // localStorage.setItem('user', item.username);
-            // localStorage.setItem('token', data.authToken);
-            // alert('Welcome To CSTM Made!!');
-            // location.href = "/welcome.html";
             addLogin(item)
         },
         error: function (request, status, error) {
@@ -111,23 +107,6 @@ function addNewUserLogin(item) {
         dataType: 'json',
         contentType: 'application/json'
     });
-    // $.ajax({
-    //     method: 'POST',
-    //     url: USERSAUTH_URL,
-    //     data: JSON.stringify(item),
-    //     success: function (data) {
-    //         console.log("Access Granted");
-    //         location.href = "/welcome.html";
-    //         localStorage.setItem('user', item.username);
-    //         localStorage.setItem('token', data.authToken);
-    //     },
-    //     error: function (request, status, error) {
-    //         let message = "There was a problem with your form: " + request.responseText;
-    //         window.alert(message);
-    //     },
-    //     dataType: 'json',
-    //     contentType: 'application/json'
-    // });
 }
 
 

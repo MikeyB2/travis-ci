@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./img/thumbnail.png" type="image/gif">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Concert+One|Indie+Flower|Kalam|Permanent+Marker"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Login | Sign Up</title>
+</head>
+
+<body class="shopping">
+    <div class="topnav" id="myTopnav">
+        <a href="./home.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#how-to">How To</a>
+        <div class="topnav-right">
+            <a href="./login.html">Login</a>
+            <a href="./register.html" class="nav-active">Register</a>
+        </div>
+        <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <section class="register-form">
+        <h2>Sign Up</h2>
+        <form id="js-new-user">
+            <div>
+                <label for="username">Username<span class="danger">*</span></label><br>
+                <input type="text" class="app-inputs modal-input" id="js-username" placeholder="Required" required><br>
+                <hr>
+                <label for="password">Password<span class="danger">*</span></label><br><span class="danger">Password
+                    Must Be
+                    atleast 8 Characters</span>
+                <input type="password" class="app-inputs modal-input password" id="js-password" placeholder="Required"
+                    required>
+                <hr>
+                <label for="email">Email Address<span class="danger">*</span></label> <br>
+                <input type="text" class="app-inputs modal-input" id="js-email" placeholder="Required" required>
+                <hr>
+                <label for="firstName">First Name</label><br>
+                <input type="text" class="app-inputs modal-input" id="js-firstName" placeholder="First Name"><br>
+                <hr>
+                <label for="lasatName">Last Name</label><br>
+                <input type="text" class="app-inputs modal-input" id="js-lastName" placeholder="Last Name"><br>
+                <hr>
+            </div>
+            <button type="submit" class="submit-btn modal-btn" id="js-modal-submit">Submit</button>
+        </form>
+    </section>
+    <footer><a href="http://www.mbryantjr.com/">&copy; Design By Mike
+            <script language="JavaScript" type="text/javascript">
+                now = new Date
+                theYear = now.getYear()
+                if (theYear < 1900)
+                    theYear = theYear + 1900
+                document.write(theYear)
+            </script></a></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="./userApp.js"></script>
+</body>
+
+</html>
